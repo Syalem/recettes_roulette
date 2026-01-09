@@ -25,7 +25,7 @@ app.add_middleware(
 )
 
 # Monter les fichiers statiques (si tu en as)
-app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
+#app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
 
 
 # Inclure les routes API
