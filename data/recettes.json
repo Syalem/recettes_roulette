@@ -1,0 +1,31 @@
+{
+  "recettes": [
+    {
+      "id": 1,
+      "titre": "Poulet rôti aux herbes",
+      "duree_prep": 90,
+      "lien": "https://example.com/recette-poulet",
+      "livre": "Le grand livre de cuisine",
+      "page": 142,
+      "ingredients": [
+        "1 poulet fermier",
+        "2 gousses d'ail",
+        "Thym frais",
+        "Huile d'olive"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Viande",
+      "date_ajout": "2026-01-08T10:30:00",
+      "tags": [
+        "facile",
+        "four",
+        "famille"
+      ],
+      "notes": "Parfait pour les dimanches en famille"
+    }
+  ],
+  "metadata": {
+    "derniere_modification": "2026-01-09T09:49:57.043304",
+    "version": "1.0.0"
+  }
+}

@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes Recettes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Composants d'icônes simples en SVG
+        const Plus = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>;
+        const Search = ({ className }) => <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>;
+        const Shuffle = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" /></svg>;
+        const Filter = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" /></svg>;
+        const X = ({ className }) => <svg className={className || "w-6 h-6"} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>;
+        const Clock = ({ className }) => <svg className={className || "w-4 h-4"} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>;
+        const Book = ({ className }) => <svg className={className || "w-4 h-4"} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>;
+        const Tag = ({ className }) => <svg className={className || "w-5 h-5"} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" /></svg>;
+        const ChefHat = () => <svg className="w-10 h-10 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" /></svg>;
+
+        const API_URL = 'http://localhost:8000/api';
+
+        function App() {
+          const [recettes, setRecettes] = useState([]);
+          const [recettesFiltrees, setRecettesFiltrees] = useState([]);
+          const [categories, setCategories] = useState([]);
+          const [showAddModal, setShowAddModal] = useState(false);
+          const [showFilterPanel, setShowFilterPanel] = useState(false);
+          const [recetteAleatoire, setRecetteAleatoire] = useState(null);
+          const [loading, setLoading] = useState(false);
+
+          const [nouvelleRecette, setNouvelleRecette] = useState({
+            titre: '',
+            duree_prep: '',
+            ingredients: [''],
+            categorie: '',
+            sous_categorie: '',
+            lien: '',
+            livre: '',
+            page: '',
+            tags: [],
+            notes: ''
+          });
+
+          const [filtres, setFiltres] = useState({
+            categorie: '',
+            sous_categorie: '',
+            duree_max: '',
+            recherche_texte: ''
+          });
+
+          useEffect(() => {
+            chargerRecettes();
+            chargerCategories();
+          }, []);
+
+          const chargerRecettes = async () => {
+            try {
+              const response = await fetch(`${API_URL}/recettes`);
+              const data = await response.json();
+              setRecettes(data);
+              setRecettesFiltrees(data);
+            } catch (error) {
+              console.error('Erreur chargement recettes:', error);
+              const demoData = [
+                {
+                  id: 1,
+                  titre: "Pâtes Carbonara",
+                  duree_prep: 20,
+                  ingredients: ["Pâtes", "Oeufs", "Lardons", "Parmesan"],
+                  categorie: "Plat principal",
+                  sous_categorie: "Pâtes",
+                  tags: ["Italien", "Rapide"]
+                },
+                {
+                  id: 2,
+                  titre: "Salade César",
+                  duree_prep: 15,
+                  ingredients: ["Salade romaine", "Poulet", "Parmesan", "Croûtons"],
+                  categorie: "Entrée",
+                  sous_categorie: "Salade",
+                  tags: ["Frais", "Léger"]
+                }
+              ];
+              setRecettes(demoData);
+              setRecettesFiltrees(demoData);
+            }
+          };
+
+          const chargerCategories = async () => {
+            try {
+              const response = await fetch(`${API_URL}/recettes/categories/liste`);
+              const data = await response.json();
+              setCategories(data);
+            } catch (error) {
+              setCategories([
+                {
+                  nom: "Entrée",
+                  sous_categories: ["Salade", "Soupe", "Charcuterie"]
+                },
+                {
+                  nom: "Plat principal",
+                  sous_categories: ["Viande", "Poisson", "Végétarien", "Pâtes", "Riz"]
+                },
+                {
+                  nom: "Dessert",
+                  sous_categories: ["Tarte", "Gâteau", "Crème", "Fruit"]
+                }
+              ]);
+            }
+          };
+
+          const ajouterRecette = async () => {
+            if (!nouvelleRecette.titre || !nouvelleRecette.duree_prep || !nouvelleRecette.categorie) {
+              alert('Veuillez remplir tous les champs obligatoires');
+              return;
+            }
+
+            const ingredientsFiltrés = nouvelleRecette.ingredients.filter(ing => ing.trim() !== '');
+            
+            if (ingredientsFiltrés.length === 0) {
+              alert('Veuillez ajouter au moins un ingrédient');
+              return;
+            }
+
+            const recetteData = {
+              ...nouvelleRecette,
+              duree_prep: parseInt(nouvelleRecette.duree_prep),
+              page: nouvelleRecette.page ? parseInt(nouvelleRecette.page) : null,
+              ingredients: ingredientsFiltrés
+            };
+
+            try {
+              const response = await fetch(`${API_URL}/recettes/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(recetteData)
+              });
+              
+              if (response.ok) {
+                await chargerRecettes();
+                setShowAddModal(false);
+                resetForm();
+                alert('Recette ajoutée avec succès !');
+              }
+            } catch (error) {
+              const newRecette = {
+                ...recetteData,
+                id: recettes.length + 1,
+                date_ajout: new Date().toISOString()
+              };
+              setRecettes([...recettes, newRecette]);
+              setRecettesFiltrees([...recettes, newRecette]);
+              setShowAddModal(false);
+              resetForm();
+              alert('Recette ajoutée (mode démo) !');
+            }
+          };
+
+          const resetForm = () => {
+            setNouvelleRecette({
+              titre: '',
+              duree_prep: '',
+              ingredients: [''],
+              categorie: '',
+              sous_categorie: '',
+              lien: '',
+              livre: '',
+              page: '',
+              tags: [],
+              notes: ''
+            });
+          };
+
+          const ajouterIngredient = () => {
+            setNouvelleRecette({
+              ...nouvelleRecette,
+              ingredients: [...nouvelleRecette.ingredients, '']
+            });
+          };
+
+          const modifierIngredient = (index, value) => {
+            const newIngredients = [...nouvelleRecette.ingredients];
+            newIngredients[index] = value;
+            setNouvelleRecette({ ...nouvelleRecette, ingredients: newIngredients });
+          };
+
+          const supprimerIngredient = (index) => {
+            const newIngredients = nouvelleRecette.ingredients.filter((_, i) => i !== index);
+            setNouvelleRecette({ ...nouvelleRecette, ingredients: newIngredients });
+          };
+
+          const appliquerFiltres = () => {
+            let resultats = [...recettes];
+
+            if (filtres.categorie) {
+              resultats = resultats.filter(r => r.categorie === filtres.categorie);
+            }
+
+            if (filtres.sous_categorie) {
+              resultats = resultats.filter(r => r.sous_categorie === filtres.sous_categorie);
+            }
+
+            if (filtres.duree_max) {
+              resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
+            }
+
+            if (filtres.recherche_texte) {
+              const terme = filtres.recherche_texte.toLowerCase();
+              resultats = resultats.filter(r => 
+                r.titre.toLowerCase().includes(terme) ||
+                r.ingredients.some(ing => ing.toLowerCase().includes(terme))
+              );
+            }
+
+            setRecettesFiltrees(resultats);
+          };
+
+          const reinitialiserFiltres = () => {
+            setFiltres({
+              categorie: '',
+              sous_categorie: '',
+              duree_max: '',
+              recherche_texte: ''
+            });
+            setRecettesFiltrees(recettes);
+          };
+
+          const tirerRecetteAleatoire = async () => {
+            setLoading(true);
+            try {
+              const params = new URLSearchParams();
+              if (filtres.categorie) params.append('categorie', filtres.categorie);
+              if (filtres.duree_max) params.append('duree_max', filtres.duree_max);
+
+              const response = await fetch(`${API_URL}/random/recette/simple?${params}`);
+              
+              if (response.ok) {
+                const data = await response.json();
+                setRecetteAleatoire(data);
+              }
+            } catch (error) {
+              const recettesFiltreesLocal = recettesFiltrees.length > 0 ? recettesFiltrees : recettes;
+              if (recettesFiltreesLocal.length > 0) {
+                const random = recettesFiltreesLocal[Math.floor(Math.random() * recettesFiltreesLocal.length)];
+                setRecetteAleatoire(random);
+              }
+            }
+            setLoading(false);
+          };
+
+          const categorieSelectionnee = categories.find(c => c.nom === nouvelleRecette.categorie);
+
+          return (
+            <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+              <header className="bg-white shadow-md">
+                <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                  <div className="flex justify-between items-center">
+                    <div className="flex items-center gap-3">
+                      <ChefHat />
+                      <h1 className="text-3xl font-bold text-gray-900">Mes Recettes</h1>
+                    </div>
+                    <button
+                      onClick={() => setShowAddModal(true)}
+                      className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition shadow-lg"
+                    >
+                      <Plus />
+                      Nouvelle recette
+                    </button>
+                  </div>
+                </div>
+              </header>
+
+              <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                <div className="bg-white rounded-lg shadow-md p-6 mb-8">
+                  <div className="flex gap-4 flex-wrap">
+                    <div className="flex-1 min-w-[200px]">
+                      <div className="relative">
+                        <Search className="absolute left-3 top-3 w-5 h-5 text-gray-400" />
+                        <input
+                          type="text"
+                          placeholder="Rechercher une recette..."
+                          value={filtres.recherche_texte}
+                          onChange={(e) => setFiltres({ ...filtres, recherche_texte: e.target.value })}
+                          onKeyDown={(e) => { if (e.key === 'Enter') appliquerFiltres(); }}
+                          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+                    
+                    <button
+                      onClick={() => setShowFilterPanel(!showFilterPanel)}
+                      className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                    >
+                      <Filter />
+                      Filtres
+                    </button>
+                    
+                    <button
+                      onClick={tirerRecetteAleatoire}
+                      className="flex items-center gap-2 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition"
+                    >
+                      <Shuffle />
+                      Recette aléatoire
+                    </button>
+                  </div>
+
+                  {showFilterPanel && (
+                    <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Catégorie
+                        </label>
+                        <select
+                          value={filtres.categorie}
+                          onChange={(e) => setFiltres({ ...filtres, categorie: e.target.value, sous_categorie: '' })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                        >
+                          <option value="">Toutes</option>
+                          {categories.map(cat => (
+                            <option key={cat.nom} value={cat.nom}>{cat.nom}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Sous-catégorie
+                        </label>
+                        <select
+                          value={filtres.sous_categorie}
+                          onChange={(e) => setFiltres({ ...filtres, sous_categorie: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          disabled={!filtres.categorie}
+                        >
+                          <option value="">Toutes</option>
+                          {filtres.categorie && categories.find(c => c.nom === filtres.categorie)?.sous_categories.map(sc => (
+                            <option key={sc} value={sc}>{sc}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Durée max (min)
+                        </label>
+                        <input
+                          type="number"
+                          min="0"
+                          step="5"
+                          value={filtres.duree_max}
+                          onChange={(e) => setFiltres({ ...filtres, duree_max: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          placeholder="Ex: 30"
+                        />
+                      </div>
+
+                      <div className="md:col-span-3 flex gap-2">
+                        <button
+                          onClick={appliquerFiltres}
+                          className="flex-1 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition"
+                        >
+                          Appliquer les filtres
+                        </button>
+                        <button
+                          onClick={reinitialiserFiltres}
+                          className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                        >
+                          Réinitialiser
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {recetteAleatoire && (
+                  <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-xl p-8 mb-8 text-white">
+                    <div className="flex justify-between items-start mb-4">
+                      <h2 className="text-2xl font-bold">🎲 Suggestion du jour</h2>
+                      <button
+                        onClick={() => setRecetteAleatoire(null)}
+                        className="text-white hover:text-gray-200"
+                      >
+                        <X />
+                      </button>
+                    </div>
+                    <h3 className="text-3xl font-bold mb-4">{recetteAleatoire.titre}</h3>
+                    <div className="flex gap-6 text-lg">
+                      <span className="flex items-center gap-2">
+                        <Clock />
+                        {recetteAleatoire.duree_prep} min
+                      </span>
+                      <span className="flex items-center gap-2">
+                        <Tag />
+                        {recetteAleatoire.categorie}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {recettesFiltrees.map(recette => (
+                    <div key={recette.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition p-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">{recette.titre}</h3>
+                      
+                      <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+                        <span className="flex items-center gap-1">
+                          <Clock />
+                          {recette.duree_prep} min
+                        </span>
+                        {recette.livre && (
+                          <span className="flex items-center gap-1">
+                            <Book />
+                            p.{recette.page}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="mb-3">
+                        <span className="inline-block bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">
+                          {recette.categorie}
+                        </span>
+                        {recette.sous_categorie && (
+                          <span className="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full ml-2">
+                            {recette.sous_categorie}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="border-t border-gray-200 pt-3">
+                        <p className="text-sm font-medium text-gray-700 mb-2">Ingrédients:</p>
+                        <ul className="text-sm text-gray-600 space-y-1">
+                          {recette.ingredients.slice(0, 3).map((ing, idx) => (
+                            <li key={idx} className="flex items-start">
+                              <span className="text-orange-600 mr-2">•</span>
+                              {ing}
+                            </li>
+                          ))}
+                          {recette.ingredients.length > 3 && (
+                            <li className="text-gray-400 italic">
+                              +{recette.ingredients.length - 3} autres...
+                            </li>
+                          )}
+                        </ul>
+                      </div>
+
+                      {recette.tags && recette.tags.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-1">
+                          {recette.tags.map((tag, idx) => (
+                            <span key={idx} className="text-xs bg-blue-50 text-blue-700 px-2 py-1 rounded">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+
+                {recettesFiltrees.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 text-lg">Aucune recette trouvée</p>
+                  </div>
+                )}
+              </main>
+
+              {showAddModal && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+                  <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
+                    <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                      <h2 className="text-2xl font-bold text-gray-900">Nouvelle recette</h2>
+                      <button
+                        onClick={() => setShowAddModal(false)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        <X />
+                      </button>
+                    </div>
+
+                    <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Titre de la recette *
+                        </label>
+                        <input
+                          type="text"
+                          value={nouvelleRecette.titre}
+                          onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, titre: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          placeholder="Ex: Pâtes à la carbonara"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Durée de préparation (minutes) *
+                        </label>
+                        <input
+                          type="number"
+                          value={nouvelleRecette.duree_prep}
+                          onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, duree_prep: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          placeholder="Ex: 30"
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Catégorie *
+                          </label>
+                          <select
+                            value={nouvelleRecette.categorie}
+                            onChange={(e) => setNouvelleRecette({ 
+                              ...nouvelleRecette, 
+                              categorie: e.target.value,
+                              sous_categorie: '' 
+                            })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          >
+                            <option value="">Sélectionner...</option>
+                            {categories.map(cat => (
+                              <option key={cat.nom} value={cat.nom}>{cat.nom}</option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Sous-catégorie *
+                          </label>
+                          <select
+                            value={nouvelleRecette.sous_categorie}
+                            onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, sous_categorie: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            disabled={!nouvelleRecette.categorie}
+                          >
+                            <option value="">Sélectionner...</option>
+                            {categorieSelectionnee?.sous_categories.map(sc => (
+                              <option key={sc} value={sc}>{sc}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          Ingrédients *
+                        </label>
+                        <div className="space-y-2">
+                          {nouvelleRecette.ingredients.map((ing, idx) => (
+                            <div key={idx} className="flex gap-2">
+                              <input
+                                type="text"
+                                value={ing}
+                                onChange={(e) => modifierIngredient(idx, e.target.value)}
+                                className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                                placeholder={`Ingrédient ${idx + 1}`}
+                              />
+                              {nouvelleRecette.ingredients.length > 1 && (
+                                <button
+                                  onClick={() => supprimerIngredient(idx)}
+                                  className="px-3 py-2 text-red-600 hover:bg-red-50 rounded-lg transition"
+                                >
+                                  <X className="w-5 h-5" />
+                                </button>
+                              )}
+                            </div>
+                          ))}
+                        </div>
+                        <button
+                          onClick={ajouterIngredient}
+                          className="mt-2 text-orange-600 hover:text-orange-700 text-sm font-medium flex items-center gap-1"
+                        >
+                          <Plus />
+                          Ajouter un ingrédient
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Livre (optionnel)
+                          </label>
+                          <input
+                            type="text"
+                            value={nouvelleRecette.livre}
+                            onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, livre: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            placeholder="Ex: Cuisine italienne"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-gray-700 mb-1">
+                            Page
+                          </label>
+                          <input
+                            type="number"
+                            value={nouvelleRecette.page}
+                            onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, page: e.target.value })}
+                            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                            placeholder="Ex: 42"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Lien (optionnel)
+                        </label>
+                        <input
+                          type="url"
+                          value={nouvelleRecette.lien}
+                          onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, lien: e.target.value })}
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          placeholder="https://..."
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Notes (optionnel)
+                        </label>
+                        <textarea
+                          value={nouvelleRecette.notes}
+                          onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, notes: e.target.value })}
+                          rows="3"
+                          className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                          placeholder="Astuces, variantes..."
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex gap-3 p-6 border-t border-gray-200">
+                      <button
+                        onClick={() => setShowAddModal(false)}
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                      >
+                        Annuler
+                      </button>
+                      <button
+                        onClick={ajouterRecette}
+                        className="flex-1 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition"
+                      >
+                        Ajouter la recette
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>

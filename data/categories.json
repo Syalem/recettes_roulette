@@ -1,0 +1,58 @@
+{
+  "categories": [
+    {
+      "nom": "Plat principal",
+      "sous_categories": [
+        "Viande",
+        "Poisson",
+        "Pâtes",
+        "Riz",
+        "Soupe",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Dessert",
+      "sous_categories": [
+        "Tarte",
+        "Gâteau",
+        "Crêpes, gauffres",
+        "Biscuits",
+        "Gâteau individuel",
+        "Tartinade",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Side dish",
+      "sous_categories": [
+        "Légumes",
+        "Bouchées",
+        "Apéro",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Boisson",
+      "sous_categories": [
+        "Sucrée",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Miscellanées",
+      "sous_categories": [
+        "Pain",
+        "Brioche, bun",
+        "Pâtes fraîches",
+        "Petit déjeuner",
+        "Sauce, condiment",
+        "Autre"
+      ]
+    }
+  ],
+  "metadata": {
+    "derniere_modification": "2026-01-09T10:00:00",
+    "version": "1.0.0"
+  }
+}
