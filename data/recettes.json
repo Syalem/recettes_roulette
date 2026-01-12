@@ -58,10 +58,26 @@
       "date_ajout": "2026-01-12T14:55:46.762365",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "pates",
+      "duree_prep": 5,
+      "ingredients": [
+        "pates"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 4,
+      "lien": "",
+      "livre": "",
+      "page": null,
+      "date_ajout": "2026-01-12T15:27:48.397711",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-12T14:55:46.774145",
+    "derniere_modification": "2026-01-12T15:27:48.407504",
     "version": "1.0.0"
   }
 }
