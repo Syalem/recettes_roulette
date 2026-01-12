@@ -253,9 +253,24 @@
           };
 
           const ajouterIngredient = () => {
-            setNouvelleRecette({
-              ...nouvelleRecette,
-              ingredients: [...nouvelleRecette.ingredients, '']
+            // functional update to avoid stale closure, then focus the new input
+            setNouvelleRecette(prev => {
+              const updated = { ...prev, ingredients: [...prev.ingredients, ''] };
+              // wait for DOM update, then focus the last ingredient input
+              setTimeout(() => {
+                try {
+                  const inputs = document.querySelectorAll('input[name="ingredient"]');
+                  if (inputs.length) {
+                    const last = inputs[inputs.length - 1];
+                    last.focus();
+                    const val = last.value || '';
+                    last.setSelectionRange(val.length, val.length);
+                  }
+                } catch (e) {
+                  // ignore focus errors
+                }
+              }, 0);
+              return updated;
             });
           };
 
@@ -348,7 +363,7 @@
                         ☁️ Sync GitHub
                       </button>
                       <button
-                        onClick={() => setShowAddModal(true)}
+                        onClick={() => { resetForm(); setShowAddModal(true); }}
                         className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition shadow-lg"
                       >
                         <Plus />
@@ -638,6 +653,7 @@
                           {nouvelleRecette.ingredients.map((ing, idx) => (
                             <div key={idx} className="flex gap-2">
                               <input
+                                name="ingredient"
                                 type="text"
                                 value={ing}
                                 onChange={(e) => modifierIngredient(idx, e.target.value)}
