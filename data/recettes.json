@@ -8,8 +8,8 @@
       "livre": "Le grand livre de cuisine",
       "page": 142,
       "ingredients": [
-        "1 poulet fermier",
-        "2 gousses d'ail",
+        "poulet - 1,5",
+        "gousses d'ail - 2",
         "Thym frais",
         "Huile d'olive"
       ],
@@ -46,8 +46,8 @@
       "duree_prep": 5,
       "ingredients": [
         "curry",
-        "thon (1 boîte)",
-        "fromage frais (~200gr)"
+        "thon - 1 boîte",
+        "fromage frais - ~200gr"
       ],
       "categorie": "Side dish",
       "sous_categorie": "Apéro",
@@ -60,24 +60,26 @@
       "notes": ""
     },
     {
-      "titre": "pates",
-      "duree_prep": 5,
+      "titre": "poulet au curry",
+      "duree_prep": 90,
       "ingredients": [
-        "pates"
+        "poulet - 1",
+        "curry",
+        "oignons"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Pâtes",
-      "id": 4,
+      "sous_categorie": "Viande",
+      "id": 5,
       "lien": "",
       "livre": "",
       "page": null,
-      "date_ajout": "2026-01-12T15:27:48.397711",
+      "date_ajout": "2026-01-12T20:28:06.012690",
       "tags": [],
       "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-12T15:35:00.439491",
+    "derniere_modification": "2026-01-12T20:43:31.846149",
     "version": "1.0.0"
   }
 }

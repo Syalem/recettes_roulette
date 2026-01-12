@@ -47,7 +47,8 @@
           const [nouvelleRecette, setNouvelleRecette] = useState({
             titre: '',
             duree_prep: '',
-            ingredients: [''],
+            // use objects { ingredient, quantity } in the form
+            ingredients: [{ ingredient: '', quantity: '' }],
             categorie: '',
             sous_categorie: '',
             lien: '',
@@ -62,12 +63,24 @@
             sous_categorie: '',
             duree_max: '',
             recherche_texte: ''
+            ,ingredient: ''
           });
 
           useEffect(() => {
             chargerRecettes();
             chargerCategories();
           }, []);
+
+          // derive a unique list of ingredient NAMES for the filter dropdown
+          const allIngredients = Array.from(new Set(recettes.flatMap(r => r.ingredients || []).map(i => {
+            if (!i) return '';
+            if (typeof i === 'string') {
+              // if stored as "name - qty", keep only the name part
+              const parts = i.split(' - ');
+              return (parts[0] || '').trim();
+            }
+            return (i.ingredient || '').toString().trim();
+          }).filter(Boolean))).sort((a,b) => a.localeCompare(b, 'fr'));
 
           const chargerRecettes = async () => {
             try {
@@ -128,7 +141,7 @@
                 // rafraîchir
                 await chargerRecettes();
                 setShowViewModal(false);
-                alert('Recette supprimée');
+                // closed modal silently on success
               } else {
                 alert('Erreur lors de la suppression');
               }
@@ -137,7 +150,7 @@
               setRecettes(recettes.filter(r => r.id !== recetteId));
               setRecettesFiltrees(recettesFiltrees.filter(r => r.id !== recetteId));
               setShowViewModal(false);
-              alert('Recette supprimée (mode démo)');
+              // closed modal silently (demo mode)
             }
           };
           
@@ -170,8 +183,15 @@
               return;
             }
 
-            const ingredientsFiltrés = nouvelleRecette.ingredients.filter(ing => ing.trim() !== '');
-            
+            // normalize ingredients: convert objects to strings "ingredient - quantity" or just ingredient
+            const ingredientsFiltrés = nouvelleRecette.ingredients.map(it => {
+              if (!it) return '';
+              if (typeof it === 'string') return it.trim();
+              const name = (it.ingredient || '').trim();
+              const qty = (it.quantity || '').toString().trim();
+              return qty ? `${name} - ${qty}` : name;
+            }).filter(s => s && s.length > 0);
+
             if (ingredientsFiltrés.length === 0) {
               alert('Veuillez ajouter au moins un ingrédient');
               return;
@@ -197,7 +217,7 @@
                   await chargerRecettes();
                   setShowAddModal(false);
                   resetForm();
-                  alert('Recette modifiée avec succès !');
+                  // closed modal silently on success
                 }
               } else {
                 // Création
@@ -211,7 +231,7 @@
                   await chargerRecettes();
                   setShowAddModal(false);
                   resetForm();
-                  alert('Recette ajoutée avec succès !');
+                  // closed modal silently on success
                 }
               }
             } catch (error) {
@@ -221,7 +241,7 @@
                 setRecettesFiltrees(recettesFiltrees.map(r => r.id === nouvelleRecette.id ? { ...r, ...recetteData } : r));
                 setShowAddModal(false);
                 resetForm();
-                alert('Recette modifiée (mode démo) !');
+                // closed modal silently (demo mode)
               } else {
                 const newRecette = {
                   ...recetteData,
@@ -232,7 +252,7 @@
                 setRecettesFiltrees([...recettes, newRecette]);
                 setShowAddModal(false);
                 resetForm();
-                alert('Recette ajoutée (mode démo) !');
+                // closed modal silently (demo mode)
               }
             }
           };
@@ -241,7 +261,7 @@
             setNouvelleRecette({
               titre: '',
               duree_prep: '',
-              ingredients: [''],
+              ingredients: [{ ingredient: '', quantity: '' }],
               categorie: '',
               sous_categorie: '',
               lien: '',
@@ -253,10 +273,9 @@
           };
 
           const ajouterIngredient = () => {
-            // functional update to avoid stale closure, then focus the new input
+            // add an empty ingredient object and focus the new ingredient input
             setNouvelleRecette(prev => {
-              const updated = { ...prev, ingredients: [...prev.ingredients, ''] };
-              // wait for DOM update, then focus the last ingredient input
+              const updated = { ...prev, ingredients: [...prev.ingredients, { ingredient: '', quantity: '' }] };
               setTimeout(() => {
                 try {
                   const inputs = document.querySelectorAll('input[name="ingredient"]');
@@ -266,17 +285,16 @@
                     const val = last.value || '';
                     last.setSelectionRange(val.length, val.length);
                   }
-                } catch (e) {
-                  // ignore focus errors
-                }
+                } catch (e) {}
               }, 0);
               return updated;
             });
           };
 
-          const modifierIngredient = (index, value) => {
+          const modifierIngredient = (index, field, value) => {
             const newIngredients = [...nouvelleRecette.ingredients];
-            newIngredients[index] = value;
+            const current = newIngredients[index] || { ingredient: '', quantity: '' };
+            newIngredients[index] = { ...current, [field]: value };
             setNouvelleRecette({ ...nouvelleRecette, ingredients: newIngredients });
           };
 
@@ -300,6 +318,11 @@
               resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
             }
 
+            if (filtres.ingredient) {
+              const termeIng = filtres.ingredient.toLowerCase();
+              resultats = resultats.filter(r => r.ingredients && r.ingredients.some(i => i.toLowerCase().includes(termeIng)));
+            }
+
             if (filtres.recherche_texte) {
               const terme = filtres.recherche_texte.toLowerCase();
               resultats = resultats.filter(r => 
@@ -316,7 +339,8 @@
               categorie: '',
               sous_categorie: '',
               duree_max: '',
-              recherche_texte: ''
+              recherche_texte: '',
+              ingredient: ''
             });
             setRecettesFiltrees(recettes);
           };
@@ -408,7 +432,7 @@
                   </div>
 
                   {showFilterPanel && (
-                    <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 md:grid-cols-4 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">
                           Catégorie
@@ -438,6 +462,22 @@
                           <option value="">Toutes</option>
                           {filtres.categorie && categories.find(c => c.nom === filtres.categorie)?.sous_categories.map(sc => (
                             <option key={sc} value={sc}>{sc}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-1">
+                          Ingrédient
+                        </label>
+                        <select
+                          value={filtres.ingredient}
+                          onChange={(e) => setFiltres({ ...filtres, ingredient: e.target.value })}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                        >
+                          <option value="">Tous</option>
+                          {allIngredients.map(ing => (
+                            <option key={ing} value={ing}>{ing}</option>
                           ))}
                         </select>
                       </div>
@@ -650,16 +690,23 @@
                           Ingrédients *
                         </label>
                         <div className="space-y-2">
-                          {nouvelleRecette.ingredients.map((ing, idx) => (
-                            <div key={idx} className="flex gap-2">
+                          {nouvelleRecette.ingredients.map((ingObj, idx) => (
+                            <div key={idx} className="flex gap-2 items-center">
                               <input
                                 name="ingredient"
                                 type="text"
-                                value={ing}
-                                onChange={(e) => modifierIngredient(idx, e.target.value)}
+                                value={ingObj.ingredient}
+                                onChange={(e) => modifierIngredient(idx, 'ingredient', e.target.value)}
                                 onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); ajouterIngredient(); } }}
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
                                 placeholder={`Ingrédient ${idx + 1}`}
+                              />
+                              <input
+                                type="text"
+                                value={ingObj.quantity}
+                                onChange={(e) => modifierIngredient(idx, 'quantity', e.target.value)}
+                                className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                                placeholder="Qté (ex: 200g)"
                               />
                               {nouvelleRecette.ingredients.length > 1 && (
                                 <button
@@ -788,7 +835,25 @@
                       <div>
                         <p className="font-medium">Ingrédients:</p>
                         <ul className="list-disc pl-5 text-sm text-gray-700">
-                          {selectedRecette.ingredients.map((ing, i) => <li key={i}>{ing}</li>)}
+                          {selectedRecette.ingredients.map((ing, i) => {
+                            let name = '';
+                            let qty = '';
+                            if (!ing) {
+                              name = '';
+                            } else if (typeof ing === 'string') {
+                              const parts = ing.split(' - ');
+                              name = parts[0] || '';
+                              qty = parts[1] || '';
+                            } else {
+                              name = ing.ingredient || '';
+                              qty = ing.quantity || '';
+                            }
+                            return (
+                              <li key={i}>
+                                {name}{qty ? ` - ${qty}` : ''}
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                       {selectedRecette.notes && (
@@ -801,7 +866,20 @@
 
                     <div className="flex gap-3 p-6 border-t border-gray-200">
                       <button
-                        onClick={() => { setShowViewModal(false); setShowAddModal(true); setNouvelleRecette({ ...selectedRecette }); }}
+                        onClick={() => {
+                          // convert ingredient strings to objects for editing
+                          const mappedIngredients = (selectedRecette.ingredients || []).map(i => {
+                            if (!i) return { ingredient: '', quantity: '' };
+                            if (typeof i === 'string') {
+                              const parts = i.split(' - ');
+                              return { ingredient: parts[0] || '', quantity: parts[1] || '' };
+                            }
+                            return { ingredient: i.ingredient || '', quantity: i.quantity || '' };
+                          });
+                          setShowViewModal(false);
+                          setShowAddModal(true);
+                          setNouvelleRecette({ ...selectedRecette, ingredients: mappedIngredients });
+                        }}
                         className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
                       >
                         Éditer
