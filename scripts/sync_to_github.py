@@ -2,6 +2,10 @@ import subprocess
 import json
 from datetime import datetime
 from pathlib import Path
+import sys
+import io
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
 def sync_recettes():
     """Synchroniser les recettes avec GitHub."""
@@ -9,7 +13,7 @@ def sync_recettes():
     # Vérifier si le fichier existe
     recettes_path = Path("data/recettes.json")
     if not recettes_path.exists():
-        print("❌ Fichier de recettes introuvable")
+        print("Fichier de recettes introuvable")
         return
     
     # Lire le nombre de recettes
@@ -26,9 +30,9 @@ def sync_recettes():
         
         subprocess.run(["git", "push"], check=True)
         
-        print(f"✅ Synchronisation réussie - {nb_recettes} recettes")
+        print(f"Synchronisation réussie - {nb_recettes} recettes")
     except subprocess.CalledProcessError as e:
-        print(f"⚠️ Aucun changement ou erreur : {e}")
+        print(f"Aucun changement ou erreur : {e}")
 
 if __name__ == "__main__":
     sync_recettes()

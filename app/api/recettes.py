@@ -103,9 +103,15 @@ def synchroniser_avec_github():
             text=True
         )
         
+        print("[X] hello from synchroniser_avec_github")
+        print("Sortie standard :", result.stdout)
+        print("Erreurs :", result.stderr)
+        print("Code de retour :", result.returncode)
         return {
             "status": "success",
             "message": result.stdout
         }
     except Exception as e:
+        print("❌ echec synchroniser_avec_github")
         raise HTTPException(status_code=500, detail=str(e))
+    
