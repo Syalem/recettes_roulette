@@ -38,6 +38,8 @@
           const [recettesFiltrees, setRecettesFiltrees] = useState([]);
           const [categories, setCategories] = useState([]);
           const [showAddModal, setShowAddModal] = useState(false);
+          const [selectedRecette, setSelectedRecette] = useState(null);
+          const [showViewModal, setShowViewModal] = useState(false);
           const [showFilterPanel, setShowFilterPanel] = useState(false);
           const [recetteAleatoire, setRecetteAleatoire] = useState(null);
           const [loading, setLoading] = useState(false);
@@ -112,6 +114,32 @@
               alert('❌ Erreur de synchronisation');
             }
           };
+
+          const openRecette = (recette) => {
+            setSelectedRecette(recette);
+            setShowViewModal(true);
+          };
+
+          const supprimerRecette = async (recetteId) => {
+            if (!confirm('Supprimer cette recette ?')) return;
+            try {
+              const response = await fetch(`${API_URL}/recettes/${recetteId}`, { method: 'DELETE' });
+              if (response.ok) {
+                // rafraîchir
+                await chargerRecettes();
+                setShowViewModal(false);
+                alert('Recette supprimée');
+              } else {
+                alert('Erreur lors de la suppression');
+              }
+            } catch (err) {
+              // fallback local removal
+              setRecettes(recettes.filter(r => r.id !== recetteId));
+              setRecettesFiltrees(recettesFiltrees.filter(r => r.id !== recetteId));
+              setShowViewModal(false);
+              alert('Recette supprimée (mode démo)');
+            }
+          };
           
           const chargerCategories = async () => {
             try {
@@ -157,29 +185,55 @@
             };
 
             try {
-              const response = await fetch(`${API_URL}/recettes/`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(recetteData)
-              });
-              
-              if (response.ok) {
-                await chargerRecettes();
-                setShowAddModal(false);
-                resetForm();
-                alert('Recette ajoutée avec succès !');
+              if (nouvelleRecette.id) {
+                // Edition
+                const response = await fetch(`${API_URL}/recettes/${nouvelleRecette.id}`, {
+                  method: 'PUT',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(recetteData)
+                });
+
+                if (response.ok) {
+                  await chargerRecettes();
+                  setShowAddModal(false);
+                  resetForm();
+                  alert('Recette modifiée avec succès !');
+                }
+              } else {
+                // Création
+                const response = await fetch(`${API_URL}/recettes/`, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(recetteData)
+                });
+
+                if (response.ok) {
+                  await chargerRecettes();
+                  setShowAddModal(false);
+                  resetForm();
+                  alert('Recette ajoutée avec succès !');
+                }
               }
             } catch (error) {
-              const newRecette = {
-                ...recetteData,
-                id: recettes.length + 1,
-                date_ajout: new Date().toISOString()
-              };
-              setRecettes([...recettes, newRecette]);
-              setRecettesFiltrees([...recettes, newRecette]);
-              setShowAddModal(false);
-              resetForm();
-              alert('Recette ajoutée (mode démo) !');
+              // Mode démo: apply changes locally
+              if (nouvelleRecette.id) {
+                setRecettes(recettes.map(r => r.id === nouvelleRecette.id ? { ...r, ...recetteData } : r));
+                setRecettesFiltrees(recettesFiltrees.map(r => r.id === nouvelleRecette.id ? { ...r, ...recetteData } : r));
+                setShowAddModal(false);
+                resetForm();
+                alert('Recette modifiée (mode démo) !');
+              } else {
+                const newRecette = {
+                  ...recetteData,
+                  id: recettes.length + 1,
+                  date_ajout: new Date().toISOString()
+                };
+                setRecettes([...recettes, newRecette]);
+                setRecettesFiltrees([...recettes, newRecette]);
+                setShowAddModal(false);
+                resetForm();
+                alert('Recette ajoutée (mode démo) !');
+              }
             }
           };
 
@@ -433,7 +487,7 @@
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                   {recettesFiltrees.map(recette => (
-                    <div key={recette.id} className="bg-white rounded-lg shadow-md hover:shadow-xl transition p-6">
+                    <div key={recette.id} onClick={() => openRecette(recette)} className="bg-white rounded-lg shadow-md hover:shadow-xl transition p-6 cursor-pointer">
                       <h3 className="text-xl font-bold text-gray-900 mb-3">{recette.titre}</h3>
                       
                       <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
@@ -587,6 +641,7 @@
                                 type="text"
                                 value={ing}
                                 onChange={(e) => modifierIngredient(idx, e.target.value)}
+                                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); ajouterIngredient(); } }}
                                 className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
                                 placeholder={`Ingrédient ${idx + 1}`}
                               />
@@ -676,7 +731,70 @@
                         onClick={ajouterRecette}
                         className="flex-1 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition"
                       >
-                        Ajouter la recette
+                        Enregistrer les modifications
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {showViewModal && selectedRecette && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto">
+                  <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
+                    <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                      <h2 className="text-2xl font-bold text-gray-900">Détails de la recette</h2>
+                      <button
+                        onClick={() => setShowViewModal(false)}
+                        className="text-gray-400 hover:text-gray-600"
+                      >
+                        <X />
+                      </button>
+                    </div>
+
+                    <div className="p-6 space-y-4">
+                      <h3 className="text-xl font-bold">{selectedRecette.titre}</h3>
+                      <div className="text-sm text-gray-600">Durée: {selectedRecette.duree_prep} min</div>
+
+                      <div className="mt-2 flex items-center gap-2">
+                        {selectedRecette.categorie && (
+                          <span className="inline-block bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">
+                            {selectedRecette.categorie}
+                          </span>
+                        )}
+                        {selectedRecette.sous_categorie && (
+                          <span className="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">
+                            {selectedRecette.sous_categorie}
+                          </span>
+                        )}
+                      </div>
+
+                      {selectedRecette.livre && <div className="text-sm">Livre: {selectedRecette.livre} p.{selectedRecette.page}</div>}
+                      <div>
+                        <p className="font-medium">Ingrédients:</p>
+                        <ul className="list-disc pl-5 text-sm text-gray-700">
+                          {selectedRecette.ingredients.map((ing, i) => <li key={i}>{ing}</li>)}
+                        </ul>
+                      </div>
+                      {selectedRecette.notes && (
+                        <div>
+                          <p className="font-medium">Notes:</p>
+                          <p className="text-sm text-gray-700">{selectedRecette.notes}</p>
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="flex gap-3 p-6 border-t border-gray-200">
+                      <button
+                        onClick={() => { setShowViewModal(false); setShowAddModal(true); setNouvelleRecette({ ...selectedRecette }); }}
+                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
+                      >
+                        Éditer
+                      </button>
+                      <button
+                        onClick={() => supprimerRecette(selectedRecette.id)}
+                        className="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                      >
+                        Supprimer
                       </button>
                     </div>
                   </div>
