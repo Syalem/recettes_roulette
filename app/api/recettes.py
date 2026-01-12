@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
+import subprocess
 
 from app.core.storage import RecetteStorage
 from app.models.recette import Recette
@@ -91,3 +92,20 @@ def statistiques_recettes():
             "duree": plus_longue['duree_prep']
         }
     }
+
+@router.post("/sync")
+def synchroniser_avec_github():
+    """Synchroniser les recettes avec GitHub."""
+    try:
+        result = subprocess.run(
+            ["python", "scripts/sync_to_github.py"],
+            capture_output=True,
+            text=True
+        )
+        
+        return {
+            "status": "success",
+            "message": result.stdout
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

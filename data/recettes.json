@@ -40,10 +40,28 @@
       "date_ajout": "2026-01-09T15:14:54.814941",
       "tags": [],
       "notes": "quantité pour 2 personnes"
+    },
+    {
+      "titre": "dip thon curry",
+      "duree_prep": 5,
+      "ingredients": [
+        "curry",
+        "thon (1 boîte)",
+        "fromage frais (~200gr)"
+      ],
+      "categorie": "Side dish",
+      "sous_categorie": "Apéro",
+      "id": 3,
+      "lien": "",
+      "livre": "",
+      "page": null,
+      "date_ajout": "2026-01-12T14:55:46.762365",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-09T15:14:54.826431",
+    "derniere_modification": "2026-01-12T14:55:46.774145",
     "version": "1.0.0"
   }
 }
