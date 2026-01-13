@@ -276,6 +276,7 @@
             // add an empty ingredient object and focus the new ingredient input
             setNouvelleRecette(prev => {
               const updated = { ...prev, ingredients: [...prev.ingredients, { ingredient: '', quantity: '' }] };
+              // small delay to ensure DOM has updated before focusing
               setTimeout(() => {
                 try {
                   const inputs = document.querySelectorAll('input[name="ingredient"]');
@@ -286,7 +287,7 @@
                     last.setSelectionRange(val.length, val.length);
                   }
                 } catch (e) {}
-              }, 0);
+              }, 50);
               return updated;
             });
           };
@@ -516,11 +517,17 @@
                 </div>
 
                 {recetteAleatoire && (
-                  <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-xl p-8 mb-8 text-white">
+                  <div
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => openRecette(recetteAleatoire)}
+                    onKeyDown={(e) => { if (e.key === 'Enter') openRecette(recetteAleatoire); }}
+                    className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg shadow-xl p-8 mb-8 text-white cursor-pointer focus:outline-none focus:ring-2 focus:ring-white"
+                  >
                     <div className="flex justify-between items-start mb-4">
                       <h2 className="text-2xl font-bold">🎲 Suggestion du jour</h2>
                       <button
-                        onClick={() => setRecetteAleatoire(null)}
+                        onClick={(e) => { e.stopPropagation(); setRecetteAleatoire(null); }}
                         className="text-white hover:text-gray-200"
                       >
                         <X />
@@ -705,6 +712,7 @@
                                 type="text"
                                 value={ingObj.quantity}
                                 onChange={(e) => modifierIngredient(idx, 'quantity', e.target.value)}
+                                onKeyDown={(e) => { if (e.key === 'Enter') { e.preventDefault(); ajouterIngredient(); } }}
                                 className="w-32 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
                                 placeholder="Qté (ex: 200g)"
                               />
