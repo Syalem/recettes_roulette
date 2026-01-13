@@ -403,7 +403,7 @@
                       <ChefHat />
                       <h1 className="text-3xl font-bold text-gray-900">Mes Recettes</h1>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-stretch gap-2">
                       <button
                         onClick={synchroniserAvecGitHub}
                         className="flex items-center gap-2 bg-green-600 text-white px-4 py-3 rounded-lg hover:bg-green-700 transition shadow-lg"
@@ -412,10 +412,11 @@
                       </button>
                       <button
                         onClick={() => { resetForm(); setShowAddModal(true); }}
-                        className="flex items-center gap-2 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition shadow-lg"
+                        aria-label="Nouvelle recette"
+                        className="flex items-center gap-2 bg-orange-600 text-white px-4 py-3 sm:px-6 sm:py-3 rounded-lg hover:bg-orange-700 transition shadow-lg"
                       >
                         <Plus />
-                        Nouvelle recette
+                        <span className="hidden sm:inline">Nouvelle recette</span>
                       </button>
                     </div>
                   </div>
