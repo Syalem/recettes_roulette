@@ -21,6 +21,20 @@ def sync_recettes():
         data = json.load(f)
         nb_recettes = len(data.get("recettes", []))
     
+    # Configurer l'identité Git (nécessaire sur Render)
+    try:
+        subprocess.run(
+            ["git", "config", "user.email", "bot@recette-roulette.app"],
+            check=True
+        )
+        subprocess.run(
+            ["git", "config", "user.name", "Recette Roulette Bot"],
+            check=True
+        )
+    except subprocess.CalledProcessError as e:
+        print(f"Erreur de configuration Git : {e}")
+        return
+    
     # Git add, commit, push
     try:
         subprocess.run(["git", "add", "data/recettes.json"], check=True)
