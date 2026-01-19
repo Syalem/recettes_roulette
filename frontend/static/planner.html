@@ -23,9 +23,9 @@
         const Calendar = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>;
         const Trash = () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>;
         const RefreshCw = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>;
+        const Download = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" /></svg>;
 
         const API_URL = '/api';
-        //const API_URL = '/api';
 
         const JOURS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
         const MOMENTS = ['Midi', 'Soir'];
@@ -36,6 +36,7 @@
             const [showRecetteModal, setShowRecetteModal] = useState(false);
             const [selectedSlot, setSelectedSlot] = useState(null);
             const [searchTerm, setSearchTerm] = useState('');
+            const [saveError, setSaveError] = useState(null);
 
             useEffect(() => {
                 chargerRecettes();
@@ -54,22 +55,53 @@
             };
 
             const chargerPlan = async () => {
-                try {
-                    const stored = await window.storage.get('meal-plan');
-                    if (stored && stored.value) {
-                        setPlanSemaine(JSON.parse(stored.value));
+                // Essayer d'abord le stockage local
+                const localPlan = localStorage.getItem('meal-plan');
+                if (localPlan) {
+                    try {
+                        setPlanSemaine(JSON.parse(localPlan));
+                        console.log('Plan chargé depuis localStorage');
+                        return;
+                    } catch (error) {
+                        console.error('Erreur parsing localStorage:', error);
                     }
-                } catch (error) {
-                    console.log('Aucun plan sauvegardé');
+                }
+                
+                // Sinon essayer window.storage si disponible
+                if (window.storage) {
+                    try {
+                        const stored = await window.storage.get('meal-plan');
+                        if (stored && stored.value) {
+                            setPlanSemaine(JSON.parse(stored.value));
+                            console.log('Plan chargé depuis window.storage');
+                        }
+                    } catch (error) {
+                        console.log('window.storage non disponible');
+                    }
                 }
             };
 
             const sauvegarderPlan = async (nouveauPlan) => {
+                setSaveError(null);
+                
+                // Sauvegarder dans localStorage (toujours disponible)
                 try {
-                    await window.storage.set('meal-plan', JSON.stringify(nouveauPlan));
+                    localStorage.setItem('meal-plan', JSON.stringify(nouveauPlan));
                     setPlanSemaine(nouveauPlan);
+                    console.log('Plan sauvegardé dans localStorage');
                 } catch (error) {
-                    console.error('Erreur sauvegarde:', error);
+                    console.error('Erreur localStorage:', error);
+                    setSaveError('Erreur de sauvegarde locale');
+                }
+
+                // Essayer aussi window.storage si disponible
+                if (window.storage) {
+                    try {
+                        await window.storage.set('meal-plan', JSON.stringify(nouveauPlan));
+                        console.log('Plan sauvegardé dans window.storage');
+                    } catch (error) {
+                        console.log('window.storage non disponible (normal en dehors de Claude)');
+                    }
                 }
             };
 
@@ -128,6 +160,78 @@
                 }
             };
 
+            const exporterPDF = () => {
+                // Créer une version imprimable
+                const printWindow = window.open('', '', 'width=800,height=600');
+                
+                let html = `
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <meta charset="UTF-8">
+                        <title>Planning de la semaine</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 20px; }
+                            h1 { color: #EA580C; border-bottom: 3px solid #EA580C; padding-bottom: 10px; }
+                            .jour { margin-bottom: 20px; page-break-inside: avoid; }
+                            .jour h2 { background: #EA580C; color: white; padding: 10px; margin: 0; }
+                            .repas { padding: 10px; border: 1px solid #ddd; margin: 5px 0; }
+                            .moment { font-weight: bold; color: #666; }
+                            .fait { text-decoration: line-through; color: #999; }
+                            .titre { font-size: 16px; margin: 5px 0; }
+                            .duree { color: #666; font-size: 14px; }
+                            @media print {
+                                .no-print { display: none; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <h1>🍽️ Planning de la semaine</h1>
+                `;
+
+                JOURS.forEach(jour => {
+                    html += `<div class="jour"><h2>${jour}</h2>`;
+                    
+                    MOMENTS.forEach(moment => {
+                        const key = `${jour}-${moment}`;
+                        const repas = planSemaine[key];
+                        
+                        html += `<div class="repas">`;
+                        html += `<div class="moment">${moment}</div>`;
+                        
+                        if (repas) {
+                            const classes = repas.fait ? 'titre fait' : 'titre';
+                            html += `<div class="${classes}">${repas.recette.titre}</div>`;
+                            if (repas.recette.duree_prep) {
+                                html += `<div class="duree">⏱️ ${repas.recette.duree_prep} min</div>`;
+                            }
+                        } else {
+                            html += `<div style="color: #ccc; font-style: italic;">Aucun repas prévu</div>`;
+                        }
+                        
+                        html += `</div>`;
+                    });
+                    
+                    html += `</div>`;
+                });
+
+                html += `
+                    <div class="no-print" style="margin-top: 30px; text-align: center;">
+                        <button onclick="window.print()" style="background: #EA580C; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                            🖨️ Imprimer / Sauvegarder en PDF
+                        </button>
+                        <button onclick="window.close()" style="background: #666; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; margin-left: 10px;">
+                            Fermer
+                        </button>
+                    </div>
+                    </body>
+                    </html>
+                `;
+
+                printWindow.document.write(html);
+                printWindow.document.close();
+            };
+
             const openRecetteModal = (jour, moment) => {
                 setSelectedSlot({ jour, moment });
                 setShowRecetteModal(true);
@@ -148,11 +252,18 @@
                                 </div>
                                 <div className="flex gap-2">
                                     <button
+                                        onClick={exporterPDF}
+                                        className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+                                    >
+                                        <Download />
+                                        <span className="hidden sm:inline">Export PDF</span>
+                                    </button>
+                                    <button
                                         onClick={reinitialiserSemaine}
                                         className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
                                     >
                                         <RefreshCw />
-                                        Réinitialiser
+                                        <span className="hidden sm:inline">Réinitialiser</span>
                                     </button>
                                     <a
                                         href="/"
@@ -162,6 +273,11 @@
                                     </a>
                                 </div>
                             </div>
+                            {saveError && (
+                                <div className="mt-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+                                    {saveError}
+                                </div>
+                            )}
                         </div>
                     </header>
 

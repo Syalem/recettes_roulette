@@ -103,7 +103,6 @@ def synchroniser_avec_github():
             text=True
         )
         
-        print("[X] hello from synchroniser_avec_github")
         print("Sortie standard :", result.stdout)
         print("Erreurs :", result.stderr)
         print("Code de retour :", result.returncode)
