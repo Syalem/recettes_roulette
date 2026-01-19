@@ -69,26 +69,10 @@
       "date_ajout": "2026-01-19T21:31:23.460840",
       "tags": [],
       "notes": ""
-    },
-    {
-      "titre": "savaef",
-      "duree_prep": 15,
-      "ingredients": [
-        "aergvser"
-      ],
-      "categorie": "Plat principal",
-      "sous_categorie": "Viande",
-      "id": 7,
-      "lien": "",
-      "livre": "",
-      "page": null,
-      "date_ajout": "2026-01-19T21:58:11.602525",
-      "tags": [],
-      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-19T21:58:11.615462",
+    "derniere_modification": "2026-01-19T22:01:04.208641",
     "version": "1.0.0"
   }
 }
