@@ -63,7 +63,7 @@ def sync_recettes():
         commit_msg = f"Sync recettes - {nb_recettes} recettes - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
         subprocess.run(["git", "commit", "-m", commit_msg], check=True)
         
-        subprocess.run(["git", "push"], check=True)
+        subprocess.run(["git", "push", "-u", "origin", "main"], check=True)
         
         print(f"Synchronisation réussie - {nb_recettes} recettes")
     except subprocess.CalledProcessError as e:
