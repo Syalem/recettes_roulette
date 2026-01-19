@@ -53,10 +53,26 @@
       "date_ajout": "2026-01-12T20:28:06.012690",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "fdhjnd",
+      "duree_prep": 10,
+      "ingredients": [
+        "ydfnbfgn"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Viande",
+      "id": 6,
+      "lien": "",
+      "livre": "",
+      "page": null,
+      "date_ajout": "2026-01-19T16:01:24.509384",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-19T10:14:32.545470",
+    "derniere_modification": "2026-01-19T16:01:24.521704",
     "version": "1.0.0"
   }
 }
