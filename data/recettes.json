@@ -53,10 +53,26 @@
       "date_ajout": "2026-01-12T20:28:06.012690",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "ergqregae",
+      "duree_prep": 15,
+      "ingredients": [
+        "2q3gwaeragv"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Viande",
+      "id": 6,
+      "lien": "",
+      "livre": "",
+      "page": null,
+      "date_ajout": "2026-01-19T21:31:23.460840",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-19T16:53:57.263065",
+    "derniere_modification": "2026-01-19T21:31:23.472852",
     "version": "1.0.0"
   }
 }
