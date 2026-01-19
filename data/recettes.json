@@ -69,27 +69,10 @@
       "date_ajout": "2026-01-19T16:01:24.509384",
       "tags": [],
       "notes": ""
-    },
-    {
-      "titre": "rdhzsrtbrt",
-      "duree_prep": 10,
-      "ingredients": [
-        "srgfbsrdtbsr",
-        "thndrzgn"
-      ],
-      "categorie": "Plat principal",
-      "sous_categorie": "Viande",
-      "id": 7,
-      "lien": "",
-      "livre": "",
-      "page": null,
-      "date_ajout": "2026-01-19T16:06:59.455416",
-      "tags": [],
-      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-19T16:06:59.464160",
+    "derniere_modification": "2026-01-19T16:48:05.537739",
     "version": "1.0.0"
   }
 }
