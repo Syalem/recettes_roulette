@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planificateur de Repas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const ChefHat = () => <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="#EA580C"><path fillRule="evenodd" clipRule="evenodd" d="M7.25285 4.25547C8.09403 2.47951 9.90263 1.25 12 1.25C14.0974 1.25 15.906 2.47951 16.7471 4.25547C16.831 4.25184 16.9153 4.25 17 4.25C20.1756 4.25 22.75 6.82436 22.75 10C22.75 12.1806 21.5363 14.0762 19.75 15.0508L19.75 18.052C19.75 18.9505 19.7501 19.6997 19.6701 20.2945C19.5857 20.9223 19.4 21.4891 18.9445 21.9445C18.4891 22.4 17.9223 22.5857 17.2945 22.6701C16.6997 22.7501 15.9505 22.75 15.052 22.75H8.94801C8.04952 22.75 7.3003 22.7501 6.70552 22.6701C6.07773 22.5857 5.51093 22.4 5.05546 21.9445C4.59999 21.4891 4.41432 20.9223 4.32991 20.2945C4.24994 19.6997 4.24997 18.9505 4.25 18.052L4.25 15.0508C2.46371 14.0762 1.25 12.1806 1.25 10C1.25 6.82436 3.82436 4.25 7 4.25C7.08469 4.25 7.16899 4.25184 7.25285 4.25547Z"></path></svg>;
+        const Check = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>;
+        const Plus = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>;
+        const X = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>;
+        const Calendar = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>;
+        const Trash = () => <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>;
+        const RefreshCw = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>;
+
+        const API_URL = '/api';
+
+        const JOURS = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
+        const MOMENTS = ['Midi', 'Soir'];
+
+        function MealPlanner() {
+            const [recettes, setRecettes] = useState([]);
+            const [planSemaine, setPlanSemaine] = useState({});
+            const [showRecetteModal, setShowRecetteModal] = useState(false);
+            const [selectedSlot, setSelectedSlot] = useState(null);
+            const [searchTerm, setSearchTerm] = useState('');
+
+            useEffect(() => {
+                chargerRecettes();
+                chargerPlan();
+            }, []);
+
+            const chargerRecettes = async () => {
+                try {
+                    const response = await fetch(`${API_URL}/recettes`);
+                    const data = await response.json();
+                    setRecettes(data);
+                } catch (error) {
+                    console.error('Erreur chargement recettes:', error);
+                    setRecettes([]);
+                }
+            };
+
+            const chargerPlan = async () => {
+                try {
+                    const stored = await window.storage.get('meal-plan');
+                    if (stored && stored.value) {
+                        setPlanSemaine(JSON.parse(stored.value));
+                    }
+                } catch (error) {
+                    console.log('Aucun plan sauvegardé');
+                }
+            };
+
+            const sauvegarderPlan = async (nouveauPlan) => {
+                try {
+                    await window.storage.set('meal-plan', JSON.stringify(nouveauPlan));
+                    setPlanSemaine(nouveauPlan);
+                } catch (error) {
+                    console.error('Erreur sauvegarde:', error);
+                }
+            };
+
+            const ajouterRepas = (jour, moment, recette) => {
+                const key = `${jour}-${moment}`;
+                const nouveauPlan = {
+                    ...planSemaine,
+                    [key]: {
+                        recette: recette,
+                        fait: false
+                    }
+                };
+                sauvegarderPlan(nouveauPlan);
+                setShowRecetteModal(false);
+            };
+
+            const ajouterRepasVide = (jour, moment) => {
+                const titre = prompt('Nom du repas:');
+                if (!titre) return;
+                
+                const key = `${jour}-${moment}`;
+                const nouveauPlan = {
+                    ...planSemaine,
+                    [key]: {
+                        recette: { titre, id: `custom-${Date.now()}` },
+                        fait: false
+                    }
+                };
+                sauvegarderPlan(nouveauPlan);
+            };
+
+            const toggleFait = (jour, moment) => {
+                const key = `${jour}-${moment}`;
+                if (!planSemaine[key]) return;
+                
+                const nouveauPlan = {
+                    ...planSemaine,
+                    [key]: {
+                        ...planSemaine[key],
+                        fait: !planSemaine[key].fait
+                    }
+                };
+                sauvegarderPlan(nouveauPlan);
+            };
+
+            const supprimerRepas = (jour, moment) => {
+                const key = `${jour}-${moment}`;
+                const nouveauPlan = { ...planSemaine };
+                delete nouveauPlan[key];
+                sauvegarderPlan(nouveauPlan);
+            };
+
+            const reinitialiserSemaine = () => {
+                if (confirm('Réinitialiser toute la semaine ?')) {
+                    sauvegarderPlan({});
+                }
+            };
+
+            const openRecetteModal = (jour, moment) => {
+                setSelectedSlot({ jour, moment });
+                setShowRecetteModal(true);
+            };
+
+            const recettesFiltrees = recettes.filter(r => 
+                r.titre.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
+                    <header className="bg-white shadow-md">
+                        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+                            <div className="flex justify-between items-center">
+                                <div className="flex items-center gap-3">
+                                    <ChefHat />
+                                    <h1 className="text-3xl font-bold text-gray-900">Planning de la Semaine</h1>
+                                </div>
+                                <div className="flex gap-2">
+                                    <button
+                                        onClick={reinitialiserSemaine}
+                                        className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
+                                    >
+                                        <RefreshCw />
+                                        Réinitialiser
+                                    </button>
+                                    <a
+                                        href="/"
+                                        className="flex items-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition"
+                                    >
+                                        Mes Recettes
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </header>
+
+                    <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                            {JOURS.map(jour => (
+                                <div key={jour} className="bg-white rounded-lg shadow-md overflow-hidden">
+                                    <div className="bg-orange-600 text-white px-4 py-3">
+                                        <h2 className="text-lg font-bold flex items-center gap-2">
+                                            <Calendar />
+                                            {jour}
+                                        </h2>
+                                    </div>
+                                    
+                                    <div className="p-4 space-y-3">
+                                        {MOMENTS.map(moment => {
+                                            const key = `${jour}-${moment}`;
+                                            const repas = planSemaine[key];
+                                            
+                                            return (
+                                                <div key={moment} className="border border-gray-200 rounded-lg p-3">
+                                                    <div className="flex justify-between items-center mb-2">
+                                                        <span className="text-sm font-semibold text-gray-700">{moment}</span>
+                                                        {repas && (
+                                                            <button
+                                                                onClick={() => supprimerRepas(jour, moment)}
+                                                                className="text-red-600 hover:bg-red-50 p-1 rounded"
+                                                            >
+                                                                <Trash />
+                                                            </button>
+                                                        )}
+                                                    </div>
+                                                    
+                                                    {repas ? (
+                                                        <div
+                                                            onClick={() => toggleFait(jour, moment)}
+                                                            className={`cursor-pointer p-3 rounded transition ${
+                                                                repas.fait 
+                                                                    ? 'bg-green-100 border-green-300' 
+                                                                    : 'bg-gray-50 hover:bg-gray-100'
+                                                            } border`}
+                                                        >
+                                                            <div className="flex items-start gap-2">
+                                                                <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
+                                                                    repas.fait 
+                                                                        ? 'bg-green-600 border-green-600' 
+                                                                        : 'border-gray-300'
+                                                                }`}>
+                                                                    {repas.fait && <Check />}
+                                                                </div>
+                                                                <div className="flex-1 min-w-0">
+                                                                    <p className={`text-sm font-medium ${
+                                                                        repas.fait 
+                                                                            ? 'line-through text-gray-500' 
+                                                                            : 'text-gray-900'
+                                                                    }`}>
+                                                                        {repas.recette.titre}
+                                                                    </p>
+                                                                    {repas.recette.duree_prep && (
+                                                                        <p className="text-xs text-gray-500 mt-1">
+                                                                            ⏱️ {repas.recette.duree_prep} min
+                                                                        </p>
+                                                                    )}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ) : (
+                                                        <div className="space-y-2">
+                                                            <button
+                                                                onClick={() => openRecetteModal(jour, moment)}
+                                                                className="w-full flex items-center justify-center gap-2 bg-orange-50 text-orange-600 px-3 py-2 rounded border border-orange-200 hover:bg-orange-100 transition text-sm"
+                                                            >
+                                                                <Plus />
+                                                                Recette
+                                                            </button>
+                                                            <button
+                                                                onClick={() => ajouterRepasVide(jour, moment)}
+                                                                className="w-full flex items-center justify-center gap-2 bg-gray-50 text-gray-600 px-3 py-2 rounded border border-gray-200 hover:bg-gray-100 transition text-sm"
+                                                            >
+                                                                <Plus />
+                                                                Repas libre
+                                                            </button>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            );
+                                        })}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </main>
+
+                    {showRecetteModal && (
+                        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+                            <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full max-h-[80vh] flex flex-col">
+                                <div className="flex justify-between items-center p-6 border-b border-gray-200">
+                                    <h2 className="text-2xl font-bold text-gray-900">
+                                        Choisir une recette - {selectedSlot?.jour} {selectedSlot?.moment}
+                                    </h2>
+                                    <button
+                                        onClick={() => setShowRecetteModal(false)}
+                                        className="text-gray-400 hover:text-gray-600"
+                                    >
+                                        <X />
+                                    </button>
+                                </div>
+
+                                <div className="p-4 border-b border-gray-200">
+                                    <input
+                                        type="text"
+                                        placeholder="Rechercher une recette..."
+                                        value={searchTerm}
+                                        onChange={(e) => setSearchTerm(e.target.value)}
+                                        className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                                    />
+                                </div>
+
+                                <div className="flex-1 overflow-y-auto p-4">
+                                    <div className="space-y-2">
+                                        {recettesFiltrees.map(recette => (
+                                            <div
+                                                key={recette.id}
+                                                onClick={() => ajouterRepas(selectedSlot.jour, selectedSlot.moment, recette)}
+                                                className="p-4 border border-gray-200 rounded-lg hover:bg-orange-50 hover:border-orange-300 cursor-pointer transition"
+                                            >
+                                                <h3 className="font-bold text-gray-900">{recette.titre}</h3>
+                                                <div className="flex gap-4 text-sm text-gray-600 mt-1">
+                                                    <span>⏱️ {recette.duree_prep} min</span>
+                                                    <span className="text-orange-600">{recette.categorie}</span>
+                                                </div>
+                                            </div>
+                                        ))}
+                                        
+                                        {recettesFiltrees.length === 0 && (
+                                            <p className="text-center text-gray-500 py-8">
+                                                Aucune recette trouvée
+                                            </p>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<MealPlanner />);
+    </script>
+</body>
+</html>

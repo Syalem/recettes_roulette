@@ -31,6 +31,27 @@ def sync_recettes():
             ["git", "config", "user.name", "Recette Roulette Bot"],
             check=True
         )
+        
+        # Vérifier si le remote origin existe, sinon l'ajouter
+        result = subprocess.run(
+            ["git", "remote", "get-url", "origin"],
+            capture_output=True,
+            text=True
+        )
+        
+        if result.returncode != 0:
+            # Récupérer l'URL du repo depuis les variables d'environnement
+            import os
+            repo_url = os.getenv("GITHUB_REPO_URL")
+            if repo_url:
+                subprocess.run(
+                    ["git", "remote", "add", "origin", repo_url],
+                    check=True
+                )
+                print(f"Remote origin configuré: {repo_url}")
+            else:
+                print("ERREUR: Variable GITHUB_REPO_URL non définie")
+                return
     except subprocess.CalledProcessError as e:
         print(f"Erreur de configuration Git : {e}")
         return
