@@ -17,7 +17,7 @@
       "categorie": "Plat principal",
       "sous_categorie": "Pâtes",
       "id": 2,
-      "lien": "",
+      "lien": "https://www.instagram.com/reel/Cz_He8gKgSY/?igsh=MW84Z2s5ZWdsc3lpdw==",
       "livre": "instagram",
       "page": null,
       "date_ajout": "2026-01-09T15:14:54.814941",
@@ -62,10 +62,30 @@
       "date_ajout": "2026-01-20T09:25:26.931781",
       "tags": [],
       "notes": "recette maman"
+    },
+    {
+      "titre": "Gratin de Kloße",
+      "duree_prep": 45,
+      "ingredients": [
+        "Kloßteig - 700g",
+        "Mini mozza - 125g",
+        "Sauce tomate - 500g",
+        "Fromage râpé - 150g",
+        "Basilic frais - Quelques feuilles"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 7,
+      "lien": "https://www.instagram.com/reel/C34wXslMIUD/?igsh=MTA1YjJwazA5ZzRhaA==",
+      "livre": "Instagram",
+      "page": null,
+      "date_ajout": "2026-01-20T08:56:56.992277",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T09:25:32.826261",
+    "derniere_modification": "2026-01-20T08:57:19.201684",
     "version": "1.0.0"
   }
 }
