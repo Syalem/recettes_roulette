@@ -4,9 +4,15 @@
       "titre": "udon sauce cacahuètes",
       "duree_prep": 10,
       "ingredients": [
-        "sauce soja",
-        "udon",
-        "jus de citron"
+        "sauce soja - 1 cac",
+        "udon - 200g",
+        "jus de citron - 2 cas",
+        "huile de sésame - 2 cac",
+        "ail purée - 1/2 cac",
+        "sirop d'agave - 1 cac",
+        "beurre cacahuètes - 1 cas",
+        "gingembre frais (purée) - 1/4 cac",
+        "vinaigre de riz - 1/2 cac"
       ],
       "categorie": "Plat principal",
       "sous_categorie": "Pâtes",
@@ -16,7 +22,7 @@
       "page": null,
       "date_ajout": "2026-01-09T15:14:54.814941",
       "tags": [],
-      "notes": "quantité pour 2 personnes"
+      "notes": "the little london vegan 23 novembre 2023"
     },
     {
       "titre": "dip thon curry",
@@ -53,26 +59,10 @@
       "date_ajout": "2026-01-12T20:28:06.012690",
       "tags": [],
       "notes": ""
-    },
-    {
-      "titre": "ergqregae",
-      "duree_prep": 15,
-      "ingredients": [
-        "2q3gwaeragv"
-      ],
-      "categorie": "Plat principal",
-      "sous_categorie": "Viande",
-      "id": 6,
-      "lien": "",
-      "livre": "",
-      "page": null,
-      "date_ajout": "2026-01-19T21:31:23.460840",
-      "tags": [],
-      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T07:15:38.588441",
+    "derniere_modification": "2026-01-20T08:22:29.866770",
     "version": "1.0.0"
   }
 }
