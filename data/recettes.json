@@ -1,7 +1,7 @@
 {
   "recettes": [
     {
-      "titre": "udon sauce cacahuètes",
+      "titre": "Udon sauce cacahuètes",
       "duree_prep": 10,
       "ingredients": [
         "sauce soja - 1 cac",
@@ -25,7 +25,7 @@
       "notes": "the little london vegan 23 novembre 2023"
     },
     {
-      "titre": "dip thon curry",
+      "titre": "Dip thon curry",
       "duree_prep": 5,
       "ingredients": [
         "curry",
@@ -43,7 +43,7 @@
       "notes": ""
     },
     {
-      "titre": "galette des rois",
+      "titre": "Galette des rois",
       "duree_prep": 45,
       "ingredients": [
         "beurre - 80g",
@@ -99,7 +99,7 @@
       "categorie": "Plat principal",
       "sous_categorie": "Pâtes",
       "id": 8,
-      "lien": "",
+      "lien": "https://www.instagram.com/reel/CzBQsedPKeE/?igsh=Z3J2eDU0Y3N1cHI2",
       "livre": "instagram",
       "page": null,
       "date_ajout": "2026-01-20T10:48:01.761904",
@@ -108,7 +108,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T10:48:01.770445",
+    "derniere_modification": "2026-01-20T10:49:30.783993",
     "version": "1.0.0"
   }
 }
