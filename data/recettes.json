@@ -82,10 +82,33 @@
       "date_ajout": "2026-01-20T08:56:56.992277",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "Udon sauce soja",
+      "duree_prep": 5,
+      "ingredients": [
+        "Udon - 100g",
+        "sauce soja - 1 cas",
+        "vinaigre de riz - 1 cas",
+        "mirin - 1 cas",
+        "ail en poudre - 1 cac",
+        "miel - 1 cac",
+        "huile de sésame - 1/2 cas",
+        "graines de sésame - 1 cac"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 8,
+      "lien": "",
+      "livre": "instagram",
+      "page": null,
+      "date_ajout": "2026-01-20T10:48:01.761904",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T08:57:19.201684",
+    "derniere_modification": "2026-01-20T10:48:01.770445",
     "version": "1.0.0"
   }
 }
