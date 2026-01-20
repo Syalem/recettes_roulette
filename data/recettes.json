@@ -105,10 +105,33 @@
       "date_ajout": "2026-01-20T10:48:01.761904",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "Lohikeitto (soupe au saumon finlandaise)",
+      "duree_prep": 30,
+      "ingredients": [
+        "saumon - 500g",
+        "pommes de terre (festkochend) - 400g",
+        "poireau - 3",
+        "carotte - 3",
+        "bouillon de poisson - 1,2L",
+        "crème épaisse - 200mL",
+        "aneth fraîche - 1 bouquet",
+        "citron - 1"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Soupe",
+      "id": 9,
+      "lien": "",
+      "livre": "instagram",
+      "page": null,
+      "date_ajout": "2026-01-20T12:35:27.519917",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T10:49:30.783993",
+    "derniere_modification": "2026-01-20T12:35:27.549484",
     "version": "1.0.0"
   }
 }
