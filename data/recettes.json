@@ -69,26 +69,10 @@
       "date_ajout": "2026-01-19T21:31:23.460840",
       "tags": [],
       "notes": ""
-    },
-    {
-      "titre": "dhbsrth",
-      "duree_prep": 15,
-      "ingredients": [
-        "sergbsy"
-      ],
-      "categorie": "Plat principal",
-      "sous_categorie": "Poisson",
-      "id": 7,
-      "lien": "",
-      "livre": "",
-      "page": null,
-      "date_ajout": "2026-01-20T08:12:22.735555",
-      "tags": [],
-      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T08:12:22.743152",
+    "derniere_modification": "2026-01-20T07:15:38.588441",
     "version": "1.0.0"
   }
 }
