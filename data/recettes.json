@@ -43,26 +43,29 @@
       "notes": ""
     },
     {
-      "titre": "poulet au curry",
-      "duree_prep": 90,
+      "titre": "galette des rois",
+      "duree_prep": 45,
       "ingredients": [
-        "poulet - 1",
-        "curry",
-        "oignons"
+        "beurre - 80g",
+        "poudre d'amandes - 125g",
+        "sucre - 125g",
+        "oeufs - 2",
+        "crème fraîche - 60g",
+        "pâte feuilletée - 2"
       ],
-      "categorie": "Plat principal",
-      "sous_categorie": "Viande",
-      "id": 5,
+      "categorie": "Dessert",
+      "sous_categorie": "Gâteau",
+      "id": 6,
       "lien": "",
-      "livre": "",
+      "livre": "carnet desserts",
       "page": null,
-      "date_ajout": "2026-01-12T20:28:06.012690",
+      "date_ajout": "2026-01-20T09:25:26.931781",
       "tags": [],
-      "notes": ""
+      "notes": "recette maman"
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T08:22:29.866770",
+    "derniere_modification": "2026-01-20T09:25:32.826261",
     "version": "1.0.0"
   }
 }
