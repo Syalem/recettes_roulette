@@ -34,6 +34,34 @@ def sync_recettes():
     if github_repo_url:
         subprocess.run(["git", "remote", "remove", "origin"], stderr=subprocess.DEVNULL)
         subprocess.run(["git", "remote", "add", "origin", github_repo_url])
+        print(f"Remote configuré: {github_repo_url.split('@')[1] if '@' in github_repo_url else github_repo_url}")
+    
+    # Gérer le detached HEAD (Render)
+    result = subprocess.run(
+        ["git", "symbolic-ref", "-q", "HEAD"],
+        capture_output=True
+    )
+    
+    if result.returncode != 0:
+        # On est en detached HEAD
+        print("Detached HEAD détecté (Render)")
+        
+        # Récupérer le SHA actuel
+        result = subprocess.run(
+            ["git", "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True
+        )
+        current_sha = result.stdout.strip()
+        
+        # Forcer la branche main sur le commit actuel
+        subprocess.run(["git", "branch", "-f", "main", current_sha])
+        
+        # Basculer sur main
+        subprocess.run(["git", "checkout", "main"])
+        print(f"Basculé sur la branche main ({current_sha[:8]})")
+    else:
+        print("Déjà sur une branche")
     
     # Vérifier s'il y a des changements
     result = subprocess.run(
@@ -53,7 +81,16 @@ def sync_recettes():
         commit_msg = f"Sync recettes - {nb_recettes} recettes - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
         subprocess.run(["git", "commit", "-m", commit_msg], check=True)
         
-        subprocess.run(["git", "push", "origin", "main"], check=True)
+        # Pull avec rebase avant le push
+        subprocess.run(["git", "pull", "--rebase", "origin", "main"], stderr=subprocess.DEVNULL)
+        
+        # Push (avec force si nécessaire)
+        result = subprocess.run(["git", "push", "origin", "main"], capture_output=True)
+        
+        if result.returncode != 0:
+            # Si échec, forcer le push
+            print("Push normal échoué, tentative avec force...")
+            subprocess.run(["git", "push", "--force", "origin", "main"], check=True)
         
         print(f"✅ Synchronisation réussie - {nb_recettes} recettes")
     except subprocess.CalledProcessError as e:
