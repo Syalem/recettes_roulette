@@ -122,7 +122,7 @@
       "categorie": "Plat principal",
       "sous_categorie": "Soupe",
       "id": 9,
-      "lien": "",
+      "lien": "https://lacuisinedegeraldine.fr/en/finnish-salmon-soup-lohikeitto",
       "livre": "instagram",
       "page": null,
       "date_ajout": "2026-01-20T12:35:27.519917",
@@ -131,7 +131,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T12:35:27.549484",
+    "derniere_modification": "2026-01-20T14:01:46.142677",
     "version": "1.0.0"
   }
 }
