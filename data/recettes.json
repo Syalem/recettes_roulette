@@ -19,7 +19,7 @@
       "id": 2,
       "lien": "https://www.instagram.com/reel/Cz_He8gKgSY/?igsh=MW84Z2s5ZWdsc3lpdw==",
       "livre": "instagram",
-      "page": null,
+      "page": "",
       "date_ajout": "2026-01-09T15:14:54.814941",
       "tags": [],
       "notes": "the little london vegan 23 novembre 2023"
@@ -37,7 +37,7 @@
       "id": 3,
       "lien": "",
       "livre": "",
-      "page": null,
+      "page": "",
       "date_ajout": "2026-01-12T14:55:46.762365",
       "tags": [],
       "notes": ""
@@ -58,7 +58,7 @@
       "id": 6,
       "lien": "",
       "livre": "carnet desserts",
-      "page": null,
+      "page": "",
       "date_ajout": "2026-01-20T09:25:26.931781",
       "tags": [],
       "notes": "recette maman"
@@ -78,7 +78,7 @@
       "id": 7,
       "lien": "https://www.instagram.com/reel/C34wXslMIUD/?igsh=MTA1YjJwazA5ZzRhaA==",
       "livre": "Instagram",
-      "page": null,
+      "page": "",
       "date_ajout": "2026-01-20T08:56:56.992277",
       "tags": [],
       "notes": ""
@@ -101,7 +101,7 @@
       "id": 8,
       "lien": "https://www.instagram.com/reel/CzBQsedPKeE/?igsh=Z3J2eDU0Y3N1cHI2",
       "livre": "instagram",
-      "page": null,
+      "page": "",
       "date_ajout": "2026-01-20T10:48:01.761904",
       "tags": [],
       "notes": ""
@@ -124,14 +124,14 @@
       "id": 9,
       "lien": "https://lacuisinedegeraldine.fr/en/finnish-salmon-soup-lohikeitto",
       "livre": "instagram",
-      "page": null,
+      "page": "",
       "date_ajout": "2026-01-20T12:35:27.519917",
       "tags": [],
       "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-20T14:01:46.142677",
+    "derniere_modification": "2026-01-21T10:35:52.965539",
     "version": "1.0.0"
   }
 }

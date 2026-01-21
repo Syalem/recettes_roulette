@@ -100,8 +100,17 @@
         
         <div class="flex items-center gap-4 text-sm text-gray-600">
           <span>⏱️ ${recette.duree_prep} min</span>
-          ${recette.livre ? `<span>📖 ${recette.livre} p.${recette.page}</span>` : ''}
+          ${recette.livre ?
+            (recette.page != null && recette.page !== '' ?
+              `<span>📖 ${recette.livre} page ${recette.page}</span>` :
+              `<span>📖 ${recette.livre}</span>`
+            ) :
+            ''
+          }
         </div>
+
+
+
 
         <div class="flex flex-wrap gap-2">
           ${recette.categorie ? `

@@ -252,7 +252,7 @@
             const recetteData = {
               ...nouvelleRecette,
               duree_prep: parseInt(nouvelleRecette.duree_prep),
-              page: nouvelleRecette.page ? parseInt(nouvelleRecette.page) : null,
+              page: nouvelleRecette.page || '',
               ingredients: ingredientsFiltrés
             };
 
@@ -622,7 +622,7 @@
                         {recette.livre && (
                           <span className="flex items-center gap-1">
                             <Book />
-                            p.{recette.page}
+                            {/* p.{recette.page} */}
                           </span>
                         )}
                       </div>
@@ -817,7 +817,7 @@
                             Page
                           </label>
                           <input
-                            type="number"
+                            type="text"
                             value={nouvelleRecette.page}
                             onChange={(e) => setNouvelleRecette({ ...nouvelleRecette, page: e.target.value })}
                             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"

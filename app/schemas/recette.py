@@ -10,7 +10,7 @@ class RecetteBase(BaseModel):
     sous_categorie: str
     lien: Optional[str] = None
     livre: Optional[str] = None
-    page: Optional[int] = Field(None, gt=0)
+    page: Optional[str] = None
     tags: Optional[List[str]] = []
     notes: Optional[str] = None
 
@@ -27,7 +27,7 @@ class RecetteUpdate(BaseModel):
     sous_categorie: Optional[str] = None
     lien: Optional[str] = None
     livre: Optional[str] = None
-    page: Optional[int] = None
+    page: Optional[str] = None
     tags: Optional[List[str]] = None
     notes: Optional[str] = None
 

@@ -13,7 +13,7 @@ class Recette:
     id: Optional[int] = None
     lien: Optional[str] = None
     livre: Optional[str] = None
-    page: Optional[int] = None
+    page: Optional[str] = None
     date_ajout: Optional[str] = None
     tags: Optional[List[str]] = None
     notes: Optional[str] = None
