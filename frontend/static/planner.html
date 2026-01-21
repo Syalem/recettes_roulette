@@ -13,9 +13,11 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script src="./js/pdfExporter.js"></script>
+    <!-- Charger le module popup -->
+    <script src="./js/popup-recette.js"></script>
     
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         const ChefHat = () => <svg className="w-8 h-8 text-orange-600" viewBox="0 0 24 24" fill="#EA580C"><path fillRule="evenodd" clipRule="evenodd" d="M7.25285 4.25547C8.09403 2.47951 9.90263 1.25 12 1.25C14.0974 1.25 15.906 2.47951 16.7471 4.25547C16.831 4.25184 16.9153 4.25 17 4.25C20.1756 4.25 22.75 6.82436 22.75 10C22.75 12.1806 21.5363 14.0762 19.75 15.0508L19.75 18.052C19.75 18.9505 19.7501 19.6997 19.6701 20.2945C19.5857 20.9223 19.4 21.4891 18.9445 21.9445C18.4891 22.4 17.9223 22.5857 17.2945 22.6701C16.6997 22.7501 15.9505 22.75 15.052 22.75H8.94801C8.04952 22.75 7.3003 22.7501 6.70552 22.6701C6.07773 22.5857 5.51093 22.4 5.05546 21.9445C4.59999 21.4891 4.41432 20.9223 4.32991 20.2945C4.24994 19.6997 4.24997 18.9505 4.25 18.052L4.25 15.0508C2.46371 14.0762 1.25 12.1806 1.25 10C1.25 6.82436 3.82436 4.25 7 4.25C7.08469 4.25 7.16899 4.25184 7.25285 4.25547Z"></path></svg>;
         const ChefHatWhite = () => <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="#ffffff"><path fillRule="evenodd" clipRule="evenodd" d="M7.25285 4.25547C8.09403 2.47951 9.90263 1.25 12 1.25C14.0974 1.25 15.906 2.47951 16.7471 4.25547C16.831 4.25184 16.9153 4.25 17 4.25C20.1756 4.25 22.75 6.82436 22.75 10C22.75 12.1806 21.5363 14.0762 19.75 15.0508L19.75 18.052C19.75 18.9505 19.7501 19.6997 19.6701 20.2945C19.5857 20.9223 19.4 21.4891 18.9445 21.9445C18.4891 22.4 17.9223 22.5857 17.2945 22.6701C16.6997 22.7501 15.9505 22.75 15.052 22.75H8.94801C8.04952 22.75 7.3003 22.7501 6.70552 22.6701C6.07773 22.5857 5.51093 22.4 5.05546 21.9445C4.59999 21.4891 4.41432 20.9223 4.32991 20.2945C4.24994 19.6997 4.24997 18.9505 4.25 18.052L4.25 15.0508C2.46371 14.0762 1.25 12.1806 1.25 10C1.25 6.82436 3.82436 4.25 7 4.25C7.08469 4.25 7.16899 4.25184 7.25285 4.25547Z"></path></svg>;
@@ -40,9 +42,22 @@
             const [searchTerm, setSearchTerm] = useState('');
             const [saveError, setSaveError] = useState(null);
 
+            const popupRef = useRef(null);
+
             useEffect(() => {
                 chargerRecettes();
                 chargerPlan();
+
+                // Initialiser le popup
+                if (window.RecettePopup) {
+                    popupRef.current = new window.RecettePopup();
+                }
+
+                return () => {
+                    if (popupRef.current) {
+                        popupRef.current.destroy();
+                    }
+                };
             }, []);
 
             const chargerRecettes = async () => {
@@ -108,8 +123,7 @@
                 const nouveauPlan = {
                     ...planSemaine,
                     [key]: {
-                        recette: recette,
-                        fait: false
+                        recette: recette
                     }
                 };
                 sauvegarderPlan(nouveauPlan);
@@ -124,22 +138,7 @@
                 const nouveauPlan = {
                     ...planSemaine,
                     [key]: {
-                        recette: { titre, id: `custom-${Date.now()}` },
-                        fait: false
-                    }
-                };
-                sauvegarderPlan(nouveauPlan);
-            };
-
-            const toggleFait = (jour, moment) => {
-                const key = `${jour}-${moment}`;
-                if (!planSemaine[key]) return;
-                
-                const nouveauPlan = {
-                    ...planSemaine,
-                    [key]: {
-                        ...planSemaine[key],
-                        fait: !planSemaine[key].fait
+                        recette: { titre, id: `custom-${Date.now()}` }
                     }
                 };
                 sauvegarderPlan(nouveauPlan);
@@ -169,6 +168,14 @@
             const openRecetteModal = (jour, moment) => {
                 setSelectedSlot({ jour, moment });
                 setShowRecetteModal(true);
+            };
+
+            const openRecetteDetails = (recette) => {
+                if (popupRef.current && recette) {
+                    popupRef.current.show(recette, {
+                        // Pas de boutons éditer/supprimer dans le planning
+                    });
+                }
             };
 
             const recettesFiltrees = recettes.filter(r => 
@@ -248,35 +255,23 @@
                                                     
                                                     {repas ? (
                                                         <div
-                                                            onClick={() => toggleFait(jour, moment)}
-                                                            className={`cursor-pointer p-3 rounded transition ${
-                                                                repas.fait 
-                                                                    ? 'bg-green-100 border-green-300' 
-                                                                    : 'bg-gray-50 hover:bg-gray-100'
-                                                            } border`}
+                                                            onClick={() => openRecetteDetails(repas.recette)}
+                                                            className="cursor-pointer p-3 rounded transition bg-gray-50 hover:bg-orange-50 border border-gray-200 hover:border-orange-300"
                                                         >
-                                                            <div className="flex items-start gap-2">
-                                                                <div className={`mt-0.5 flex-shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center ${
-                                                                    repas.fait 
-                                                                        ? 'bg-green-600 border-green-600' 
-                                                                        : 'border-gray-300'
-                                                                }`}>
-                                                                    {repas.fait && <Check />}
-                                                                </div>
-                                                                <div className="flex-1 min-w-0">
-                                                                    <p className={`text-sm font-medium ${
-                                                                        repas.fait 
-                                                                            ? 'line-through text-gray-500' 
-                                                                            : 'text-gray-900'
-                                                                    }`}>
-                                                                        {repas.recette.titre}
+                                                            <div className="flex-1 min-w-0">
+                                                                <p className="text-sm font-medium text-gray-900">
+                                                                    {repas.recette.titre}
+                                                                </p>
+                                                                {repas.recette.duree_prep && (
+                                                                    <p className="text-xs text-gray-500 mt-1">
+                                                                        ⏱️ {repas.recette.duree_prep} min
                                                                     </p>
-                                                                    {repas.recette.duree_prep && (
-                                                                        <p className="text-xs text-gray-500 mt-1">
-                                                                            ⏱️ {repas.recette.duree_prep} min
-                                                                        </p>
-                                                                    )}
-                                                                </div>
+                                                                )}
+                                                                {repas.recette.categorie && (
+                                                                    <p className="text-xs text-orange-600 mt-1">
+                                                                        {repas.recette.categorie}
+                                                                    </p>
+                                                                )}
                                                             </div>
                                                         </div>
                                                     ) : (

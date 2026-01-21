@@ -12,9 +12,11 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    
+    <!-- Charger le module popup -->
+    <script src="../static/js/popup-recette.js"></script>
+
     <script type="text/babel">
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useRef } = React;
 
         // Composants d'icônes simples en SVG
         const Plus = () => <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>;
@@ -49,7 +51,7 @@
             20.8839C6.24643 21.0142 6.44393 21.1214 6.90539 21.1835C7.38843 21.2484 8.03599 21.25 9 21.25H15C15.964 
             21.25 16.6116 21.2484 17.0946 21.1835C17.5561 21.1214 17.7536 21.0142 17.8839 20.8839C18.0142 20.7536 
             18.1214 20.5561 18.1835 20.0946C18.2299 19.7491 18.244 19.3194 18.2482 18.75Z" ></path> </g></svg>
-        //fill="#1C274C"
+        
         const API_URL = '/api';
         //const API_URL = 'http://localhost:8000/api';
         //const API_URL = import.meta.env.VITE_API_URL;
@@ -61,11 +63,11 @@
           const [recettesFiltrees, setRecettesFiltrees] = useState([]);
           const [categories, setCategories] = useState([]);
           const [showAddModal, setShowAddModal] = useState(false);
-          const [selectedRecette, setSelectedRecette] = useState(null);
-          const [showViewModal, setShowViewModal] = useState(false);
-          const [showFilterPanel, setShowFilterPanel] = useState(false);
           const [recetteAleatoire, setRecetteAleatoire] = useState(null);
+          const [showFilterPanel, setShowFilterPanel] = useState(false);
           const [loading, setLoading] = useState(false);
+
+          const popupRef = useRef(null);
 
           const [nouvelleRecette, setNouvelleRecette] = useState({
             titre: '',
@@ -85,13 +87,24 @@
             categorie: '',
             sous_categorie: '',
             duree_max: '',
-            recherche_texte: ''
-            ,ingredient: ''
+            recherche_texte: '',
+            ingredient: ''
           });
 
           useEffect(() => {
             chargerRecettes();
             chargerCategories();
+            
+            // Initialiser le popup
+            if (window.RecettePopup) {
+              popupRef.current = new window.RecettePopup();
+            }
+
+            return () => {
+              if (popupRef.current) {
+                popupRef.current.destroy();
+              }
+            };
           }, []);
 
           // derive a unique list of ingredient NAMES for the filter dropdown
@@ -152,28 +165,44 @@
           };
 
           const openRecette = (recette) => {
-            setSelectedRecette(recette);
-            setShowViewModal(true);
+            if (popupRef.current) {
+              popupRef.current.show(recette, {
+                onEdit: (r) => {
+                  const mappedIngredients = (r.ingredients || []).map(i => {
+                    if (!i) return { ingredient: '', quantity: '' };
+                    if (typeof i === 'string') {
+                      const parts = i.split(' - ');
+                      return { ingredient: parts[0] || '', quantity: parts[1] || '' };
+                    }
+                    return { ingredient: i.ingredient || '', quantity: i.quantity || '' };
+                  });
+                  setShowAddModal(true);
+                  setNouvelleRecette({ ...r, ingredients: mappedIngredients });
+                },
+                onDelete: supprimerRecette
+              });
+            }
           };
 
-          const supprimerRecette = async (recetteId) => {
+          const supprimerRecette = async (recette) => {
             if (!confirm('Supprimer cette recette ?')) return;
             try {
-              const response = await fetch(`${API_URL}/recettes/${recetteId}`, { method: 'DELETE' });
+              const response = await fetch(`${API_URL}/recettes/${recette.id}`, { method: 'DELETE' });
               if (response.ok) {
                 // rafraîchir
                 await chargerRecettes();
-                setShowViewModal(false);
-                // closed modal silently on success
+                if (popupRef.current) {
+                  popupRef.current.close();
+                }
               } else {
                 alert('Erreur lors de la suppression');
               }
             } catch (err) {
-              // fallback local removal
-              setRecettes(recettes.filter(r => r.id !== recetteId));
-              setRecettesFiltrees(recettesFiltrees.filter(r => r.id !== recetteId));
-              setShowViewModal(false);
-              // closed modal silently (demo mode)
+              setRecettes(recettes.filter(r => r.id !== recette.id));
+              setRecettesFiltrees(recettesFiltrees.filter(r => r.id !== recette.id));
+              if (popupRef.current) {
+                popupRef.current.close();
+              }
             }
           };
           
@@ -836,100 +865,6 @@
                         className="flex-1 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition"
                       >
                         Enregistrer les modifications
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {showViewModal && selectedRecette && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto">
-                  <div className="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8">
-                    <div className="flex justify-between items-center p-6 border-b border-gray-200">
-                      <h2 className="text-2xl font-bold text-gray-900">Détails de la recette</h2>
-                      <button
-                        onClick={() => setShowViewModal(false)}
-                        className="text-gray-400 hover:text-gray-600"
-                      >
-                        <X />
-                      </button>
-                    </div>
-
-                    <div className="p-6 space-y-4">
-                      <h3 className="text-xl font-bold">{selectedRecette.titre}</h3>
-                      <div className="text-sm text-gray-600">Durée: {selectedRecette.duree_prep} min</div>
-
-                      <div className="mt-2 flex items-center gap-2">
-                        {selectedRecette.categorie && (
-                          <span className="inline-block bg-orange-100 text-orange-800 text-xs px-3 py-1 rounded-full">
-                            {selectedRecette.categorie}
-                          </span>
-                        )}
-                        {selectedRecette.sous_categorie && (
-                          <span className="inline-block bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">
-                            {selectedRecette.sous_categorie}
-                          </span>
-                        )}
-                      </div>
-
-                      {selectedRecette.livre && <div className="text-sm">Livre: {selectedRecette.livre} p.{selectedRecette.page}</div>}
-                      <div>
-                        <p className="font-medium">Ingrédients:</p>
-                        <ul className="list-disc pl-5 text-sm text-gray-700">
-                          {selectedRecette.ingredients.map((ing, i) => {
-                            let name = '';
-                            let qty = '';
-                            if (!ing) {
-                              name = '';
-                            } else if (typeof ing === 'string') {
-                              const parts = ing.split(' - ');
-                              name = parts[0] || '';
-                              qty = parts[1] || '';
-                            } else {
-                              name = ing.ingredient || '';
-                              qty = ing.quantity || '';
-                            }
-                            return (
-                              <li key={i}>
-                                {name}{qty ? ` - ${qty}` : ''}
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                      {selectedRecette.notes && (
-                        <div>
-                          <p className="font-medium">Notes:</p>
-                          <p className="text-sm text-gray-700">{selectedRecette.notes}</p>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="flex gap-3 p-6 border-t border-gray-200">
-                      <button
-                        onClick={() => {
-                          // convert ingredient strings to objects for editing
-                          const mappedIngredients = (selectedRecette.ingredients || []).map(i => {
-                            if (!i) return { ingredient: '', quantity: '' };
-                            if (typeof i === 'string') {
-                              const parts = i.split(' - ');
-                              return { ingredient: parts[0] || '', quantity: parts[1] || '' };
-                            }
-                            return { ingredient: i.ingredient || '', quantity: i.quantity || '' };
-                          });
-                          setShowViewModal(false);
-                          setShowAddModal(true);
-                          setNouvelleRecette({ ...selectedRecette, ingredients: mappedIngredients });
-                        }}
-                        className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition"
-                      >
-                        Éditer
-                      </button>
-                      <button
-                        onClick={() => supprimerRecette(selectedRecette.id)}
-                        className="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition"
-                      >
-                        Supprimer
                       </button>
                     </div>
                   </div>
