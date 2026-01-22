@@ -5,13 +5,14 @@ class FiltresRecetteSchema(BaseModel):
     """Schéma pour les paramètres de filtrage."""
     categorie: Optional[str] = None
     sous_categorie: Optional[str] = None
-    duree_min: Optional[int] = Field(None, ge=0)
     duree_max: Optional[int] = Field(None, ge=0)
     ingredients_inclus: Optional[List[str]] = None
     ingredients_exclus: Optional[List[str]] = None
     livre: Optional[str] = None
     tags: Optional[List[str]] = None
     recherche_texte: Optional[str] = None
+    ingredients: Optional[List[str]] = None  # ← Ajoute cette ligne
+
 
 class TriSchema(BaseModel):
     """Schéma pour les paramètres de tri."""

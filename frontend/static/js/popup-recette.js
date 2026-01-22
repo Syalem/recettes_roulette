@@ -65,6 +65,112 @@
       this.popupElement = popup;
     }
 
+    // Afficher le modal de sélection du repas
+    showMealSelection() {
+      const modal = document.createElement('div');
+      modal.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50';
+      modal.innerHTML = `
+        <div class="bg-white rounded-lg shadow-2xl max-w-sm w-full">
+          <div class="p-6">
+            <h3 class="text-lg font-bold text-gray-900 mb-4">Sélectionner le repas</h3>
+            <select id="meal-type-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-purple-500">
+              <option value="">-- Choisir un repas --</option>
+              <option value="petit-dejeuner">🌅 Petit-déjeuner</option>
+              <option value="dejeuner">🍽️ Déjeuner</option>
+              <option value="gouter">☕ Goûter</option>
+              <option value="diner">🌙 Dîner</option>
+            </select>
+            
+            <div class="flex gap-2">
+              <button class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition" onclick="this.closest('.fixed').remove();">
+                Annuler
+              </button>
+              <button id="confirm-meal-btn" class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                Ajouter
+              </button>
+            </div>
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      
+      // Bouton confirmer
+      const confirmBtn = document.getElementById('confirm-meal-btn');
+      const selectInput = document.getElementById('meal-type-select');
+      
+      confirmBtn.addEventListener('click', () => {
+        const mealType = selectInput.value;
+        if (!mealType) {
+          alert('Veuillez sélectionner un repas');
+          return;
+        }
+        
+        this.addToPlanning(mealType);
+        modal.remove();
+      });
+
+      // Fermer en cliquant en dehors
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.remove();
+        }
+      });
+    }
+
+    // Ajouter la recette au planning
+    addToPlanning(mealType) {
+      // Récupérer le planning existant du localStorage
+      const planning = JSON.parse(localStorage.getItem('planning') || '{}');
+      
+      // Initialiser le tableau si le repas n'existe pas
+      if (!planning[mealType]) {
+        planning[mealType] = [];
+      }
+      
+      // Créer l'objet recette à ajouter
+      const recetteToAdd = {
+        id: this.currentRecette.id,
+        titre: this.currentRecette.titre,
+        duree_prep: this.currentRecette.duree_prep,
+        ingredients: this.currentRecette.ingredients,
+        categorie: this.currentRecette.categorie,
+        sous_categorie: this.currentRecette.sous_categorie || '',
+        lien: this.currentRecette.lien || '',
+        livre: this.currentRecette.livre || '',
+        page: this.currentRecette.page || '',
+        notes: this.currentRecette.notes || '',
+        tags: this.currentRecette.tags || [],
+        date_ajoutee: new Date().toISOString()
+      };
+      
+      // Vérifier si la recette n'existe pas déjà pour ce repas
+      const exists = planning[mealType].some(r => r.id === this.currentRecette.id);
+      if (exists) {
+        alert('Cette recette est déjà présente dans ce jour');
+        return;
+      }
+      
+      // Ajouter la recette au planning
+      planning[mealType].push(recetteToAdd);
+      
+      // Sauvegarder dans le localStorage
+      localStorage.setItem('planning', JSON.stringify(planning));
+      
+      // Message de confirmation
+      const mealTypeLabel = {
+        'lundi': 'Lundi',
+        'mardi': 'Mardi',
+        'mercredi': 'Mercredi',
+        'jeudi': 'Jeudi',
+        'vendredi': 'Vendredi',
+        'samedi': 'Samedi',
+        'dimanche': 'Dimanche'
+      };
+      
+      alert(`✅ "${this.currentRecette.titre}" a été ajoutée à ${mealTypeLabel[mealType] || mealType} !`);
+    }
+
     // Formater les ingrédients
     formatIngredient(ing) {
       if (!ing) return { name: '', quantity: '' };
@@ -108,9 +214,6 @@
             ''
           }
         </div>
-
-
-
 
         <div class="flex flex-wrap gap-2">
           ${recette.categorie ? `
@@ -172,6 +275,14 @@
       const footer = this.popupElement.querySelector('#popup-footer');
       const buttons = [];
 
+      // Bouton "Ajouter au planning" (toujours visible)
+      buttons.push(`
+        <button id="popup-add-to-planning-btn" 
+                class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+          📅 Ajouter au planning
+        </button>
+      `);
+
       if (this.onEdit) {
         buttons.push(`
           <button id="popup-edit-btn" 
@@ -184,7 +295,7 @@
       if (this.onDelete) {
         buttons.push(`
           <button id="popup-delete-btn" 
-                  class="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                  class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
             Supprimer
           </button>
         `);
@@ -193,6 +304,10 @@
       footer.innerHTML = buttons.join('');
 
       // Ajouter les event listeners
+      footer.querySelector('#popup-add-to-planning-btn')?.addEventListener('click', () => {
+        this.showMealSelection();
+      });
+
       if (this.onEdit) {
         footer.querySelector('#popup-edit-btn')?.addEventListener('click', () => {
           this.onEdit(this.currentRecette);

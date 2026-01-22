@@ -1,0 +1,102 @@
+recettes_roulette
+├── LICENSE
+├── README.md
+├── app
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-313.pyc
+│   │   └── main.cpython-313.pyc
+│   ├── api
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── filters.cpython-313.pyc
+│   │   │   ├── random.cpython-313.pyc
+│   │   │   └── recettes.cpython-313.pyc
+│   │   ├── filters.py
+│   │   ├── random.py
+│   │   └── recettes.py
+│   ├── config.py
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── filters.cpython-313.pyc
+│   │   │   ├── random_picker.cpython-313.pyc
+│   │   │   └── storage.cpython-313.pyc
+│   │   ├── filters.py
+│   │   ├── random_picker.py
+│   │   └── storage.py
+│   ├── main.py
+│   ├── models
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   └── recette.cpython-313.pyc
+│   │   └── recette.py
+│   ├── schemas
+│   │   ├── __init__.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── filters.cpython-313.pyc
+│   │   │   └── recette.cpython-313.pyc
+│   │   ├── filters.py
+│   │   └── recette.py
+│   └── utils
+│       ├── __init__.py
+│       └── backup.py
+├── data
+│   ├── backups
+│   │   ├── backup_20260119_160659.json
+│   │   ├── backup_20260119_164805.json
+│   │   ├── backup_20260119_165357.json
+│   │   ├── backup_20260119_213123.json
+│   │   ├── backup_20260119_215811.json
+│   │   ├── backup_20260119_220104.json
+│   │   ├── backup_20260120_081222.json
+│   │   ├── backup_20260120_092526.json
+│   │   ├── backup_20260120_092532.json
+│   │   └── backup_20260121_103552.json
+│   ├── categories.json
+│   └── recettes.json
+├── frontend
+│   ├── static
+│   │   ├── js
+│   │   │   ├── App.jsx
+│   │   │   ├── components
+│   │   │   │   ├── AddRecetteModal.jsx
+│   │   │   │   ├── FilterPanel.jsx
+│   │   │   │   ├── Header.jsx
+│   │   │   │   ├── RecetteCard.jsx
+│   │   │   │   ├── SearchBar.jsx
+│   │   │   │   └── SuggestionCard.jsx
+│   │   │   ├── hooks
+│   │   │   │   ├── useCategories.js
+│   │   │   │   ├── useFilters.js
+│   │   │   │   └── useRecettes.js
+│   │   │   ├── pdfExporter.js
+│   │   │   ├── popup-recette.js
+│   │   │   └── utils
+│   │   │       ├── api.js
+│   │   │       ├── constants.js
+│   │   │       └── icons.js
+│   │   └── planner.html
+│   └── templates
+│       └── index.html
+├── requirements.txt
+├── scripts
+│   └── sync_to_github.py
+├── stats.py
+└── tests
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-313.pyc
+    │   ├── test_filters.cpython-313-pytest-8.3.4.pyc
+    │   ├── test_filters.cpython-313-pytest-9.0.2.pyc
+    │   ├── test_random.cpython-313-pytest-8.3.4.pyc
+    │   ├── test_random.cpython-313-pytest-9.0.2.pyc
+    │   ├── test_storage.cpython-313-pytest-8.3.4.pyc
+    │   └── test_storage.cpython-313-pytest-9.0.2.pyc
+    ├── test_filters.py
+    ├── test_random.py
+    └── test_storage.py

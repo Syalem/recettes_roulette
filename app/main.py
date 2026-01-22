@@ -61,5 +61,5 @@ def health():
 
 @app.get("/planner", response_class=HTMLResponse)
 def planner():
-    html_path = Path("frontend/templates/planner.html")
+    html_path = Path("../frontend/static/planner.html")
     return serve_frontend()
