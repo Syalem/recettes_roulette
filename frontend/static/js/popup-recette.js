@@ -278,27 +278,27 @@
       const footer = this.popupElement.querySelector('#popup-footer');
       const buttons = [];
 
-      // Bouton "Ajouter au planning" (toujours visible)
-      buttons.push(`
-        <button id="popup-add-to-planning-btn" 
-                class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
-          📅 Ajouter au planning
-        </button>
-      `);
-
       if (this.onEdit) {
         buttons.push(`
           <button id="popup-edit-btn" 
-                  class="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition">
+                  class="px-4 py-2 mr-auto border border-gray-300 rounded-lg hover:bg-gray-50 transition">
             Éditer
           </button>
         `);
       }
 
+      // Bouton "Ajouter au planning" (toujours visible)
+      buttons.push(`
+        <button id="popup-add-to-planning-btn" 
+                class="w-auto bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+          📅 Ajouter au planning
+        </button>
+      `);
+
       if (this.onDelete) {
         buttons.push(`
           <button id="popup-delete-btn" 
-                  class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                  class="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
             Supprimer
           </button>
         `);
