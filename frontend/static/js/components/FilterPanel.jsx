@@ -14,12 +14,11 @@ const FilterPanel = ({
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-md p-6 mb-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        
-        {/* Catégories avec cases à cocher */}
-        <div className="lg:col-span-1">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+    <div className="border-t border-gray-200 px-6 py-4">
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+        {/* Catégorie */}
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Catégorie
           </label>
           <select
@@ -34,7 +33,7 @@ const FilterPanel = ({
                 }
               }
             }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
           >
             <option value="">Toutes</option>
             {Array.isArray(categories) && categories.map(cat => (
@@ -44,30 +43,33 @@ const FilterPanel = ({
         </div>
 
         {/* Sous-catégorie */}
-        <div className="lg:col-span-1">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Sous-catégorie
           </label>
           <select
             value={filtres.sous_categorie || ''}
             onChange={(e) => onModifierFiltre('sous_categorie', e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
           >
             <option value="">Toutes</option>
+            {Array.isArray(categories) && categories.map(cat => (
+              <option key={cat.nom} value={cat.nom}>{cat.nom}</option>
+            ))}
           </select>
         </div>
 
         {/* Ingrédient */}
-        <div className="lg:col-span-1">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Ingrédient
           </label>
           <select
             value={filtres.ingredient || ''}
             onChange={(e) => onModifierFiltre('ingredient', e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
           >
             <option value="">Tous</option>
             {allIngredients.map(ing => (
@@ -77,8 +79,8 @@ const FilterPanel = ({
         </div>
 
         {/* Durée max */}
-        <div className="lg:col-span-1">
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+        <div>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
             Durée max (min)
           </label>
           <input
@@ -88,23 +90,23 @@ const FilterPanel = ({
             value={filtres.duree_max || ''}
             onChange={(e) => onModifierFiltre('duree_max', e.target.value)}
             onKeyDown={handleKeyDown}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
             placeholder="Ex: 30"
           />
         </div>
       </div>
 
-      {/* Boutons d'action */}
+      {/* Buttons row */}
       <div className="flex gap-3">
         <button
           onClick={onApplyFilters}
-          className="flex-1 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition font-medium"
+          className="flex-1 bg-orange-600 text-white px-6 py-2.5 rounded-lg hover:bg-orange-700 transition font-medium"
         >
           Appliquer les filtres
         </button>
         <button
           onClick={onReinitialiser}
-          className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium"
+          className="px-6 py-2.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition font-medium text-gray-700"
         >
           Réinitialiser
         </button>
