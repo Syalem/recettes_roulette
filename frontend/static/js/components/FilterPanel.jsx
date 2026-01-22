@@ -15,7 +15,7 @@ const FilterPanel = ({
 
   return (
     <div className="border-t border-gray-200 px-6 py-4">
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         {/* Catégorie */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -27,30 +27,11 @@ const FilterPanel = ({
               if (e.target.value) {
                 onToggleCategorie(e.target.value);
               } else {
-                // Réinitialiser les catégories
                 if (filtres.categories && filtres.categories.length > 0) {
                   filtres.categories.forEach(cat => onToggleCategorie(cat));
                 }
               }
             }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-          >
-            <option value="">Toutes</option>
-            {Array.isArray(categories) && categories.map(cat => (
-              <option key={cat.nom} value={cat.nom}>{cat.nom}</option>
-            ))}
-          </select>
-        </div>
-
-        {/* Sous-catégorie */}
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Sous-catégorie
-          </label>
-          <select
-            value={filtres.sous_categorie || ''}
-            onChange={(e) => onModifierFiltre('sous_categorie', e.target.value)}
-            onKeyDown={handleKeyDown}
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
           >
             <option value="">Toutes</option>
