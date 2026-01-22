@@ -3,7 +3,7 @@ const DEFAULT_FILTERS = {
   sous_categorie: '',
   duree_min: '',
   duree_max: '',
-  ingredient: '',
+  ingredients: [], // CHANGÉ: de 'ingredient' à 'ingredients' (tableau)
   recherche_texte: '',
   tags: [],
   livre: ''
@@ -19,24 +19,32 @@ const useFilters = (recettes = []) => {
     if (filtres.categories && filtres.categories.length > 0) {
       resultats = resultats.filter(r => filtres.categories.includes(r.categorie));
     }
-
-    if (filtres.sous_categorie) {
-      resultats = resultats.filter(r => r.sous_categorie === filtres.sous_categorie);
-    }
-
-    if (filtres.duree_min) {
-      resultats = resultats.filter(r => r.duree_prep >= parseInt(filtres.duree_min));
-    }
-
+    
     if (filtres.duree_max) {
       resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
     }
 
-    if (filtres.ingredient) {
-      const termeIng = filtres.ingredient.toLowerCase();
-      resultats = resultats.filter(r => 
-        r.ingredients && r.ingredients.some(i => i.toLowerCase().includes(termeIng))
-      );
+    // NOUVEAU: Filtrage par ingrédients multiples
+    if (filtres.ingredients && filtres.ingredients.length > 0) {
+      resultats = resultats.filter(r => {
+        if (!r.ingredients || !Array.isArray(r.ingredients)) return false;
+        
+        // Normaliser les ingrédients de la recette
+        const recetteIngredients = r.ingredients.map(i => {
+          if (typeof i === 'string') {
+            const parts = i.split(' - ');
+            return parts[0].trim().toLowerCase();
+          }
+          return (i.ingredient || '').toString().trim().toLowerCase();
+        });
+        
+        // Vérifier que TOUS les ingrédients filtrés sont présents dans la recette
+        return filtres.ingredients.every(filterIng =>
+          recetteIngredients.some(recIng => 
+            recIng.includes(filterIng.toLowerCase())
+          )
+        );
+      });
     }
 
     if (filtres.livre) {
@@ -53,7 +61,10 @@ const useFilters = (recettes = []) => {
       const terme = filtres.recherche_texte.toLowerCase();
       resultats = resultats.filter(r => 
         r.titre.toLowerCase().includes(terme) ||
-        (r.ingredients && r.ingredients.some(ing => ing.toLowerCase().includes(terme)))
+        (r.ingredients && r.ingredients.some(ing => {
+          const ingStr = typeof ing === 'string' ? ing : (ing.ingredient || '');
+          return ingStr.toLowerCase().includes(terme);
+        }))
       );
     }
 

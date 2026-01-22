@@ -13,50 +13,64 @@ const FilterPanel = ({
     }
   };
 
+  const selectedCategories = filtres.categories || [];
+  const selectedIngredients = filtres.ingredients || [];
+
+  const toggleIngredient = (ingredient) => {
+    const current = filtres.ingredients || [];
+    const newIngredients = current.includes(ingredient)
+      ? current.filter(i => i !== ingredient)
+      : [...current, ingredient];
+    onModifierFiltre('ingredients', newIngredients);
+  };
+
   return (
     <div className="border-t border-gray-200 px-6 py-4">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-        {/* Catégorie */}
+        {/* Catégories - Multi-select avec checkboxes */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Catégorie
           </label>
-          <select
-            value={filtres.categories && filtres.categories.length > 0 ? filtres.categories[0] : ''}
-            onChange={(e) => {
-              if (e.target.value) {
-                onToggleCategorie(e.target.value);
-              } else {
-                if (filtres.categories && filtres.categories.length > 0) {
-                  filtres.categories.forEach(cat => onToggleCategorie(cat));
-                }
-              }
-            }}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-          >
-            <option value="">Toutes</option>
+          <div className="border border-gray-300 rounded-lg bg-white max-h-40 overflow-y-auto">
             {Array.isArray(categories) && categories.map(cat => (
-              <option key={cat.nom} value={cat.nom}>{cat.nom}</option>
+              <label
+                key={cat.nom}
+                className="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedCategories.includes(cat.nom)}
+                  onChange={() => onToggleCategorie(cat.nom)}
+                  className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <span className="ml-2 text-gray-700">{cat.nom}</span>
+              </label>
             ))}
-          </select>
+          </div>
         </div>
 
-        {/* Ingrédient */}
+        {/* Ingrédients - Multi-select avec checkboxes */}
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Ingrédient
           </label>
-          <select
-            value={filtres.ingredient || ''}
-            onChange={(e) => onModifierFiltre('ingredient', e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
-          >
-            <option value="">Tous</option>
+          <div className="border border-gray-300 rounded-lg bg-white max-h-40 overflow-y-auto">
             {allIngredients.map(ing => (
-              <option key={ing} value={ing}>{ing}</option>
+              <label
+                key={ing}
+                className="flex items-center px-3 py-2 hover:bg-gray-50 cursor-pointer border-b border-gray-100 last:border-b-0"
+              >
+                <input
+                  type="checkbox"
+                  checked={selectedIngredients.includes(ing)}
+                  onChange={() => toggleIngredient(ing)}
+                  className="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500"
+                />
+                <span className="ml-2 text-gray-700">{ing}</span>
+              </label>
             ))}
-          </select>
+          </div>
         </div>
 
         {/* Durée max */}
