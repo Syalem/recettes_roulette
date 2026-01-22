@@ -37,11 +37,18 @@ window.DEMO_RECIPES = [
 ];
 
 window.MEAL_TYPES = {
-        'lundi': 'Lundi',
-        'mardi': 'Mardi',
-        'mercredi': 'Mercredi',
-        'jeudi': 'Jeudi',
-        'vendredi': 'Vendredi',
-        'samedi': 'Samedi',
-        'dimanche': 'Dimanche'
+      'Lundi-Midi': 'Lundi midi',
+      'Lundi-Soir': 'Lundi soir',
+      'Mardi-Midi': 'Mardi midi',
+      'Mardi-Soir': 'Mardi soir',
+      'Mercredi-Midi': 'Mercredi midi',
+      'Mercredi-Soir': 'Mercredi soir',
+      'Jeudi-Midi': 'Jeudi midi',
+      'Jeudi-Soir': 'Jeudi soir',
+      'Vendredi-Midi': 'Vendredi midi',
+      'Vendredi-Soir': 'Vendredi soir',
+      'Samedi-Midi': 'Samedi midi',
+      'Samedi-Soir': 'Samedi soir',
+      'Dimanche-Midi': 'Dimanche midi',
+      'Dimanche-Soir': 'Dimanche soir'
 };

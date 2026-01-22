@@ -75,13 +75,20 @@
             <h3 class="text-lg font-bold text-gray-900 mb-4">Sélectionner le repas</h3>
             <select id="meal-type-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-purple-500">
               <option value="">-- Choisir un repas --</option>
-              <option value="lundi">Lundi</option>
-              <option value="mardi">Mardi</option>
-              <option value="mercredi">Mercredi</option>
-              <option value="jeudi">Jeudi</option>
-              <option value="vendredi">Vendredi</option>
-              <option value="samedi">Samedi</option>
-              <option value="dimanche">Dimanche</option>
+              <option value="Lundi-Midi">Lundi midi</option>
+              <option value="Lundi-Soir">Lundi soir</option>
+              <option value="Mardi-Midi">Mardi midi</option>
+              <option value="Mardi-Soir">Mardi soir</option>
+              <option value="Mercredi-Midi">Mercredi midi</option>
+              <option value="Mercredi-Soir">Mercredi soir</option>
+              <option value="Jeudi-Midi">Jeudi midi</option>
+              <option value="Jeudi-Soir">Jeudi soir</option>
+              <option value="Vendredi-Midi">Vendredi midi</option>
+              <option value="Vendredi-Soir">Vendredi soir</option>
+              <option value="Samedi-Midi">Samedi midi</option>
+              <option value="Samedi-Soir">Samedi soir</option>
+              <option value="Dimanche-Midi">Dimanche midi</option>
+              <option value="Dimanche-Soir">Dimanche soir</option>
             </select>
             
             <div class="flex gap-2">
@@ -124,7 +131,7 @@
     // Ajouter la recette au planning
     addToPlanning(mealType) {
       // Récupérer le planning existant du localStorage
-      const planning = JSON.parse(localStorage.getItem('planning') || '{}');
+      const planning = JSON.parse(localStorage.getItem('meal-plan') || '{}');
       
       // Initialiser le tableau si le repas n'existe pas
       if (!planning[mealType]) {
@@ -133,19 +140,19 @@
       
       // Créer l'objet recette à ajouter
       const recetteToAdd = {
-        id: this.currentRecette.id,
-        titre: this.currentRecette.titre,
-        duree_prep: this.currentRecette.duree_prep,
-        ingredients: this.currentRecette.ingredients,
-        categorie: this.currentRecette.categorie,
-        sous_categorie: this.currentRecette.sous_categorie || '',
-        lien: this.currentRecette.lien || '',
-        livre: this.currentRecette.livre || '',
-        page: this.currentRecette.page || '',
-        notes: this.currentRecette.notes || '',
-        tags: this.currentRecette.tags || [],
-        date_ajoutee: new Date().toISOString()
-      };
+          titre: this.currentRecette.titre,
+          duree_prep: this.currentRecette.duree_prep,
+          ingredients: this.currentRecette.ingredients,
+          categorie: this.currentRecette.categorie,
+          sous_categorie: this.currentRecette.sous_categorie || '',
+          lien: this.currentRecette.lien || '',
+          livre: this.currentRecette.livre || '',
+          page: this.currentRecette.page || '',
+          tags: this.currentRecette.tags || [],
+          notes: this.currentRecette.notes || '',
+          id: this.currentRecette.id,
+          date_ajout: new Date().toISOString()
+      }
       
       // Vérifier si la recette n'existe pas déjà pour ce repas
       const exists = planning[mealType].some(r => r.id === this.currentRecette.id);
@@ -155,20 +162,32 @@
       }
       
       // Ajouter la recette au planning
-      planning[mealType].push(recetteToAdd);
-      
+      //planning[mealType].push(recetteToAdd.recette);
+      const new_planning = {
+        ...planning,
+        [mealType]: {
+          recette: recetteToAdd
+        }
+      };
       // Sauvegarder dans le localStorage
-      localStorage.setItem('planning', JSON.stringify(planning));
+      localStorage.setItem('meal-plan', JSON.stringify(new_planning));
       
       // Message de confirmation
       const mealTypeLabel = {
-        'lundi': 'Lundi',
-        'mardi': 'Mardi',
-        'mercredi': 'Mercredi',
-        'jeudi': 'Jeudi',
-        'vendredi': 'Vendredi',
-        'samedi': 'Samedi',
-        'dimanche': 'Dimanche'
+      'Lundi-Midi': 'Lundi midi',
+      'Lundi-Soir': 'Lundi soir',
+      'Mardi-Midi': 'Mardi midi',
+      'Mardi-Soir': 'Mardi soir',
+      'Mercredi-Midi': 'Mercredi midi',
+      'Mercredi-Soir': 'Mercredi soir',
+      'Jeudi-Midi': 'Jeudi midi',
+      'Jeudi-Soir': 'Jeudi soir',
+      'Vendredi-Midi': 'Vendredi midi',
+      'Vendredi-Soir': 'Vendredi soir',
+      'Samedi-Midi': 'Samedi midi',
+      'Samedi-Soir': 'Samedi soir',
+      'Dimanche-Midi': 'Dimanche midi',
+      'Dimanche-Soir': 'Dimanche soir'
       };
       
       alert(`✅ "${this.currentRecette.titre}" a été ajoutée à ${mealTypeLabel[mealType] || mealType} !`);
