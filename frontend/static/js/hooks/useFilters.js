@@ -19,7 +19,7 @@ const useFilters = (recettes = []) => {
     if (filtres.categories && filtres.categories.length > 0) {
       resultats = resultats.filter(r => filtres.categories.includes(r.categorie));
     }
-    
+
     if (filtres.duree_max) {
       resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
     }
@@ -39,7 +39,7 @@ const useFilters = (recettes = []) => {
         });
         
         // Vérifier que TOUS les ingrédients filtrés sont présents dans la recette
-        return filtres.ingredients.every(filterIng =>
+        return filtres.ingredients.some(filterIng =>
           recetteIngredients.some(recIng => 
             recIng.includes(filterIng.toLowerCase())
           )

@@ -37,8 +37,11 @@ window.DEMO_RECIPES = [
 ];
 
 window.MEAL_TYPES = {
-  'petit-dejeuner': '🌅 Petit-déjeuner',
-  'dejeuner': '🍽️ Déjeuner',
-  'gouter': '☕ Goûter',
-  'diner': '🌙 Dîner'
+        'lundi': 'Lundi',
+        'mardi': 'Mardi',
+        'mercredi': 'Mercredi',
+        'jeudi': 'Jeudi',
+        'vendredi': 'Vendredi',
+        'samedi': 'Samedi',
+        'dimanche': 'Dimanche'
 };

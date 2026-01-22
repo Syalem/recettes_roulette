@@ -75,10 +75,13 @@
             <h3 class="text-lg font-bold text-gray-900 mb-4">Sélectionner le repas</h3>
             <select id="meal-type-select" class="w-full px-3 py-2 border border-gray-300 rounded-lg mb-4 focus:ring-2 focus:ring-purple-500">
               <option value="">-- Choisir un repas --</option>
-              <option value="petit-dejeuner">🌅 Petit-déjeuner</option>
-              <option value="dejeuner">🍽️ Déjeuner</option>
-              <option value="gouter">☕ Goûter</option>
-              <option value="diner">🌙 Dîner</option>
+              <option value="lundi">Lundi</option>
+              <option value="mardi">Mardi</option>
+              <option value="mercredi">Mercredi</option>
+              <option value="jeudi">Jeudi</option>
+              <option value="vendredi">Vendredi</option>
+              <option value="samedi">Samedi</option>
+              <option value="dimanche">Dimanche</option>
             </select>
             
             <div class="flex gap-2">
