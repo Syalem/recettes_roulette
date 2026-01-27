@@ -128,10 +128,68 @@
       "date_ajout": "2026-01-20T12:35:27.519917",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "Sauce wafu légère ",
+      "duree_prep": 5,
+      "ingredients": [
+        "œuf dur - 2",
+        "Sauce soja - 30 mL",
+        "vinaigre de riz - 20 mL",
+        "huile de sésame - 1 cas",
+        "miel - 1 cac",
+        "miso (ou tahini) - 1 cac",
+        "gingembre frais - 1 cac",
+        "gousse d'ail râpé - 1/2",
+        "graines de sésame - 1 cac",
+        "jus de citron - 1 cas",
+        "Poivre",
+        "eau - 2 à 3 cas"
+      ],
+      "categorie": "Miscellanées",
+      "sous_categorie": "Sauce, condiment",
+      "id": 10,
+      "lien": "https://www.instagram.com/reel/DT8Za3VDPiY/?igsh=YjgyNmRoc3N6MHdv",
+      "livre": "Instagram",
+      "page": "",
+      "date_ajout": "2026-01-26T18:46:52.543962",
+      "tags": [],
+      "notes": "3 a 4 jours au frais"
+    },
+    {
+      "titre": "Soupe au poulet",
+      "duree_prep": 45,
+      "ingredients": [
+        "huile d'olive - 1 tbsp",
+        "oignon - 1",
+        "carotte - 2",
+        "céleri branche - 2",
+        "gousse d'ail - 2-4",
+        "beurre - 4 tbsp",
+        "farine - 4 tbsp",
+        "bouillon de poulet - 4 cups",
+        "moutarde - 1 tsp",
+        "tobasco - 1 goutte",
+        "poulet cuit - 3 cups",
+        "petits pois congelés - 1 cup",
+        "crème épaisse - 1 cup",
+        "sel - 1 tsp",
+        "poivre - 1/2 tsp",
+        "biscuits anglais"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Soupe",
+      "id": 11,
+      "lien": "https://eatwithchlo.substack.com/p/chicken-pot-pie-but-make-it-make?utm_medium=profile-page&utm_campaign=profile",
+      "livre": "Substack",
+      "page": "",
+      "date_ajout": "2026-01-27T08:10:00.267517",
+      "tags": [],
+      "notes": "4-6 personnes "
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-23T08:28:42.311043",
+    "derniere_modification": "2026-01-27T08:10:00.274920",
     "version": "1.0.0"
   }
 }
