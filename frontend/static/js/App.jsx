@@ -1,7 +1,7 @@
 const App = () => {
   const { recettes, loading, chargerRecettes, ajouterRecette, editerRecette, supprimerRecette, tirerAleatoire, synchroniserGitHub } = useRecettes();
   const { categories, chargerCategories } = useCategories();
-  const { filtres, recettesFiltrees, modifierFiltre, toggleCategorie, reinitialiser } = useFilters(recettes);
+  const { filtres, recettesFiltrees, modifierFiltre, toggleCategorie, toggleSousCategorie, reinitialiser } = useFilters(recettes);
 
   const [showFilterPanel, setShowFilterPanel] = React.useState(false);
   const [showAddModal, setShowAddModal] = React.useState(false);
@@ -90,16 +90,15 @@ const App = () => {
   };
 
   const handleRandomRecette = async () => {
-    // Si aucune recette filtrée disponible
-    if (recettesFiltrees.length === 0) {
-      alert('Aucune recette ne correspond aux filtres appliqués');
-      return;
+    const params = {};
+    if (filtres.categories && filtres.categories.length > 0) {
+      params.categories = filtres.categories;
+    }
+    if (filtres.duree_max) {
+      params.duree_max = parseInt(filtres.duree_max);
     }
 
-    // Choisir une recette aléatoire parmi les recettes filtrées
-    const randomIndex = Math.floor(Math.random() * recettesFiltrees.length);
-    const recette = recettesFiltrees[randomIndex];
-    
+    const recette = await tirerAleatoire(params);
     setRecetteAleatoire(recette);
   };
 
@@ -123,19 +122,20 @@ const App = () => {
           onFilterClick={() => setShowFilterPanel(!showFilterPanel)}
           onRandomClick={handleRandomRecette}
           loading={loading}
-        >
-          {showFilterPanel && (
-            <FilterPanel
-              categories={categories}
-              filtres={filtres}
-              allIngredients={allIngredients}
-              onToggleCategorie={toggleCategorie}
-              onModifierFiltre={modifierFiltre}
-              onReinitialiser={reinitialiser}
-              onApplyFilters={handleApplyFilters}
-            />
-          )}
-        </SearchBar>
+        />
+
+        {showFilterPanel && (
+          <FilterPanel
+            categories={categories}
+            filtres={filtres}
+            allIngredients={allIngredients}
+            onToggleCategorie={toggleCategorie}
+            onToggleSousCategorie={toggleSousCategorie}
+            onModifierFiltre={modifierFiltre}
+            onReinitialiser={reinitialiser}
+            onApplyFilters={handleApplyFilters}
+          />
+        )}
 
         {recetteAleatoire && (
           <SuggestionCard

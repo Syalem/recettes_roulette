@@ -10,7 +10,7 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
         </svg>`,
     ExternalLink: `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                            d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                    </svg>`
   };
@@ -30,7 +30,7 @@
       popup.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 overflow-y-auto';
       popup.style.display = 'none';
       popup.id = 'recette-popup-overlay';
-      
+
       popup.innerHTML = `
         <div class="bg-white rounded-lg shadow-2xl max-w-2xl w-full my-8" id="recette-popup-content">
           <div class="flex justify-between items-center p-6 border-b border-gray-200">
@@ -90,7 +90,7 @@
               <option value="Dimanche-Midi">Dimanche midi</option>
               <option value="Dimanche-Soir">Dimanche soir</option>
             </select>
-            
+
             <div class="flex gap-2">
               <button class="flex-1 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition" onclick="this.closest('.fixed').remove();">
                 Annuler
@@ -102,20 +102,20 @@
           </div>
         </div>
       `;
-      
+
       document.body.appendChild(modal);
-      
+
       // Bouton confirmer
       const confirmBtn = document.getElementById('confirm-meal-btn');
       const selectInput = document.getElementById('meal-type-select');
-      
+
       confirmBtn.addEventListener('click', () => {
         const mealType = selectInput.value;
         if (!mealType) {
           alert('Veuillez sélectionner un repas');
           return;
         }
-        
+
         this.addToPlanning(mealType);
         modal.remove();
       });
@@ -132,12 +132,12 @@
     addToPlanning(mealType) {
       // Récupérer le planning existant du localStorage
       const planning = JSON.parse(localStorage.getItem('meal-plan') || '{}');
-      
+
       // Initialiser le tableau si le repas n'existe pas
       if (!planning[mealType]) {
         planning[mealType] = [];
       }
-      
+
       // Créer l'objet recette à ajouter
       const recetteToAdd = {
           titre: this.currentRecette.titre,
@@ -153,14 +153,14 @@
           id: this.currentRecette.id,
           date_ajout: new Date().toISOString()
       }
-      
+
       // Vérifier si la recette n'existe pas déjà pour ce repas
       const exists = planning[mealType].some(r => r.id === this.currentRecette.id);
       if (exists) {
         alert('Cette recette est déjà présente dans ce jour');
         return;
       }
-      
+
       // Ajouter la recette au planning
       //planning[mealType].push(recetteToAdd.recette);
       const new_planning = {
@@ -171,7 +171,7 @@
       };
       // Sauvegarder dans le localStorage
       localStorage.setItem('meal-plan', JSON.stringify(new_planning));
-      
+
       // Message de confirmation
       const mealTypeLabel = {
       'Lundi-Midi': 'Lundi midi',
@@ -189,14 +189,12 @@
       'Dimanche-Midi': 'Dimanche midi',
       'Dimanche-Soir': 'Dimanche soir'
       };
-      
-      alert(`✅ "${this.currentRecette.titre}" a été ajoutée à ${mealTypeLabel[mealType] || mealType} !`);
     }
 
     // Formater les ingrédients
     formatIngredient(ing) {
       if (!ing) return { name: '', quantity: '' };
-      
+
       if (typeof ing === 'string') {
         const parts = ing.split(' - ');
         return {
@@ -204,7 +202,7 @@
           quantity: parts[1] || ''
         };
       }
-      
+
       return {
         name: ing.ingredient || '',
         quantity: ing.quantity || ''
@@ -225,7 +223,7 @@
       const body = this.popupElement.querySelector('#popup-body');
       body.innerHTML = `
         <h3 class="text-xl font-bold">${recette.titre}</h3>
-        
+
         <div class="flex items-center gap-4 text-sm text-gray-600">
           <span>⏱️ ${recette.duree_prep} min</span>
           ${recette.livre ?
@@ -252,8 +250,8 @@
 
         ${recette.lien ? `
           <div>
-            <a href="${recette.lien}" 
-               target="_blank" 
+            <a href="${recette.lien}"
+               target="_blank"
                rel="noopener noreferrer"
                class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
               ${ICONS.ExternalLink}
@@ -299,7 +297,7 @@
 
       if (this.onEdit) {
         buttons.push(`
-          <button id="popup-edit-btn" 
+          <button id="popup-edit-btn"
                   class="px-4 py-2 mr-auto border border-gray-300 rounded-lg hover:bg-gray-50 transition">
             Éditer
           </button>
@@ -307,16 +305,16 @@
       }
 
       // Bouton "Ajouter au planning" (toujours visible)
-      buttons.push(`
-        <button id="popup-add-to-planning-btn" 
-                class="w-auto bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
-          📅 Ajouter au planning
-        </button>
-      `);
+        buttons.push(`
+          <button id="popup-add-to-planning-btn"
+                  class="w-auto bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+            📅 Ajouter au planning
+          </button>
+        `);
 
       if (this.onDelete) {
         buttons.push(`
-          <button id="popup-delete-btn" 
+          <button id="popup-delete-btn"
                   class="ml-auto bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
             Supprimer
           </button>
@@ -339,7 +337,8 @@
 
       if (this.onDelete) {
         footer.querySelector('#popup-delete-btn')?.addEventListener('click', () => {
-          this.onDelete(this.currentRecette);
+          this.onDelete(this.currentRecette.id);
+          this.close();
         });
       }
 
