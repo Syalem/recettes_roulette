@@ -186,10 +186,40 @@
       "date_ajout": "2026-01-27T08:10:00.267517",
       "tags": [],
       "notes": "4-6 personnes "
+    },
+    {
+      "titre": "Quinoa épicé à l'indienne et carottes rôties au cumin",
+      "duree_prep": 30,
+      "ingredients": [
+        "Coriandre fraîche - 40g",
+        "Citron vert - 2",
+        "Épinards frais - 100g",
+        "Carottes - 8",
+        "Tomates - 600g",
+        "Noix de cajou non salées - 60g",
+        "Quinoa - 360g",
+        "Haricots rouges - 240g",
+        "Yaourt - 60g",
+        "Curry en poudre - 8 cac",
+        "Huile d'olive - 4 cas",
+        "Cumin en poudre - 4 cac",
+        "Flocons de piment - 2 cac",
+        "Sel",
+        "Poivre"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 12,
+      "lien": "Regarde cette super recette que je viens de découvrir dans l'application Kptncook ! https://share.kptncook.com/Dh4a/k9c9fwzu",
+      "livre": "Kptn cook ",
+      "page": "",
+      "date_ajout": "2026-01-27T16:48:23.710372",
+      "tags": [],
+      "notes": "4 pers. "
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-27T08:10:00.274920",
+    "derniere_modification": "2026-01-27T16:48:23.719546",
     "version": "1.0.0"
   }
 }
