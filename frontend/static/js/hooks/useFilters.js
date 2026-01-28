@@ -3,7 +3,8 @@ const DEFAULT_FILTERS = {
   sous_categories: [],
   duree_min: '',
   duree_max: '',
-  ingredient: '',
+  ingredients: [],
+  ingredient_mode: 'any',
   recherche_texte: '',
   tags: [],
   livre: ''
@@ -32,11 +33,23 @@ const useFilters = (recettes = []) => {
       resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
     }
 
-    if (filtres.ingredient) {
-      const termeIng = filtres.ingredient.toLowerCase();
-      resultats = resultats.filter(r => 
-        r.ingredients && r.ingredients.some(i => i.toLowerCase().includes(termeIng))
-      );
+    if (filtres.ingredients && filtres.ingredients.length > 0) {
+      resultats = resultats.filter(r => {
+        if (!r.ingredients) return false;
+        const ingredientsLower = r.ingredients.map(i => i.toLowerCase());
+        
+        if (filtres.ingredient_mode === 'all') {
+          // Tous les ingrédients doivent être présents
+          return filtres.ingredients.every(ing =>
+            ingredientsLower.some(ri => ri.includes(ing.toLowerCase()))
+          );
+        } else {
+          // Au moins un ingrédient doit être présent
+          return filtres.ingredients.some(ing =>
+            ingredientsLower.some(ri => ri.includes(ing.toLowerCase()))
+          );
+        }
+      });
     }
 
     if (filtres.livre) {
@@ -102,6 +115,23 @@ const useFilters = (recettes = []) => {
       }
     });
   }, []);
+  
+  const toggleIngredient = React.useCallback((ingredient) => {
+    setFiltres(prev => {
+      const ingredients = Array.isArray(prev.ingredients) ? prev.ingredients : [];
+      if (ingredients.includes(ingredient)) {
+        return {
+          ...prev,
+          ingredients: ingredients.filter(i => i !== ingredient)
+        };
+      } else {
+        return {
+          ...prev,
+          ingredients: [...ingredients, ingredient]
+        };
+      }
+    });
+  }, []);
 
   const reinitialiser = React.useCallback(() => {
     setFiltres(DEFAULT_FILTERS);
@@ -113,6 +143,7 @@ const useFilters = (recettes = []) => {
     modifierFiltre,
     toggleCategorie,
     toggleSousCategorie,
+    toggleIngredient,
     reinitialiser
   };
 };

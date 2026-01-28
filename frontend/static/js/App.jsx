@@ -1,7 +1,7 @@
 const App = () => {
   const { recettes, loading, chargerRecettes, ajouterRecette, editerRecette, supprimerRecette, tirerAleatoire, synchroniserGitHub } = useRecettes();
   const { categories, chargerCategories } = useCategories();
-  const { filtres, recettesFiltrees, modifierFiltre, toggleCategorie, toggleSousCategorie, reinitialiser } = useFilters(recettes);
+  const { filtres, recettesFiltrees, modifierFiltre, toggleCategorie, toggleSousCategorie, toggleIngredient, reinitialiser } = useFilters(recettes);
 
   const [showFilterPanel, setShowFilterPanel] = React.useState(false);
   const [showAddModal, setShowAddModal] = React.useState(false);
@@ -131,6 +131,7 @@ const App = () => {
             allIngredients={allIngredients}
             onToggleCategorie={toggleCategorie}
             onToggleSousCategorie={toggleSousCategorie}
+            onToggleIngredient={toggleIngredient}
             onModifierFiltre={modifierFiltre}
             onReinitialiser={reinitialiser}
             onApplyFilters={handleApplyFilters}

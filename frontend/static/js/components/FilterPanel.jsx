@@ -4,6 +4,7 @@ const FilterPanel = ({
   allIngredients,
   onToggleCategorie,
   onToggleSousCategorie,
+  onToggleIngredient,
   onModifierFiltre,
   onReinitialiser,
   onApplyFilters
@@ -56,22 +57,51 @@ const FilterPanel = ({
           </div>
         </div>
 
-        {/* Ingrédient */}
-        <div className="lg:col-span-1">
+        {/* Ingrédients */}
+        <div className="lg:col-span-2">
           <label className="block text-sm font-medium text-gray-700 mb-3">
-            Ingrédient
+            Ingrédients
           </label>
-          <select
-            value={filtres.ingredient || ''}
-            onChange={(e) => onModifierFiltre('ingredient', e.target.value)}
-            onKeyDown={handleKeyDown}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-          >
-            <option value="">Tous</option>
-            {allIngredients.map(ing => (
-              <option key={ing} value={ing}>{ing}</option>
-            ))}
-          </select>
+          <div className="space-y-3">
+            {/* Toggle "Tous" ou "Au moins un" */}
+            <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-lg p-2">
+              <button
+                onClick={() => onModifierFiltre('ingredient_mode', 'any')}
+                className={`flex-1 px-2 py-1 text-xs font-medium rounded transition ${
+                  (filtres.ingredient_mode || 'any') === 'any'
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Au moins 1
+              </button>
+              <button
+                onClick={() => onModifierFiltre('ingredient_mode', 'all')}
+                className={`flex-1 px-2 py-1 text-xs font-medium rounded transition ${
+                  (filtres.ingredient_mode || 'any') === 'all'
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                Tous
+              </button>
+            </div>
+            
+            {/* Cases à cocher ingrédients */}
+            <div className="space-y-2 max-h-48 overflow-y-auto border border-gray-200 p-3 rounded-lg bg-gray-50">
+              {allIngredients.map(ing => (
+                <label key={ing} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={(filtres.ingredients || []).includes(ing)}
+                    onChange={() => onToggleIngredient(ing)}
+                    className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+                  />
+                  <span className="text-sm text-gray-700">{ing}</span>
+                </label>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Durée max */}
