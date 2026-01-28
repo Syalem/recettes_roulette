@@ -62,7 +62,7 @@ const FilterPanel = ({
           <label className="block text-sm font-medium text-gray-700 mb-3">
             Ingrédients
           </label>
-          <div className="space-y-3">
+          <div className="space-y-3 max-h-48 overflow-y-auto border border-gray-200 p-3 rounded-lg bg-gray-50">
             {/* Toggle "Tous" ou "Au moins un" */}
             <div className="flex items-center gap-2 bg-white border border-gray-300 rounded-lg p-2">
               <button
@@ -88,7 +88,7 @@ const FilterPanel = ({
             </div>
             
             {/* Cases à cocher ingrédients */}
-            <div className="space-y-2 max-h-48 overflow-y-auto border border-gray-200 p-3 rounded-lg bg-gray-50">
+            <div className="space-y-2 border border-gray-200 p-3 rounded-lg bg-gray-50">
               {allIngredients.map(ing => (
                 <label key={ing} className="flex items-center gap-2 cursor-pointer">
                   <input
