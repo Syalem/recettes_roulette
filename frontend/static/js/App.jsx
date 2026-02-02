@@ -163,7 +163,7 @@ const App = () => {
         )}
       </main>
 
-      <AddRecetteModal
+      <AddRecetteToggle
         isOpen={showAddModal}
         onClose={() => {
           setShowAddModal(false);

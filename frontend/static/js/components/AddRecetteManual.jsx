@@ -11,13 +11,14 @@ const DEFAULT_RECIPE = {
   notes: ''
 };
 
-const AddRecetteModal = ({ 
+const AddRecetteManual = ({ 
   isOpen, 
   onClose, 
   onSave, 
   categories,
   initialRecette = null,
-  loading = false 
+  loading = false,
+  onSwitchToAuto = null  // Nouvelle prop pour basculer vers l'extraction auto
 }) => {
   const [recette, setRecette] = React.useState(DEFAULT_RECIPE);
   const ingredientRefs = React.useRef([]);
@@ -163,6 +164,29 @@ const AddRecetteModal = ({
 
         {/* Content */}
         <div className="p-6 space-y-4 max-h-[70vh] overflow-y-auto">
+          
+          {/* Bouton pour basculer vers l'extraction auto (seulement si on n'édite pas une recette existante) */}
+          {!recette.id && onSwitchToAuto && (
+            <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex-1">
+                  <p className="text-sm text-purple-900 font-medium mb-1">
+                    ✨ Gain de temps !
+                  </p>
+                  <p className="text-xs text-purple-700">
+                    Vous avez un lien Instagram ou d'un blog ? Laissez-nous extraire les ingrédients automatiquement.
+                  </p>
+                </div>
+                <button
+                  onClick={onSwitchToAuto}
+                  className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium rounded-lg transition whitespace-nowrap"
+                >
+                  Extraction auto
+                </button>
+              </div>
+            </div>
+          )}
+
           {/* Titre */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -242,6 +266,7 @@ const AddRecetteModal = ({
                   <input
                     ref={el => ingredientRefs.current[idx] = el}
                     type="text"
+                    name="ingredient"
                     value={ingObj.ingredient}
                     onChange={(e) => modifierIngredient(idx, 'ingredient', e.target.value)}
                     onKeyDown={(e) => handleIngredientKeyDown(e, idx)}

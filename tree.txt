@@ -64,7 +64,7 @@ recettes_roulette
 │   │   ├── js
 │   │   │   ├── App.jsx
 │   │   │   ├── components
-│   │   │   │   ├── AddRecetteModal.jsx
+│   │   │   │   ├── AddRecetteManual.jsx
 │   │   │   │   ├── FilterPanel.jsx
 │   │   │   │   ├── Header.jsx
 │   │   │   │   ├── RecetteCard.jsx
