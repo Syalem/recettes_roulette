@@ -4,7 +4,7 @@ const DEFAULT_FILTERS = {
   duree_min: '',
   duree_max: '',
   ingredients: [],
-  ingredient_mode: 'any',
+  ingredient_mode: 'any', // 'any' = au moins un, 'all' = tous
   recherche_texte: '',
   tags: [],
   livre: ''
@@ -17,22 +17,40 @@ const useFilters = (recettes = []) => {
     if (!Array.isArray(recettes)) return [];
     let resultats = recettes.slice();
 
+    // Filtre par catégories
     if (filtres.categories && filtres.categories.length > 0) {
       resultats = resultats.filter(r => filtres.categories.includes(r.categorie));
     }
 
+    // Filtre par sous-catégories
     if (filtres.sous_categories && filtres.sous_categories.length > 0) {
       resultats = resultats.filter(r => filtres.sous_categories.includes(r.sous_categorie));
     }
 
+    // Filtre par sous-catégorie unique (ancien système)
+    if (filtres.sous_categorie) {
+      resultats = resultats.filter(r => r.sous_categorie === filtres.sous_categorie);
+    }
+
+    // Filtre par durée min
     if (filtres.duree_min) {
       resultats = resultats.filter(r => r.duree_prep >= parseInt(filtres.duree_min));
     }
 
+    // Filtre par durée max
     if (filtres.duree_max) {
       resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
     }
 
+    // Filtre par ingrédients (ancien système - un seul ingrédient)
+    if (filtres.ingredient) {
+      const termeIng = filtres.ingredient.toLowerCase();
+      resultats = resultats.filter(r => 
+        r.ingredients && r.ingredients.some(i => i.toLowerCase().includes(termeIng))
+      );
+    }
+
+    // Filtre par ingrédients (nouveau système - multiple)
     if (filtres.ingredients && filtres.ingredients.length > 0) {
       resultats = resultats.filter(r => {
         if (!r.ingredients) return false;
@@ -52,16 +70,19 @@ const useFilters = (recettes = []) => {
       });
     }
 
+    // Filtre par livre
     if (filtres.livre) {
       resultats = resultats.filter(r => r.livre === filtres.livre);
     }
 
+    // Filtre par tags
     if (filtres.tags && filtres.tags.length > 0) {
       resultats = resultats.filter(r =>
         r.tags && filtres.tags.some(tag => r.tags.includes(tag))
       );
     }
 
+    // Filtre par recherche texte
     if (filtres.recherche_texte) {
       const terme = filtres.recherche_texte.toLowerCase();
       resultats = resultats.filter(r => 
@@ -115,7 +136,7 @@ const useFilters = (recettes = []) => {
       }
     });
   }, []);
-  
+
   const toggleIngredient = React.useCallback((ingredient) => {
     setFiltres(prev => {
       const ingredients = Array.isArray(prev.ingredients) ? prev.ingredients : [];

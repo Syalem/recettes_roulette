@@ -5,7 +5,7 @@ from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
 from pathlib import Path
 
-from app.api import recettes, filters, random
+from app.api import recettes, filters, random, extraction
 
 
 app = FastAPI(
@@ -32,6 +32,7 @@ app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
 app.include_router(recettes.router, prefix="/api")
 app.include_router(filters.router, prefix="/api")
 app.include_router(random.router, prefix="/api")
+app.include_router(extraction.router, prefix="/api")
 
 
 # Route pour servir l'interface web

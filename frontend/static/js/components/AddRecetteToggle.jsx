@@ -1,43 +1,25 @@
-import React, { useState } from 'react';
-
-// Simple SVG Icons as components
-const Wand2 = ({ className = '' }) => (
-  <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M15 4V2" />
-    <path d="M15 16v-2" />
-    <path d="M8 9h2" />
-    <path d="M20 9h2" />
-    <path d="M17.8 11.8 19 13" />
-    <path d="M15 9h0" />
-    <path d="M17.8 6.2 19 5" />
-    <path d="m3 21 9-9" />
-    <path d="M12.2 6.2 11 5" />
-  </svg>
-);
-
-const FileEdit = ({ className = '' }) => (
-  <svg className={className} width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5" />
-    <polyline points="14 2 14 8 20 8" />
-    <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" />
-  </svg>
-);
-
 const AddRecetteToggle = ({ 
   isOpen, 
   onClose, 
   onSave, 
   categories,
   initialRecette = null,
-  loading = false,
-  RecetteExtractor,
-  AddRecetteManual
+  loading = false
 }) => {
   // Si on édite une recette existante, on va directement en mode manuel
-  const [mode, setMode] = useState(initialRecette ? 'manual' : 'choice');
+  const [mode, setMode] = React.useState(initialRecette ? 'manual' : 'choice');
+  const [extractedRecipeData, setExtractedRecipeData] = React.useState(null);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      setMode(initialRecette ? 'manual' : 'choice');
+      setExtractedRecipeData(null);
+    }
+  }, [isOpen, initialRecette]);
 
   const handleClose = () => {
     setMode(initialRecette ? 'manual' : 'choice');
+    setExtractedRecipeData(null);
     onClose();
   };
 
@@ -59,15 +41,9 @@ const AddRecetteToggle = ({
       notes: ''
     };
     
-    // Passer en mode manuel avec les données pré-remplies
+    // Stocker les données et passer en mode manuel
+    setExtractedRecipeData(recetteData);
     setMode('manual');
-    // On utilise un petit délai pour s'assurer que le modal manuel est monté
-    setTimeout(() => {
-      // Le AddRecetteManual recevra ces données via initialRecette
-      onClose();
-      // On doit rouvrir avec les données
-      // Pour cela, on va passer par un état intermédiaire
-    }, 0);
   };
 
   if (!isOpen) return null;
@@ -93,7 +69,17 @@ const AddRecetteToggle = ({
             >
               <div className="flex items-start gap-4">
                 <div className="bg-purple-500 text-white p-3 rounded-lg group-hover:scale-110 transition-transform">
-                  <Wand2 />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M15 4V2" />
+                    <path d="M15 16v-2" />
+                    <path d="M8 9h2" />
+                    <path d="M20 9h2" />
+                    <path d="M17.8 11.8 19 13" />
+                    <path d="M15 9h0" />
+                    <path d="M17.8 6.2 19 5" />
+                    <path d="m3 21 9-9" />
+                    <path d="M12.2 6.2 11 5" />
+                  </svg>
                 </div>
                 <div className="flex-1 text-left">
                   <h3 className="font-bold text-gray-900 text-lg mb-1">
@@ -117,7 +103,11 @@ const AddRecetteToggle = ({
             >
               <div className="flex items-start gap-4">
                 <div className="bg-orange-500 text-white p-3 rounded-lg group-hover:scale-110 transition-transform">
-                  <FileEdit />
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M4 13.5V4a2 2 0 0 1 2-2h8.5L20 7.5V20a2 2 0 0 1-2 2h-5.5" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <path d="M10.42 12.61a2.1 2.1 0 1 1 2.97 2.97L7.95 21 4 22l.99-3.95 5.43-5.44Z" />
+                  </svg>
                 </div>
                 <div className="flex-1 text-left">
                   <h3 className="font-bold text-gray-900 text-lg mb-1">
@@ -155,7 +145,6 @@ const AddRecetteToggle = ({
       <RecetteExtractor 
         isOpen={isOpen}
         onClose={handleClose}
-        onSave={onSave}
         onExtracted={handleExtractedRecipe}
         onSwitchToManual={() => setMode('manual')}
       />
@@ -164,18 +153,14 @@ const AddRecetteToggle = ({
 
   // Mode manuel
   return (
-    <div className="min-h-screen bg-gradient-to-br from-orange-50 to-red-50">
-      <AddRecetteManual
-        isOpen={isOpen}
-        onClose={handleClose}
-        onSave={onSave}
-        categories={categories}
-        initialRecette={initialRecette}
-        loading={loading}
-        onSwitchToAuto={() => setMode('auto')}
-      />
-    </div>
+    <AddRecetteManual
+      isOpen={isOpen}
+      onClose={handleClose}
+      onSave={onSave}
+      categories={categories}
+      initialRecette={extractedRecipeData || initialRecette}
+      loading={loading}
+      onSwitchToAuto={() => setMode('auto')}
+    />
   );
 };
-
-export default AddRecetteToggle;
