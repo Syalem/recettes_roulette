@@ -10,7 +10,7 @@ from urllib.parse import urlparse
 import json
 
 # Crée un router FastAPI
-router = APIRouter(prefix="/extraction", tags=["extraction"])
+router = APIRouter(tags=["extraction"])
 
 def extract_from_instagram(url: str):
     """
