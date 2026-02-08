@@ -278,10 +278,32 @@
       "date_ajout": "2026-01-28T09:44:00.046516",
       "tags": [],
       "notes": "Tout mixer ensemble"
+    },
+    {
+      "titre": "Gâteau au cacao",
+      "duree_prep": 40,
+      "ingredients": [
+        "Farine - 200g",
+        "Lait - 175mL",
+        "Sucre - 150g",
+        "Huile - 80mL",
+        "Cacao amer - 60g",
+        "Œuf - 2",
+        "Levure chimique - 2 cac"
+      ],
+      "categorie": "Dessert",
+      "sous_categorie": "Gâteau",
+      "id": 16,
+      "lien": "https://cuisineminutes.com/2021/10/06/gateau-au-cacao-5-minutes/?utm_source=Pinterest&utm_medium=organic",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-02-08T09:03:16.238148",
+      "tags": [],
+      "notes": "35min au four "
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-01-28T09:44:00.047842",
+    "derniere_modification": "2026-02-08T09:03:16.240869",
     "version": "1.0.0"
   }
 }
