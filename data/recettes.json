@@ -436,10 +436,37 @@
       "date_ajout": "2026-06-03T11:02:13.689828",
       "tags": [],
       "notes": "4 pers"
+    },
+    {
+      "titre": "Salade froide de vermicelles",
+      "duree_prep": 10,
+      "ingredients": [
+        "Glassnudeln - 100g",
+        "Crevettes cuites - 20",
+        "Coriandre (feuille) - 8",
+        "Tiá tô (ou shiso rouge) - 8",
+        "Menthe (feuille) - 20",
+        "Carotte - 2",
+        "Cacahouètes non salées - un peu",
+        "Sauce de poisson ou nuoc mam - 4 càs",
+        "Jus de citron vert - 4 càs",
+        "sucre ou sirop d'agave - 1 càs",
+        "Vinaigre de riz - 2 càs",
+        "Piment d'espelette - 1 pincée"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 22,
+      "lien": "https://lutsubo.com/2015/08/10/vietnamisant-et-frais-glass-noodle-salad/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-04T09:00:28.238807",
+      "tags": [],
+      "notes": "4 pers."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-06-03T11:02:13.690340",
+    "derniere_modification": "2026-08-04T09:00:28.242728",
     "version": "1.0.0"
   }
 }
