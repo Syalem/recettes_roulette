@@ -562,10 +562,35 @@
       "date_ajout": "2026-08-07T09:02:13.652688",
       "tags": [],
       "notes": "4 pers."
+    },
+    {
+      "titre": "Burrito bowl",
+      "duree_prep": 35,
+      "ingredients": [
+        "Oignons - 1",
+        "Blanc de poulet - 500g",
+        "Huile d'olive - 2 càs",
+        "Bouillon de poulet - 600mL",
+        "Tomates (stückig) - 400g",
+        "Maïs - 285g",
+        "Haricots rouge - 285g",
+        "Epices texmex",
+        "Riz - 200g",
+        "Fromage rapé - 150g"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Viande",
+      "id": 27,
+      "lien": "https://www.rewe.de/rezepte/burrito-bowl/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T09:11:11.924733",
+      "tags": [],
+      "notes": "4 pers."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-07T09:02:13.656574",
+    "derniere_modification": "2026-08-07T09:11:11.928456",
     "version": "1.0.0"
   }
 }
