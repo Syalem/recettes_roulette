@@ -505,10 +505,41 @@
       "date_ajout": "2026-08-07T08:34:26.217106",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "Salade de quinoa, feta et airelles",
+      "duree_prep": 25,
+      "ingredients": [
+        "Quinoa - 200g",
+        "Bouillon de légume - 500mL",
+        "Echalottes - 4",
+        "Ail - 2 gousses",
+        "Citron bio - 1",
+        "Airelles - 2 poignées",
+        "Ciboulette - 60g",
+        "Huile d'olive - 6 càs",
+        "Petits pois (congelés) - 300g",
+        "Miel - 2càs",
+        "Vin blanc - 150mL",
+        "Vinaigre de vin blanc - 4càs",
+        "Sel",
+        "Poivre",
+        "Noix de muscade",
+        "Fêta - un peu"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 25,
+      "lien": "https://www.rewe.de/rezepte/quinoasalat-erbsen/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T08:43:10.412853",
+      "tags": [],
+      "notes": "4 pers."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-07T08:34:26.218266",
+    "derniere_modification": "2026-08-07T08:43:10.416498",
     "version": "1.0.0"
   }
 }
