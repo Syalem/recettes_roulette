@@ -536,10 +536,36 @@
       "date_ajout": "2026-08-07T08:43:10.412853",
       "tags": [],
       "notes": "4 pers."
+    },
+    {
+      "titre": "Salade de pâtes roses",
+      "duree_prep": 35,
+      "ingredients": [
+        "Pâtes rigatoni - 600g",
+        "Betterave cuite - 6",
+        "Jus de betterave - 10 càs",
+        "Ail - 2 gousses",
+        "Fêta - 400g",
+        "Paprika rosenscharf - 1 càc",
+        "Sel",
+        "Huile d'olive - 4 càs",
+        "Pistaches - 4 càs",
+        "Menthe - 4 branches",
+        "Citron - 1"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 26,
+      "lien": "https://www.rewe.de/rezepte/pink-pasta-salat/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T09:02:13.652688",
+      "tags": [],
+      "notes": "4 pers."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-07T08:43:10.416498",
+    "derniere_modification": "2026-08-07T09:02:13.656574",
     "version": "1.0.0"
   }
 }
