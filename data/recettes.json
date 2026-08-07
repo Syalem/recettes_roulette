@@ -587,10 +587,102 @@
       "date_ajout": "2026-08-07T09:11:11.924733",
       "tags": [],
       "notes": "4 pers."
+    },
+    {
+      "titre": "Spaghetti sauce petits pois citron",
+      "duree_prep": 30,
+      "ingredients": [
+        "Spaghetti - 200g",
+        "Sel",
+        "Petits pois (congelés) - 150g",
+        "Oignons - 1",
+        "Citron bio - 1",
+        "Parmesan - 30g",
+        "Huile neutre - 1 càs",
+        "Crème liquide - 150mL",
+        "Fromage frais - 60g",
+        "Poivre",
+        "Menthe - 10g",
+        "Aneth - 10g"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 28,
+      "lien": "https://www.rewe.de/rezepte/spaghetti-erbsen-zitronen-sauce/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T09:32:27.527612",
+      "tags": [],
+      "notes": "4 pers. sur le papier, tendance à ajouter des pâtes pour un plat unique"
+    },
+    {
+      "titre": "Pâtes à la sauge",
+      "duree_prep": 20,
+      "ingredients": [
+        "Spaghetti - 500g",
+        "Sel",
+        "Sauge fraîche - 15g",
+        "Ail - 2 gousses",
+        "Beurre - 60g",
+        "Poivre",
+        "Parmesan - 50g"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 29,
+      "lien": "https://www.rewe.de/rezepte/salbei-spaghetti/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T09:51:13.029304",
+      "tags": [],
+      "notes": "4 pers."
+    },
+    {
+      "titre": "Spaghetti aglio e olio",
+      "duree_prep": 20,
+      "ingredients": [
+        "Spaghetti - 400g",
+        "Sel",
+        "Ail - 4 gousses",
+        "Huile d'olive - 150mL",
+        "Poivre",
+        "Parmesan"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 30,
+      "lien": "https://www.rewe.de/rezepte/spaghetti-aglio-e-olio/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T09:58:36.888030",
+      "tags": [],
+      "notes": "4 pers."
+    },
+    {
+      "titre": "Gratin de tortilla",
+      "duree_prep": 30,
+      "ingredients": [
+        "Mozarella rapée - 150-200g",
+        "Tomates cerises (ou stückig) - 250g",
+        "Olives vertes sans noyau - 60g",
+        "Haricots rouges - 255g",
+        "Maïs - 285g",
+        "Epices",
+        "Wrap tortilla - 4"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 31,
+      "lien": "https://www.rewe.de/rezepte/wrap-auflauf/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T10:04:08.924141",
+      "tags": [],
+      "notes": "4 pers."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-07T09:11:11.928456",
+    "derniere_modification": "2026-08-07T10:04:08.924602",
     "version": "1.0.0"
   }
 }
