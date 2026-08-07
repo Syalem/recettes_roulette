@@ -679,10 +679,58 @@
       "date_ajout": "2026-08-07T10:04:08.924141",
       "tags": [],
       "notes": "4 pers."
+    },
+    {
+      "titre": "Pâtes sauce tomate (diavolo)",
+      "duree_prep": 30,
+      "ingredients": [
+        "Oignons - 1",
+        "Ail - 2 gousses",
+        "Piments",
+        "Huile d'olive - 2 càs",
+        "Pâtes (penne) - 400g",
+        "Sel",
+        "Concentré de tomates - 2 càs",
+        "Tomates stückig - 800g",
+        "Sucre - 1 càc",
+        "Poivre",
+        "Origan (sec) - 1 càc",
+        "Basilic frais"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 32,
+      "lien": "https://www.rewe.de/rezepte/pasta-diavolo/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T11:16:36.602633",
+      "tags": [],
+      "notes": "4 pers."
+    },
+    {
+      "titre": "Stockbrot",
+      "duree_prep": 30,
+      "ingredients": [
+        "Farine - 350g",
+        "Sucre - 1 càs",
+        "Sel",
+        "Levure de boulanger - 1 paquet",
+        "Huile d'olive - 2 càs",
+        "Eau tiède - 180mL"
+      ],
+      "categorie": "Miscellanées",
+      "sous_categorie": "Pain",
+      "id": 33,
+      "lien": "https://www.rewe.de/rezepte/veganes-kichererbsen-curry-stockbrot/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T11:27:28.412552",
+      "tags": [],
+      "notes": "8 Stücke\nMehl, Zucker, 1 TL Salz, Hefe, 180 ml warmes Wasser und Öl in eine Schüssel geben, mind. 5 Minuten mit den Händen zu einem glatten Teig kneten. Ggf. mehr Mehl oder Wasser zufügen. Abgedeckt ca. 1 Stunde gehen lassen.\nWährenddessen Stöcke säubern, ggf. das obere Ende von der Rinde befreien.\nStockbrotteig in 8 Portionen teilen, diese zu Strängen formen und um die Stöcke wickeln. Stockbrot auf dem Grill oder über dem Lagerfeuer ca. 30 Minuten garen, immer wieder drehen."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-07T10:04:08.924602",
+    "derniere_modification": "2026-08-07T11:27:28.413367",
     "version": "1.0.0"
   }
 }
