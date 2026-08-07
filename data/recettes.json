@@ -463,10 +463,52 @@
       "date_ajout": "2026-08-04T09:00:28.238807",
       "tags": [],
       "notes": "4 pers."
+    },
+    {
+      "titre": "Tarte fine tomate pesto",
+      "duree_prep": 10,
+      "ingredients": [
+        "Pâte feuilletée - 1",
+        "Crème fraîche - 2-3 càs",
+        "Pesto - 2-3 càc",
+        "Fêta - 1/2",
+        "Tomates (grosses ou cerises) - ~10-20"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 23,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T08:32:10.141048",
+      "tags": [],
+      "notes": ""
+    },
+    {
+      "titre": "Quiche des reines (poireaux saumon)",
+      "duree_prep": 45,
+      "ingredients": [
+        "Pâte à tarte ronde - 1",
+        "Crème fraîche - 20 cL",
+        "Poireaux - 3",
+        "Saumon (pavés) - 1-2",
+        "Oeufs - 3",
+        "Sel",
+        "Poivre"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Poisson",
+      "id": 24,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-07T08:34:26.217106",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-04T09:00:28.242728",
+    "derniere_modification": "2026-08-07T08:34:26.218266",
     "version": "1.0.0"
   }
 }
