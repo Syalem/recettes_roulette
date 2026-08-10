@@ -776,10 +776,49 @@
       "date_ajout": "2026-08-10T07:06:55.068454",
       "tags": [],
       "notes": "4 pers."
+    },
+    {
+      "titre": "Gratin conchiglioni ricotta épinards",
+      "duree_prep": 45,
+      "ingredients": [
+        "Conchiglioni",
+        "Ricotta",
+        "Épinards",
+        "Sel",
+        "Passata",
+        "Fomage rapé"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 36,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-10T07:12:18.448798",
+      "tags": [],
+      "notes": ""
+    },
+    {
+      "titre": "One pot maquereau poireaux",
+      "duree_prep": 30,
+      "ingredients": [
+        "Maquereau",
+        "Poireaux",
+        "Pâtes"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Pâtes",
+      "id": 37,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-10T07:13:11.882002",
+      "tags": [],
+      "notes": ""
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-10T07:06:55.069118",
+    "derniere_modification": "2026-08-10T07:13:11.882558",
     "version": "1.0.0"
   }
 }
