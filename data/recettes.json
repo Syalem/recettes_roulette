@@ -727,10 +727,59 @@
       "date_ajout": "2026-08-07T11:27:28.412552",
       "tags": [],
       "notes": "8 Stücke\nMehl, Zucker, 1 TL Salz, Hefe, 180 ml warmes Wasser und Öl in eine Schüssel geben, mind. 5 Minuten mit den Händen zu einem glatten Teig kneten. Ggf. mehr Mehl oder Wasser zufügen. Abgedeckt ca. 1 Stunde gehen lassen.\nWährenddessen Stöcke säubern, ggf. das obere Ende von der Rinde befreien.\nStockbrotteig in 8 Portionen teilen, diese zu Strängen formen und um die Stöcke wickeln. Stockbrot auf dem Grill oder über dem Lagerfeuer ca. 30 Minuten garen, immer wieder drehen."
+    },
+    {
+      "titre": "Palak paneer",
+      "duree_prep": 45,
+      "ingredients": [
+        "Riz",
+        "Tomates stückig",
+        "Épinards",
+        "Oignons",
+        "Paneer",
+        "Beurre (ou ghee)"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Riz",
+      "id": 34,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-10T06:59:52.432923",
+      "tags": [],
+      "notes": ""
+    },
+    {
+      "titre": "Ragoût de lentilles éthiopien berbère",
+      "duree_prep": 45,
+      "ingredients": [
+        "Poivron - 1",
+        "Carotte - 1",
+        "Ail - 3 gousses",
+        "Gingembre frais - 1 tbsp",
+        "Lentilles blondes ou brunes - 1 cup",
+        "Épinards ou kale - 2 cups",
+        "Jus de citron - 1",
+        "Oignon - 1",
+        "Tomates stückig - 400g",
+        "Bouillon de légume - 4 cups",
+        "Épices berbères - 2 tbsp",
+        "Poivre noir - 1/2 tsp",
+        "Sel - 1 tsp"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 35,
+      "lien": "https://bakedinone.com/ethiopian-berbere-lentil-stew-recipe",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-10T07:06:55.068454",
+      "tags": [],
+      "notes": "4 pers."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-07T13:21:05.543199",
+    "derniere_modification": "2026-08-10T07:06:55.069118",
     "version": "1.0.0"
   }
 }
