@@ -7,28 +7,62 @@
         "Poisson",
         "Pâtes",
         "Riz",
+        "Légumineuses",
         "Soupe",
+        "Salade",
+        "Gratin",
+        "Mijotés",
         "Autre"
       ]
     },
     {
       "nom": "Dessert",
       "sous_categories": [
+        "Gâteau",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Sucré",
+      "sous_categories": [
         "Tarte",
         "Gâteau",
         "Crêpes, gauffres",
         "Biscuits",
         "Gâteau individuel",
-        "Tartinade",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Pâtes levées",
+      "sous_categories": [
+        "Pain",
+        "Brioche, bun",
         "Autre"
       ]
     },
     {
       "nom": "Side dish",
       "sous_categories": [
-        "Légumes",
-        "Bouchées",
         "Apéro",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Accompagnements",
+      "sous_categories": [
+        "Légumes",
+        "Sauce, condiment",
+        "Autre"
+      ]
+    },
+    {
+      "nom": "Apéro - Brunch",
+      "sous_categories": [
+        "Bouchées",
+        "Tartinade",
+        "Cakes",
+        "Verrines",
         "Autre"
       ]
     },
@@ -36,6 +70,7 @@
       "nom": "Boisson",
       "sous_categories": [
         "Sucrée",
+        "Chaude",
         "Autre"
       ]
     },
@@ -43,9 +78,6 @@
       "nom": "Miscellanées",
       "sous_categories": [
         "Pain",
-        "Brioche, bun",
-        "Pâtes fraîches",
-        "Petit déjeuner",
         "Sauce, condiment",
         "Autre"
       ]
