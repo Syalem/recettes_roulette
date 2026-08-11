@@ -511,7 +511,7 @@
       "duree_prep": 25,
       "ingredients": [
         "Quinoa - 200g",
-        "Bouillon de légume - 500mL",
+        "Bouillon de légumes - 500mL",
         "Echalottes - 4",
         "Ail - 2 gousses",
         "Citron bio - 1",
@@ -690,7 +690,7 @@
         "Huile d'olive - 2 càs",
         "Pâtes (penne) - 400g",
         "Sel",
-        "Concentré de tomates - 2 càs",
+        "Concentré de tomate - 2 càs",
         "Tomates stückig - 800g",
         "Sucre - 1 càc",
         "Poivre",
@@ -762,7 +762,7 @@
         "Jus de citron - 1",
         "Oignon - 1",
         "Tomates stückig - 400g",
-        "Bouillon de légume - 4 cups",
+        "Bouillon de légumes - 4 cups",
         "Épices berbères - 2 tbsp",
         "Poivre noir - 1/2 tsp",
         "Sel - 1 tsp"
@@ -818,7 +818,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-10T07:13:11.882558",
+    "derniere_modification": "2026-08-11T07:10:30.078935",
     "version": "1.0.0"
   }
 }
