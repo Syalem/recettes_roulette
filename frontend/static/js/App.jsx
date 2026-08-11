@@ -172,6 +172,7 @@ const App = () => {
         onSave={handleSaveRecette}
         categories={categories}
         initialRecette={recetteEnCours}
+        allIngredients={allIngredients}
         loading={modalLoading}
       />
     </div>

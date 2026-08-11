@@ -17,10 +17,15 @@ const AddRecetteModal = ({
   onSave, 
   categories,
   initialRecette = null,
+  allIngredients,
   loading = false 
 }) => {
   const [recette, setRecette] = React.useState(DEFAULT_RECIPE);
   const ingredientRefs = React.useRef([]);
+  const [suggestions, setSuggestions] = React.useState([]);
+  const [showSuggestions, setShowSuggestions] = React.useState(false);
+  const [activeIngredientIndex, setActiveIngredientIndex] = React.useState(null); // Tracks which ingredient input is focused
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = React.useState(0); // Tracks which suggestion is selected in the dropdown
 
   React.useEffect(() => {
     if (initialRecette) {
@@ -73,10 +78,36 @@ const AddRecetteModal = ({
     await onSave(recetteData);
   };
 
+  const capitalizeFirstLetter = (str) => {
+    if (!str) return str;
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  };
+
   const modifierIngredient = (index, field, value) => {
     const newIngredients = [...recette.ingredients];
     const current = newIngredients[index] || { ingredient: '', quantity: '' };
-    newIngredients[index] = { ...current, [field]: value };
+
+    if (field === 'ingredient') {
+      const capitalizedValue = capitalizeFirstLetter(value);
+      newIngredients[index] = { ...current, [field]: capitalizedValue };
+
+      // Update active ingredient index
+      setActiveIngredientIndex(index);
+
+      // Show suggestions if input is not empty
+      if (capitalizedValue.length > 0) {
+        const filtered = allIngredients.filter(ing =>
+          ing.toLowerCase().includes(capitalizedValue.toLowerCase())
+        );
+        setSuggestions(filtered);
+        setShowSuggestions(true);
+      } else {
+        setShowSuggestions(false); // Hide dropdown for empty input
+      }
+    } else {
+      newIngredients[index] = { ...current, [field]: value };
+    }
+
     setRecette({ ...recette, ingredients: newIngredients });
   };
 
@@ -85,38 +116,51 @@ const AddRecetteModal = ({
       ...prev,
       ingredients: [...prev.ingredients, { ingredient: '', quantity: '' }]
     }));
-    
-    // Focus sur le nouvel ingrédient après un petit délai
+
+    // Focus on the new ingredient after a small delay
     setTimeout(() => {
-      const inputs = document.querySelectorAll('input[name="ingredient"]');
-      if (inputs.length) {
-        const lastInput = inputs[inputs.length - 1];
-        lastInput.focus();
+      const newIndex = recette.ingredients.length;
+      if (ingredientRefs.current[newIndex]) {
+        ingredientRefs.current[newIndex].focus();
       }
     }, 50);
   };
 
   const handleIngredientKeyDown = (e, index) => {
-    if (e.key === 'Tab') {
-      e.preventDefault();
-      // Tab = aller à la quantité (input suivant dans la même ligne)
-      const quantityInput = e.target.parentElement.querySelector('input:nth-of-type(2)');
-      if (quantityInput) {
-        quantityInput.focus();
+    if (showSuggestions && index === activeIngredientIndex) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        setActiveSuggestionIndex(prev =>
+          prev < suggestions.length - 1 ? prev + 1 : prev
+        );
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        setActiveSuggestionIndex(prev => (prev > 0 ? prev - 1 : 0));
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        modifierIngredient(index, 'ingredient', suggestions[activeSuggestionIndex]);
+        setShowSuggestions(false);
+      } else if (e.key === 'Tab') {
+        setShowSuggestions(false);
       }
-    } else if (e.key === 'Enter') {
-      e.preventDefault();
-      e.stopPropagation();
-      // Entrée = ajouter un nouvel ingrédient et y placer le curseur
-      const newIngredients = [...recette.ingredients, { ingredient: '', quantity: '' }];
-      setRecette({ ...recette, ingredients: newIngredients });
-      
-      // Focus sur le nouvel ingrédient après un petit délai
-      setTimeout(() => {
-        if (ingredientRefs.current[newIngredients.length - 1]) {
-          ingredientRefs.current[newIngredients.length - 1].focus();
+    } else {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const quantityInput = e.target.parentElement.querySelector('input:nth-of-type(2)');
+        if (quantityInput) {
+          quantityInput.focus();
         }
-      }, 50);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        e.stopPropagation();
+        const newIngredients = [...recette.ingredients, { ingredient: '', quantity: '' }];
+        setRecette({ ...recette, ingredients: newIngredients });
+        setTimeout(() => {
+          if (ingredientRefs.current[newIngredients.length - 1]) {
+            ingredientRefs.current[newIngredients.length - 1].focus();
+          }
+        }, 50);
+      }
     }
   };
 
@@ -124,14 +168,17 @@ const AddRecetteModal = ({
     if (e.key === 'Enter') {
       e.preventDefault();
       e.stopPropagation();
-      // Entrée = ajouter un nouvel ingrédient et y placer le curseur
       const newIngredients = [...recette.ingredients, { ingredient: '', quantity: '' }];
       setRecette({ ...recette, ingredients: newIngredients });
-      
-      // Focus sur le nouvel ingrédient après un petit délai
+
+      // Focus on the new ingredient after a small delay
       setTimeout(() => {
-        if (ingredientRefs.current[newIngredients.length - 1]) {
-          ingredientRefs.current[newIngredients.length - 1].focus();
+        const newIndex = recette.ingredients.length; // Index of the new ingredient
+        if (ingredientRefs.current[newIndex]) {
+          ingredientRefs.current[newIndex].focus();
+          setActiveIngredientIndex(newIndex); // Set the active ingredient index
+          setSuggestions(allIngredients); // Show all suggestions for the empty input
+          setShowSuggestions(true); // Show the dropdown
         }
       }, 50);
     }
@@ -239,15 +286,22 @@ const AddRecetteModal = ({
             <div className="space-y-2">
               {recette.ingredients.map((ingObj, idx) => (
                 <div key={idx} className="flex gap-2 items-center">
-                  <input
-                    ref={el => ingredientRefs.current[idx] = el}
-                    type="text"
-                    value={ingObj.ingredient}
-                    onChange={(e) => modifierIngredient(idx, 'ingredient', e.target.value)}
-                    onKeyDown={(e) => handleIngredientKeyDown(e, idx)}
-                    className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-                    placeholder={`Ingrédient ${idx + 1}`}
-                  />
+                  <div className="flex-1 relative">
+                    <input
+                      ref={el => ingredientRefs.current[idx] = el}
+                      type="text"
+                      value={ingObj.ingredient}
+                      onChange={(e) => modifierIngredient(idx, 'ingredient', e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Escape') {
+                          setShowSuggestions(false);
+                        }
+                        handleIngredientKeyDown(e, idx);
+                      }}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                      placeholder={`Ingrédient ${idx + 1}`}
+                    />
+                  </div>
                   <input
                     type="text"
                     value={ingObj.quantity}
@@ -266,6 +320,30 @@ const AddRecetteModal = ({
                   )}
                 </div>
               ))}
+
+              {/* Render the dropdown once, positioned near the active input */}
+              {showSuggestions && suggestions.length > 0 && activeIngredientIndex !== null && (
+                <div
+                  className="absolute z-10 bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto w-64"
+                  style={{
+                    top: `${ingredientRefs.current[activeIngredientIndex]?.getBoundingClientRect().bottom + window.scrollY}px`,
+                    left: `${ingredientRefs.current[activeIngredientIndex]?.getBoundingClientRect().left + window.scrollX}px`,
+                  }}
+                >
+                  {suggestions.map((suggestion, i) => (
+                    <li
+                      key={suggestion}
+                      className={`px-4 py-2 cursor-pointer ${i === activeSuggestionIndex ? 'bg-orange-100' : ''}`}
+                      onClick={() => {
+                        modifierIngredient(activeIngredientIndex, 'ingredient', suggestion);
+                        setShowSuggestions(false);
+                      }}
+                    >
+                      {suggestion}
+                    </li>
+                  ))}
+                </div>
+              )}
             </div>
             <button
               onClick={ajouterIngredient}
