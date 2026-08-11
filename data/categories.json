@@ -16,13 +16,6 @@
       ]
     },
     {
-      "nom": "Dessert",
-      "sous_categories": [
-        "Gâteau",
-        "Autre"
-      ]
-    },
-    {
       "nom": "Sucré",
       "sous_categories": [
         "Tarte",
@@ -42,13 +35,6 @@
       ]
     },
     {
-      "nom": "Side dish",
-      "sous_categories": [
-        "Apéro",
-        "Autre"
-      ]
-    },
-    {
       "nom": "Accompagnements",
       "sous_categories": [
         "Légumes",
@@ -63,6 +49,7 @@
         "Tartinade",
         "Cakes",
         "Verrines",
+        "Gauffres salées",
         "Autre"
       ]
     },
@@ -77,8 +64,6 @@
     {
       "nom": "Miscellanées",
       "sous_categories": [
-        "Pain",
-        "Sauce, condiment",
         "Autre"
       ]
     }
