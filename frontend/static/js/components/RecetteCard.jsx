@@ -9,10 +9,21 @@ const RecetteCard = ({ recette, onClick }) => {
       </h3>
 
       <div className="flex items-center gap-4 text-sm text-gray-600 mb-3">
+        {/* Prep time (existing) */}
         <span className="flex items-center gap-1 whitespace-nowrap">
           <Clock className="w-4 h-4" />
           {recette.duree_prep} min
         </span>
+
+        {/* Cooking time (new) */}
+        {Number(recette.duree_cuisson) > 0 && (
+          <span className="flex items-center gap-1 whitespace-nowrap">
+            <CookingPot className="w-4 h-4" />
+            {recette.duree_cuisson} min
+          </span>
+        )}
+
+        {/* Book info (existing) */}
         {recette.livre && (
           <span className="flex items-center gap-1 whitespace-nowrap">
             <Book className="w-4 h-4" />

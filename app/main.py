@@ -8,11 +8,21 @@ from pathlib import Path
 from app.api import recettes, filters, random
 
 
+class NoCacheStaticFiles(StaticFiles):
+    """StaticFiles qui force le navigateur à revalider via ETag (Cache-Control: no-cache)."""
+
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-cache"
+        return response
+
+
 app = FastAPI(
     title="API Recettes",
     description="API pour gérer vos recettes avec filtrage et sélection aléatoire",
     version="1.0.0",
 )
+
 
 
 # CORS
@@ -25,7 +35,13 @@ app.add_middleware(
 )
 
 # Monter les fichiers statiques (si tu en as)
-app.mount("/static", StaticFiles(directory="frontend/static"), name="static")
+# Cache-Control: no-cache -> le navigateur revalide toujours via ETag
+app.mount(
+    "/static",
+    NoCacheStaticFiles(directory="frontend/static"),
+    name="static",
+)
+
 
 
 # Inclure les routes API

@@ -1,6 +1,7 @@
 const DEFAULT_RECIPE = {
   titre: '',
   duree_prep: '',
+  duree_cuisson: '', // Optional (cook time, default: 0)
   ingredients: [{ ingredient: '', quantity: '' }],
   categorie: '',
   sous_categorie: '',
@@ -49,7 +50,7 @@ const AddRecetteModal = ({
 
   const handleSave = async () => {
     if (!recette.titre || !recette.duree_prep || !recette.categorie) {
-      alert('Veuillez remplir tous les champs obligatoires');
+      alert('Veuillez remplir tous les champs obligatoires (titre, durée de préparation, catégorie)');
       return;
     }
 
@@ -68,10 +69,15 @@ const AddRecetteModal = ({
       return;
     }
 
+    // Calculate total duration (prep + cook)
+    const dureeCuisson = recette.duree_cuisson === '' ? 0 : parseInt(recette.duree_cuisson || '0');
+    const dureeTotale = parseInt(recette.duree_prep) + dureeCuisson;
+
     const recetteData = {
       ...recette,
-      duree_prep: parseInt(recette.duree_prep),
-      page: recette.page || '',
+      duree_prep: parseInt(recette.duree_prep), // Prep time (mandatory)
+      duree_cuisson: dureeCuisson, // Cook time (0 if empty)
+      duree_totale: dureeTotale, // Total time (for filtering)
       ingredients: ingredientsFiltrés
     };
 
@@ -225,17 +231,33 @@ const AddRecetteModal = ({
           </div>
 
           {/* Durée */}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Durée de préparation (minutes) *
-            </label>
-            <input
-              type="number"
-              value={recette.duree_prep}
-              onChange={(e) => setRecette({ ...recette, duree_prep: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
-              placeholder="Ex: 30"
-            />
+          {/* Durée de préparation et cuisson */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Durée de préparation (minutes) *
+              </label>
+              <input
+                type="number"
+                value={recette.duree_prep}
+                onChange={(e) => setRecette({ ...recette, duree_prep: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                placeholder="Ex: 30"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Durée de cuisson (minutes)
+              </label>
+              <input
+                type="number"
+                value={recette.duree_cuisson}
+                onChange={(e) => setRecette({ ...recette, duree_cuisson: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+                placeholder="Ex: 20 (laisser vide si aucune cuisson)"
+              />
+            </div>
           </div>
 
           {/* Catégorie et Sous-catégorie */}

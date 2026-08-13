@@ -3,6 +3,7 @@
     {
       "titre": "Udon sauce cacahuètes",
       "duree_prep": 10,
+      "duree_cuisson": 0,
       "ingredients": [
         "Sauce soja - 1 cac",
         "Udon - 200g",
@@ -27,13 +28,14 @@
     {
       "titre": "Dip thon curry",
       "duree_prep": 5,
+      "duree_cuisson": 2,
       "ingredients": [
         "Curry",
         "Thon - 1 boîte",
         "Fromage frais - ~200gr"
       ],
-      "categorie": "Side dish",
-      "sous_categorie": "Apéro",
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Tartinade",
       "id": 3,
       "lien": "",
       "livre": "",
@@ -45,6 +47,7 @@
     {
       "titre": "Galette des rois",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Beurre - 80g",
         "Poudre d'amandes - 125g",
@@ -66,6 +69,7 @@
     {
       "titre": "Gratin de Kloße",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Kloßteig - 700g",
         "Mini mozza - 125g",
@@ -86,6 +90,7 @@
     {
       "titre": "Udon sauce soja",
       "duree_prep": 5,
+      "duree_cuisson": 0,
       "ingredients": [
         "Udon - 100g",
         "Sauce soja - 1 cas",
@@ -109,6 +114,7 @@
     {
       "titre": "Lohikeitto (soupe au saumon finlandaise)",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Saumon - 500g",
         "Pommes de terre (festkochend) - 400g",
@@ -132,6 +138,7 @@
     {
       "titre": "Sauce wafu légère ",
       "duree_prep": 5,
+      "duree_cuisson": 0,
       "ingredients": [
         "Œuf dur - 2",
         "Sauce soja - 30 mL",
@@ -159,6 +166,7 @@
     {
       "titre": "Soupe au poulet",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Huile d'olive - 1 tbsp",
         "Oignon - 1",
@@ -190,6 +198,7 @@
     {
       "titre": "Quinoa épicé à l'indienne et carottes rôties au cumin",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Coriandre fraîche - 40g",
         "Citron vert - 2",
@@ -220,6 +229,7 @@
     {
       "titre": "Gaufres broccoli fromage",
       "duree_prep": 10,
+      "duree_cuisson": 0,
       "ingredients": [
         "Broccoli cuit - 200g",
         "Œuf - 2",
@@ -239,6 +249,7 @@
     {
       "titre": "Gaufres de maïs ",
       "duree_prep": 10,
+      "duree_cuisson": 0,
       "ingredients": [
         "Farine de maïs - 40g",
         "Œuf - 4",
@@ -261,6 +272,7 @@
     {
       "titre": "Mayonnaise enfant ",
       "duree_prep": 5,
+      "duree_cuisson": 0,
       "ingredients": [
         "Œuf dur - 3",
         "Eau - 2 tbsp",
@@ -282,6 +294,7 @@
     {
       "titre": "Gâteau au cacao",
       "duree_prep": 40,
+      "duree_cuisson": 0,
       "ingredients": [
         "Farine - 200g",
         "Lait - 175mL",
@@ -304,6 +317,7 @@
     {
       "titre": "Lentilles au Spätzle ",
       "duree_prep": 60,
+      "duree_cuisson": 0,
       "ingredients": [
         "Oignons - 1",
         "Carottes - 200g",
@@ -330,6 +344,7 @@
     {
       "titre": "Gâteau de savoie",
       "duree_prep": 55,
+      "duree_cuisson": 0,
       "ingredients": [
         "Œufs - 5",
         "Sucre - 150g",
@@ -352,6 +367,7 @@
     {
       "titre": "Soupe aux herbes ",
       "duree_prep": 50,
+      "duree_cuisson": 0,
       "ingredients": [
         "Oignon - 1",
         "Ail - 2 gousses",
@@ -381,6 +397,7 @@
     {
       "titre": "Poêlée Texmex ",
       "duree_prep": 50,
+      "duree_cuisson": 0,
       "ingredients": [
         "Blanc de poulet - 4",
         "Tomates - 2",
@@ -410,6 +427,7 @@
     {
       "titre": "Gratin pâtes tomates ",
       "duree_prep": 50,
+      "duree_cuisson": 0,
       "ingredients": [
         "Pâtes (spirales) - 350g",
         "Huile d'olive - 3 càs",
@@ -440,6 +458,7 @@
     {
       "titre": "Salade froide de vermicelles",
       "duree_prep": 10,
+      "duree_cuisson": 0,
       "ingredients": [
         "Glassnudeln - 100g",
         "Crevettes cuites - 20",
@@ -467,6 +486,7 @@
     {
       "titre": "Tarte fine tomate pesto",
       "duree_prep": 10,
+      "duree_cuisson": 0,
       "ingredients": [
         "Pâte feuilletée - 1",
         "Crème fraîche - 2-3 càs",
@@ -487,6 +507,7 @@
     {
       "titre": "Quiche des reines (poireaux saumon)",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Pâte à tarte ronde - 1",
         "Crème fraîche - 20 cL",
@@ -509,6 +530,7 @@
     {
       "titre": "Salade de quinoa, feta et airelles",
       "duree_prep": 25,
+      "duree_cuisson": 0,
       "ingredients": [
         "Quinoa - 200g",
         "Bouillon de légumes - 500mL",
@@ -540,6 +562,7 @@
     {
       "titre": "Salade de pâtes roses",
       "duree_prep": 35,
+      "duree_cuisson": 0,
       "ingredients": [
         "Pâtes rigatoni - 600g",
         "Betterave cuite - 6",
@@ -566,6 +589,7 @@
     {
       "titre": "Burrito bowl",
       "duree_prep": 35,
+      "duree_cuisson": 0,
       "ingredients": [
         "Oignons - 1",
         "Blanc de poulet - 500g",
@@ -591,6 +615,7 @@
     {
       "titre": "Spaghetti sauce petits pois citron",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Spaghetti - 200g",
         "Sel",
@@ -618,6 +643,7 @@
     {
       "titre": "Pâtes à la sauge",
       "duree_prep": 20,
+      "duree_cuisson": 0,
       "ingredients": [
         "Spaghetti - 500g",
         "Sel",
@@ -640,6 +666,7 @@
     {
       "titre": "Spaghetti aglio e olio",
       "duree_prep": 20,
+      "duree_cuisson": 0,
       "ingredients": [
         "Spaghetti - 400g",
         "Sel",
@@ -661,6 +688,7 @@
     {
       "titre": "Gratin de tortilla",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Mozarella rapée - 150-200g",
         "Tomates cerises (ou stückig) - 250g",
@@ -683,6 +711,7 @@
     {
       "titre": "Pâtes sauce tomate (diavolo)",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Oignons - 1",
         "Ail - 2 gousses",
@@ -710,6 +739,7 @@
     {
       "titre": "Stockbrot",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Farine - 350g",
         "Sucre - 1 càs",
@@ -731,6 +761,7 @@
     {
       "titre": "Palak paneer",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Riz",
         "Tomates stückig",
@@ -752,6 +783,7 @@
     {
       "titre": "Ragoût de lentilles éthiopien berbère",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Poivron - 1",
         "Carotte - 1",
@@ -780,6 +812,7 @@
     {
       "titre": "Gratin conchiglioni ricotta épinards",
       "duree_prep": 45,
+      "duree_cuisson": 0,
       "ingredients": [
         "Conchiglioni",
         "Ricotta",
@@ -801,6 +834,7 @@
     {
       "titre": "One pot maquereau poireaux",
       "duree_prep": 30,
+      "duree_cuisson": 0,
       "ingredients": [
         "Maquereau",
         "Poireaux",
@@ -818,7 +852,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-11T11:48:15.033010",
+    "derniere_modification": "2026-08-13T10:17:17.954013",
     "version": "1.0.0"
   }
 }

@@ -7,6 +7,7 @@ class Recette:
     """Modèle de données pour une recette."""
     titre: str
     duree_prep: int  # en minutes
+    duree_cuisson: int  # en minutes
     ingredients: List[str]
     categorie: str
     sous_categorie: str

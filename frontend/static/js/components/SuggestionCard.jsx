@@ -31,6 +31,10 @@ const SuggestionCard = ({ recette, onClose, onClick }) => {
           {recette.duree_prep} min
         </span>
         <span className="flex items-center gap-2">
+          <CookingPot className="w-5 h-5" />
+          {recette.duree_cuisson} min
+        </span>
+        <span className="flex items-center gap-2">
           {recette.categorie}
         </span>
       </div>

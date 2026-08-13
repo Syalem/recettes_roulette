@@ -3,12 +3,14 @@ const DEFAULT_FILTERS = {
   sous_categories: [],
   duree_min: '',
   duree_max: '',
+  duree_prep_max: '',
   ingredients: [],
   ingredient_mode: 'any',
   recherche_texte: '',
   tags: [],
   livre: ''
 };
+
 
 const useFilters = (recettes = []) => {
   const [filtres, setFiltres] = React.useState(DEFAULT_FILTERS);
@@ -25,15 +27,24 @@ const useFilters = (recettes = []) => {
       resultats = resultats.filter(r => filtres.sous_categories.includes(r.sous_categorie));
     }
 
+    // Durée totale = préparation + cuisson
+    const dureeTotale = (r) => (Number(r.duree_prep) || 0) + (Number(r.duree_cuisson) || 0);
+
     if (filtres.duree_min) {
-      resultats = resultats.filter(r => r.duree_prep >= parseInt(filtres.duree_min));
+      resultats = resultats.filter(r => dureeTotale(r) >= parseInt(filtres.duree_min));
     }
 
     if (filtres.duree_max) {
-      resultats = resultats.filter(r => r.duree_prep <= parseInt(filtres.duree_max));
+      resultats = resultats.filter(r => dureeTotale(r) <= parseInt(filtres.duree_max));
+    }
+
+    // Durée de préparation maximale (préparation seule)
+    if (filtres.duree_prep_max) {
+      resultats = resultats.filter(r => (Number(r.duree_prep) || 0) <= parseInt(filtres.duree_prep_max));
     }
 
     if (filtres.ingredients && filtres.ingredients.length > 0) {
+
       resultats = resultats.filter(r => {
         if (!r.ingredients) return false;
         const ingredientsLower = r.ingredients.map(i => i.toLowerCase());

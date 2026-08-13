@@ -45,21 +45,21 @@ class RecetteFilter:
                 r for r in resultats 
                 if r["sous_categorie"].lower() == filtres.sous_categorie.lower()
             ]
-        
-        # Filtre par durée minimale
+            
+        # Filtre par durée minimale (total: prep + cook)
         if filtres.duree_min is not None:
             resultats = [
-                r for r in resultats 
-                if r["duree_prep"] >= filtres.duree_min
+                r for r in resultats
+                if (r.get("duree_prep", 0) + r.get("duree_cuisson", 0)) >= filtres.duree_min
             ]
-        
-        # Filtre par durée maximale
+
+        # Filtre par durée maximale (total: prep + cook)
         if filtres.duree_max is not None:
             resultats = [
-                r for r in resultats 
-                if r["duree_prep"] <= filtres.duree_max
+                r for r in resultats
+                if (r.get("duree_prep", 0) + r.get("duree_cuisson", 0)) <= filtres.duree_max
             ]
-        
+
         # Filtre par ingrédients à inclure
         if filtres.ingredients_inclus:
             resultats = [

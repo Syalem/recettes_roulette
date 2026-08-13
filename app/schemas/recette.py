@@ -5,6 +5,7 @@ class RecetteBase(BaseModel):
     """Schéma de base pour une recette."""
     titre: str = Field(..., min_length=1, max_length=200)
     duree_prep: int = Field(..., gt=0, description="Durée en minutes")
+    duree_cuisson: int = Field(default=0, ge=0, description="Durée en minutes")
     ingredients: List[str] = Field(..., min_items=1)
     categorie: str
     sous_categorie: str
@@ -22,6 +23,7 @@ class RecetteUpdate(BaseModel):
     """Schéma pour modifier une recette."""
     titre: Optional[str] = None
     duree_prep: Optional[int] = Field(None, gt=0)
+    duree_cuisson: Optional[int] = Field(default=0, ge=0)
     ingredients: Optional[List[str]] = None
     categorie: Optional[str] = None
     sous_categorie: Optional[str] = None

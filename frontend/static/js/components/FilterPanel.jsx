@@ -104,10 +104,10 @@ const FilterPanel = ({
           </div>
         </div>
 
-        {/* Durée max */}
+        {/* Durées */}
         <div className="lg:col-span-1">
           <label className="block text-sm font-medium text-gray-700 mb-3">
-            Durée max (min)
+            Durée max totale (minutes)
           </label>
           <input
             type="number"
@@ -119,7 +119,22 @@ const FilterPanel = ({
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
             placeholder="Ex: 30"
           />
+
+          <label className="block text-sm font-medium text-gray-700 mt-4 mb-3">
+            Durée max préparation (minutes)
+          </label>
+          <input
+            type="number"
+            min="0"
+            step="5"
+            value={filtres.duree_prep_max || ''}
+            onChange={(e) => onModifierFiltre('duree_prep_max', e.target.value)}
+            onKeyDown={handleKeyDown}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+            placeholder="Ex: 15"
+          />
         </div>
+
       </div>
 
       {/* Boutons d'action */}
