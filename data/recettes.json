@@ -28,7 +28,7 @@
     {
       "titre": "Dip thon curry",
       "duree_prep": 5,
-      "duree_cuisson": 2,
+      "duree_cuisson": 0,
       "ingredients": [
         "Curry",
         "Thon - 1 boîte",
@@ -852,7 +852,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-13T10:17:17.954013",
+    "derniere_modification": "2026-08-13T10:26:38.293727",
     "version": "1.0.0"
   }
 }
