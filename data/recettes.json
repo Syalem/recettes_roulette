@@ -78,7 +78,7 @@
         "Basilic frais - Quelques feuilles"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Autre",
+      "sous_categorie": "Gratin",
       "id": 7,
       "lien": "https://www.instagram.com/reel/C34wXslMIUD/?igsh=MTA1YjJwazA5ZzRhaA==",
       "livre": "Instagram",
@@ -217,7 +217,7 @@
         "Poivre"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Autre",
+      "sous_categorie": "Légumineuses",
       "id": 12,
       "lien": "Regarde cette super recette que je viens de découvrir dans l'application Kptncook ! https://share.kptncook.com/Dh4a/k9c9fwzu",
       "livre": "Kptn cook ",
@@ -446,7 +446,7 @@
         "Basilic - 1/2 pot"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Pâtes",
+      "sous_categorie": "Gratin",
       "id": 21,
       "lien": "",
       "livre": "Classeur",
@@ -474,7 +474,7 @@
         "Piment d'espelette - 1 pincée"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Pâtes",
+      "sous_categorie": "Salade",
       "id": 22,
       "lien": "https://lutsubo.com/2015/08/10/vietnamisant-et-frais-glass-noodle-salad/",
       "livre": "",
@@ -550,7 +550,7 @@
         "Fêta - un peu"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Autre",
+      "sous_categorie": "Salade",
       "id": 25,
       "lien": "https://www.rewe.de/rezepte/quinoasalat-erbsen/",
       "livre": "",
@@ -577,7 +577,7 @@
         "Citron - 1"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Pâtes",
+      "sous_categorie": "Salade",
       "id": 26,
       "lien": "https://www.rewe.de/rezepte/pink-pasta-salat/",
       "livre": "",
@@ -699,7 +699,7 @@
         "Wrap tortilla - 4"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Autre",
+      "sous_categorie": "Gratin",
       "id": 31,
       "lien": "https://www.rewe.de/rezepte/wrap-auflauf/",
       "livre": "",
@@ -800,7 +800,7 @@
         "Sel - 1 tsp"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Autre",
+      "sous_categorie": "Mijotés",
       "id": 35,
       "lien": "https://bakedinone.com/ethiopian-berbere-lentil-stew-recipe",
       "livre": "",
@@ -822,7 +822,7 @@
         "Fomage rapé"
       ],
       "categorie": "Plat principal",
-      "sous_categorie": "Pâtes",
+      "sous_categorie": "Gratin",
       "id": 36,
       "lien": "",
       "livre": "",
@@ -852,7 +852,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-13T10:26:38.293727",
+    "derniere_modification": "2026-08-19T09:41:25.639763",
     "version": "1.0.0"
   }
 }
