@@ -849,10 +849,32 @@
       "date_ajout": "2026-08-10T07:13:11.882002",
       "tags": [],
       "notes": ""
+    },
+    {
+      "titre": "Marshmallow fluff",
+      "duree_prep": 20,
+      "duree_cuisson": 15,
+      "ingredients": [
+        "Blanc d'oeuf (tempéré) - 2",
+        "Crème de tartre - 1/4 cac",
+        "Sel - 1 pincée",
+        "Sucre - 160g (3/4 cup)",
+        "Sirop de maïs clair - 180mL (3/4 cup)",
+        "Eau - 60ml (1/4 cup)"
+      ],
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Tartinade",
+      "id": 38,
+      "lien": "https://www.ricardocuisine.com/recettes/7215-pate-de-guimauve-a-tartiner-marshmallow-fluff",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-20T12:06:00.689058",
+      "tags": [],
+      "notes": "For 1L (4 cups)\nDans un bol, déposer les blancs d’œufs, la crème de tartre et le sel. Réserver.\nDans une petite casserole, porter à ébullition le sucre, le sirop de maïs et l’eau. Laisser mijoter jusqu’à ce qu’un thermomètre à bonbons indique 116 °C (240 °F). Retirer du feu le temps de fouetter les blancs d’œufs.\nFouetter le mélange de blancs d’œufs au batteur électrique à vitesse moyenne jusqu’à l’obtention de pics mous. Verser le sirop chaud en filet sur les blancs en évitant les fouets du batteur. Fouetter continuellement jusqu’à l’obtention de pics fermes.\nVerser dans des pots. La pâte de guimauve se conserve au réfrigérateur environ 1 semaine. "
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-19T09:41:25.639763",
+    "derniere_modification": "2026-08-20T12:06:00.690913",
     "version": "1.0.0"
   }
 }
