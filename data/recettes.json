@@ -955,10 +955,31 @@
       "date_ajout": "2026-08-25T09:41:17.494011",
       "tags": [],
       "notes": "Dans une casserole hors du feu, mélanger le cacao (tamisé) et le sucre. Ajouter l’eau, le sirop de maïs et porter à ébullition en remuant à l’aide d’un fouet. Laisser mijoter 10 secondes.\nRetirer du feu et ajouter le chocolat (haché). Mélanger jusqu’à ce que la sauce soit lisse et homogène. Transvider dans un contenant et laisser refroidir.\nCette sauce se sert chaude ou froide sur de la crème glacée, des gaufres, des crêpes et la recette de pavlova au chocolat.\nConserver dans un contenant hermétique à la température ambiante."
+    },
+    {
+      "titre": "Tartinade choco noisettes",
+      "duree_prep": 10,
+      "duree_cuisson": 5,
+      "ingredients": [
+        "Crème fraîche - 250mL (1 cup)",
+        "Sucre - 55g (1/4 cup)",
+        "Cacao amer - 20g (3 tbsp)",
+        "Chocolat au lait - 170g",
+        "Beurre de noisette - 125mL (1/2 cup)"
+      ],
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Tartinade",
+      "id": 43,
+      "lien": "https://www.ricardocuisine.com/recettes/7388-tartinade-choco-noisettes-la-meilleure",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-25T11:05:53.020527",
+      "tags": [],
+      "notes": "Dans une casserole, hors du feu, mélanger au fouet la crème, le sucre et le cacao. Porter à ébullition et laisser mijoter 1 minute en fouettant continuellement.\nVerser dans un mélangeur. Ajouter le chocolat et le beurre de noisettes. Laisser fondre 1 minute. Mélanger jusqu’à ce que la tartinade soit homogène. Attention aux éclaboussures.\nVerser dans des pots. Laisser tiédir. Couvrir et réfrigérer 2 heures. Laisser tempérer avant de servir.\nLa tartinade choco-noisettes se conserve de 2 à 3 semaines au réfrigérateur."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-25T09:41:17.494576",
+    "derniere_modification": "2026-08-25T11:05:53.028028",
     "version": "1.0.0"
   }
 }
