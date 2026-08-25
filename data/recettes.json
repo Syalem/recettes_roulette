@@ -871,10 +871,33 @@
       "date_ajout": "2026-08-20T12:06:00.689058",
       "tags": [],
       "notes": "For 1L (4 cups)\nDans un bol, déposer les blancs d’œufs, la crème de tartre et le sel. Réserver.\nDans une petite casserole, porter à ébullition le sucre, le sirop de maïs et l’eau. Laisser mijoter jusqu’à ce qu’un thermomètre à bonbons indique 116 °C (240 °F). Retirer du feu le temps de fouetter les blancs d’œufs.\nFouetter le mélange de blancs d’œufs au batteur électrique à vitesse moyenne jusqu’à l’obtention de pics mous. Verser le sirop chaud en filet sur les blancs en évitant les fouets du batteur. Fouetter continuellement jusqu’à l’obtention de pics fermes.\nVerser dans des pots. La pâte de guimauve se conserve au réfrigérateur environ 1 semaine. "
+    },
+    {
+      "titre": "Sauce ribs Pili",
+      "duree_prep": 5,
+      "duree_cuisson": 10,
+      "ingredients": [
+        "Sauce worcestershire - 1 cas (1 tbsp)",
+        "Vinaigre de cidre - 12,5cL (1/2 cup)",
+        "Sauce tomate - 450g (2 cups)",
+        "Sucre vergeoise ou roux - 80g (1/2 cup)",
+        "Gousse d'ail (pressées) - 3",
+        "Chili - 3 cas (3 tbsp)",
+        "Poivre de cayenne - 2 pincées"
+      ],
+      "categorie": "Accompagnements",
+      "sous_categorie": "Sauce, condiment",
+      "id": 39,
+      "lien": "",
+      "livre": "cuisine américaine (maman)",
+      "page": "",
+      "date_ajout": "2026-08-25T05:53:46.620811",
+      "tags": [],
+      "notes": "Pour 1kg de viande\nMélanger tous les ingrédients dans une casserole et laisser mijoter pendant 10 min environ jusau'à ce que la sauce devienne épaisse."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-20T12:06:00.690913",
+    "derniere_modification": "2026-08-25T05:53:46.624742",
     "version": "1.0.0"
   }
 }
