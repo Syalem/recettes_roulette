@@ -913,10 +913,52 @@
       "date_ajout": "2026-08-25T09:04:34.444348",
       "tags": [],
       "notes": "Step 1: Prep the Garlic\n\nFirst, grab your garlic head and lay it on its side. Now here’s the important part – you’ll want to slice off about 1/4 inch from the top (the pointy end) to expose the cloves inside. My grandma taught me to use a sharp paring knife and make one confident cut – no sawing back and forth! Be careful not to cut too far down though – you want to just barely expose the tops of the cloves without removing too much. Trust me, seeing those little garlic tops peeking out is the best feeling!\nStep 2: Season and Wrap\n\nNow for the fun part – making it shiny and delicious! Place your prepped garlic on a small piece of foil (about 6 inches square). Drizzle that teaspoon of olive oil all over the exposed cloves – I like to use my fingers to gently rub it in so every clove gets coated. The oil helps the garlic caramelize beautifully. Then sprinkle just a pinch of salt over top – this little touch makes all the difference! If you don’t have foil, no worries – a small oven-safe ramekin works great too. Just cover it with another piece of foil to trap the steam.\nStep 3: Air Fry and Cool\n\nHere comes the magic! Pop your wrapped garlic into the air fryer basket. Set it to 375°F and let it work its magic for 15-20 minutes. I always check at 15 minutes – you’ll know it’s done when the exposed cloves turn a deep golden color and feel super soft when poked with a fork. The smell in your kitchen will be AMAZING at this point! Carefully remove it (it’s hot!) and let it cool for about 5 minutes before unwrapping. Then just squeeze from the bottom – those buttery soft cloves will slide right out!"
+    },
+    {
+      "titre": "Caramel au beurre salé à tartiner",
+      "duree_prep": 5,
+      "duree_cuisson": 15,
+      "ingredients": [
+        "Eau - 60mL (1/4 cup)",
+        "Sucre - 2 cups",
+        "Sirop de maïs clair - 2 tbsp",
+        "Crème fraîche 35%, chaude - 3/4 cup",
+        "Beurre salé - 1/2 cup"
+      ],
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Tartinade",
+      "id": 41,
+      "lien": "https://www.ricardocuisine.com/recettes/5175-caramel-au-beurre-sale-a-tartiner",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-25T09:32:49.122705",
+      "tags": [],
+      "notes": "Dans une casserole, porter à ébullition l’eau, le sucre et le sirop. Cuire sans remuer jusqu’à ce que le mélange prenne une couleur ambrée. Hors du feu, ajouter graduellement la crème. Attention aux éclaboussures.\nPorter de nouveau à ébullition, jusqu’à ce que le mélange soit homogène. Ajouter le beurre et bien mélanger jusqu’à ce qu’il soit fondu. Transvider dans des pots en verre et laisser refroidir complètement à la température ambiante. Se conserve deux semaines à la température de la pièce ou 1 mois au réfrigérateur."
+    },
+    {
+      "titre": "Sauce au chocolat",
+      "duree_prep": 5,
+      "duree_cuisson": 5,
+      "ingredients": [
+        "Cacao amer - 1/3 cup",
+        "Sucre - 1/2 cup",
+        "Eau - 125 mL (1/2 cup)",
+        "Sirop de maïs clair - 60 mL (1/4 cup)",
+        "Chocolat - 85g"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Autre",
+      "id": 42,
+      "lien": "https://www.ricardocuisine.com/recettes/6132-sauce-au-chocolat",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-25T09:41:17.494011",
+      "tags": [],
+      "notes": "Dans une casserole hors du feu, mélanger le cacao (tamisé) et le sucre. Ajouter l’eau, le sirop de maïs et porter à ébullition en remuant à l’aide d’un fouet. Laisser mijoter 10 secondes.\nRetirer du feu et ajouter le chocolat (haché). Mélanger jusqu’à ce que la sauce soit lisse et homogène. Transvider dans un contenant et laisser refroidir.\nCette sauce se sert chaude ou froide sur de la crème glacée, des gaufres, des crêpes et la recette de pavlova au chocolat.\nConserver dans un contenant hermétique à la température ambiante."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-25T09:04:34.447899",
+    "derniere_modification": "2026-08-25T09:41:17.494576",
     "version": "1.0.0"
   }
 }
