@@ -894,10 +894,29 @@
       "date_ajout": "2026-08-25T05:53:46.620811",
       "tags": [],
       "notes": "Pour 1kg de viande\nMélanger tous les ingrédients dans une casserole et laisser mijoter pendant 10 min environ jusau'à ce que la sauce devienne épaisse."
+    },
+    {
+      "titre": "Ail rôti à l'airfryer",
+      "duree_prep": 2,
+      "duree_cuisson": 30,
+      "ingredients": [
+        "Ail - 1 tête",
+        "Huile d'olive - 1 tsp",
+        "Sel - 1 pincée"
+      ],
+      "categorie": "Accompagnements",
+      "sous_categorie": "Autre",
+      "id": 40,
+      "lien": "https://olerecipes.com/roasted-garlic-in-air-fryer-recipe/",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-25T09:04:34.444348",
+      "tags": [],
+      "notes": "Step 1: Prep the Garlic\n\nFirst, grab your garlic head and lay it on its side. Now here’s the important part – you’ll want to slice off about 1/4 inch from the top (the pointy end) to expose the cloves inside. My grandma taught me to use a sharp paring knife and make one confident cut – no sawing back and forth! Be careful not to cut too far down though – you want to just barely expose the tops of the cloves without removing too much. Trust me, seeing those little garlic tops peeking out is the best feeling!\nStep 2: Season and Wrap\n\nNow for the fun part – making it shiny and delicious! Place your prepped garlic on a small piece of foil (about 6 inches square). Drizzle that teaspoon of olive oil all over the exposed cloves – I like to use my fingers to gently rub it in so every clove gets coated. The oil helps the garlic caramelize beautifully. Then sprinkle just a pinch of salt over top – this little touch makes all the difference! If you don’t have foil, no worries – a small oven-safe ramekin works great too. Just cover it with another piece of foil to trap the steam.\nStep 3: Air Fry and Cool\n\nHere comes the magic! Pop your wrapped garlic into the air fryer basket. Set it to 375°F and let it work its magic for 15-20 minutes. I always check at 15 minutes – you’ll know it’s done when the exposed cloves turn a deep golden color and feel super soft when poked with a fork. The smell in your kitchen will be AMAZING at this point! Carefully remove it (it’s hot!) and let it cool for about 5 minutes before unwrapping. Then just squeeze from the bottom – those buttery soft cloves will slide right out!"
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-25T05:53:46.624742",
+    "derniere_modification": "2026-08-25T09:04:34.447899",
     "version": "1.0.0"
   }
 }
