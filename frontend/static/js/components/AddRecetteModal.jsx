@@ -27,6 +27,7 @@ const AddRecetteModal = ({
   const [showSuggestions, setShowSuggestions] = React.useState(false);
   const [activeIngredientIndex, setActiveIngredientIndex] = React.useState(null); // Tracks which ingredient input is focused
   const [activeSuggestionIndex, setActiveSuggestionIndex] = React.useState(0); // Tracks which suggestion is selected in the dropdown
+  const aNavigueDansSuggestions = React.useRef(false); // True si l'utilisateur a navigué dans la liste avec les flèches
 
   React.useEffect(() => {
     if (initialRecette) {
@@ -98,6 +99,7 @@ const AddRecetteModal = ({
     if (field === 'ingredient') {
       const capitalizedValue = capitalizeFirstLetter(value);
       newIngredients[index] = { ...current, [field]: capitalizedValue };
+      aNavigueDansSuggestions.current = false;
 
       // Update active ingredient index
       setActiveIngredientIndex(index);
@@ -138,16 +140,33 @@ const AddRecetteModal = ({
     if (showSuggestions && index === activeIngredientIndex) {
       if (e.key === 'ArrowDown') {
         e.preventDefault();
+        aNavigueDansSuggestions.current = true;
         setActiveSuggestionIndex(prev =>
           prev < suggestions.length - 1 ? prev + 1 : prev
         );
       } else if (e.key === 'ArrowUp') {
         e.preventDefault();
+        aNavigueDansSuggestions.current = true;
         setActiveSuggestionIndex(prev => (prev > 0 ? prev - 1 : 0));
       } else if (e.key === 'Enter') {
         e.preventDefault();
-        modifierIngredient(index, 'ingredient', suggestions[activeSuggestionIndex]);
-        setShowSuggestions(false);
+        if (aNavigueDansSuggestions.current) {
+          // L'utilisateur a navigué dans la liste : on sélectionne la suggestion en surbrillance
+          modifierIngredient(index, 'ingredient', suggestions[activeSuggestionIndex]);
+          aNavigueDansSuggestions.current = false;
+          setShowSuggestions(false);
+        } else {
+          // L'utilisateur écrit l'ingrédient à la main : on crée une nouvelle ligne
+          const newIngredients = [...recette.ingredients, { ingredient: '', quantity: '' }];
+          setRecette({ ...recette, ingredients: newIngredients });
+          setShowSuggestions(false);
+          setTimeout(() => {
+            if (ingredientRefs.current[newIngredients.length - 1]) {
+              ingredientRefs.current[newIngredients.length - 1].focus();
+              setActiveIngredientIndex(newIngredients.length - 1);
+            }
+          }, 50);
+        }
       } else if (e.key === 'Tab') {
         setShowSuggestions(false);
       }
@@ -361,6 +380,10 @@ const AddRecetteModal = ({
                       onClick={() => {
                         modifierIngredient(activeIngredientIndex, 'ingredient', suggestion);
                         setShowSuggestions(false);
+                        // Garder le curseur dans la case ingrédient après sélection
+                        setTimeout(() => {
+                          ingredientRefs.current[activeIngredientIndex]?.focus();
+                        }, 0);
                       }}
                     >
                       {suggestion}
