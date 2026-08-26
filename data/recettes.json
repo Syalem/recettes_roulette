@@ -1044,10 +1044,30 @@
       "date_ajout": "2026-08-26T09:38:07.578700",
       "tags": [],
       "notes": "Pour 12 crêpes\nDans un bol, mélanger les farines avec le sel. Ajouter les oeufs, 250 ml (1 tasse) de l’eau pétillante et le beurre fondu. Bien mélanger au fouet jusqu’à ce que la pâte soit homogène. Incorporer le reste de l’eau pétillante et le sirop d’érable.\nChauffer une poêle antiadhésive d’environ 18 cm (7 po) de diamètre à feu moyen-élevé. Lorsque la poêle est chaude, la badigeonner de beurre avec un pinceau.\nPour chaque crêpe, verser environ 60 ml ( tasse) de pâte au centre de la poêle. En faisant pivoter la poêle, répandre la pâte également pour recouvrir tout le fond. Lorsque le rebord se décolle facilement et commence à dorer, soit après environ 1 minute, retourner la crêpe à l’aide d’une spatule. Poursuivre la cuisson 30 secondes et retirer la crêpe de la poêle. Réserver sur une assiette."
+    },
+    {
+      "titre": "Fromage à la crème ( à tartiner)",
+      "duree_prep": 5,
+      "duree_cuisson": 30,
+      "ingredients": [
+        "Crème fraîche 35% liquide (schlag) - 500mL (2 cups)",
+        "Lait - 500mL (2 cups)",
+        "Yaourt - 375mL (1 1/2 cups)",
+        "Sel - 1 tsp"
+      ],
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Tartinade",
+      "id": 47,
+      "lien": "https://www.ricardocuisine.com/recettes/7696-fromage-a-la-creme",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-26T10:08:34.514053",
+      "tags": [],
+      "notes": "Dans une casserole, hors du feu, mélanger au fouet tous les ingrédients. Porter à ébullition à feu moyen en remuant continuellement et en raclant le fond et les parois de la casserole jusqu’à ce que le mélange épaississe légèrement. Laisser mijoter 20 minutes. Retirer du feu et laisser tiédir 1h30 ou jusqu’à ce que le thermomètre indique 40 °C (104 °F).\nEntre-temps, placer un tamis tapissé de 4 épaisseurs de coton étamine au-dessus d’un bol. Y verser le mélange. Couvrir d’une pellicule plastique et laisser tiédir 30 minutes. Réfrigérer 8 heures ou toute une nuit en le laissant égoutter.\nJeter le liquide. Transférer le fromage égoutté dans un contenant hermétique. Le fromage à la crème se conserve 2 semaines au réfrigérateur.\n\nVous pouvez diminuer ou augmenter la quantité de sel de cette recette. Tout comme la parfumer, au goût, de ciboulette, de pesto ou de moutarde. Si vous utilisez du yogourt maison, ajouter 15 ml (1 c. à soupe) de jus de citron."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T09:38:07.585308",
+    "derniere_modification": "2026-08-26T10:08:34.517670",
     "version": "1.0.0"
   }
 }
