@@ -997,10 +997,34 @@
       "date_ajout": "2026-08-26T08:30:37.089629",
       "tags": [],
       "notes": "Pour 4 personnes (entrée)\nLave les bulbes du fenouil et enlever les petites plumettes, ainsi que les tiges vertes. Elles sont plus dures, crues, que le bulbe, mais seront parfaites pour parfumer un bouillon, ne les jetez pas !\nÉmincer finement les bulbes du fenouil et les déposer dans un saladier. Arroser du jus du demi-citron, de l’huile d’olive et ajouter le sel. Poivrez généreusement si vous aimez le poivre, mélanger et servir aussitôt !\nLe fenouil cru a tendance à griser à l'air. Ça n'altère pas son goût, mais c'est moins appétissant. Ne trainez donc pas à l'assaisonner.\n\nNotes\nLes petites “plumettes” vertes ressemblent à l’aneth, avec un goût un tout petit peu différent. Là aussi, ne les jetez pas !\nVous pouvez les utiliser en aromatiques pour servir avec votre salade, ou bien dans une poêlée de légumes.  Conservez-les dans une boite au frais si vous n’en avez pas l’usage immédiat."
+    },
+    {
+      "titre": "pancake géant au ricecooker",
+      "duree_prep": 5,
+      "duree_cuisson": 40,
+      "ingredients": [
+        "Farine - 1 1/2 cups",
+        "Sucre - 3 tbsp",
+        "Levure chimique - 1 tbsp",
+        "Oeufs - 2",
+        "Lait - 1 1/4 cups",
+        "Beurre - 3 tbsp",
+        "Vanille - 1/2 tsp",
+        "Sel - 1/2 tsp"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Crêpes, gauffres",
+      "id": 45,
+      "lien": "https://www.foodnetwork.com/recipes/food-network-kitchen/rice-cooker-pancake-11602933",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-26T09:30:12.127257",
+      "tags": [],
+      "notes": "Préparation\nGraisse légèrement la cuve du rice cooker.\nDans un grand saladier, mélange :\nla farine,\nle sucre,\nla levure chimique,\nle sel.\nDans un autre récipient, mélange les :\nœufs,\nlait,\nbeurre fondu refroidi,\nvanille.\nVerse les ingrédients liquides dans les ingrédients secs.\nMélange juste assez pour incorporer la farine. Il peut rester quelques petits grumeaux : il ne faut pas trop travailler la pâte.\nVerse toute la pâte dans la cuve.\nFerme le couvercle et lance le programme standard « White Rice » / riz blanc.\nLa recette indique une cuisson de 35 à 50 minutes, mais précise que cela dépend beaucoup du modèle de rice cooker.\nLe pancake est prêt lorsque :\nle dessous est doré,\nle dessus est ferme mais encore légèrement rebondissant,\nune pique plantée au centre ressort propre.\nDémoule-le en retournant la cuve sur une grande assiette, coupe en parts et sers avec du beurre et du sirop d'érable. On ne le retourne pas pendant la cuisson"
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T08:30:37.093040",
+    "derniere_modification": "2026-08-26T09:30:12.131347",
     "version": "1.0.0"
   }
 }
