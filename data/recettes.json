@@ -1115,10 +1115,30 @@
       "date_ajout": "2026-08-26T13:25:41.369987",
       "tags": [],
       "notes": "Dans une grande poêle à feu moyen-élevé, attendrir l’oignon (haché finement) dans l’huile. Ajouter l’ail (haché finement) et les épices. Cuire 1 minute en remuant. Déglacer avec le bouillon. Ajouter les tomates. Porter à ébullition. Laisser mijoter 20 minutes ou jusqu’à ce que la sauce épaississe. Saler et poivrer.\nÀ l’aide d’une cuillère, creuser quatre ou six puits dans la sauce tomate. Y casser les oeufs et parsemer du fromage. Couvrir et laisser mijoter doucement de 5 à 6 minutes ou jusqu’à ce que le blanc des oeufs soit cuit. Parsemer du persil. Répartir dans des assiettes creuses. Accompagner des tranches de pain grillées aillées. "
+    },
+    {
+      "titre": "Tartinade bacon et cheddar",
+      "duree_prep": 5,
+      "duree_cuisson": 0,
+      "ingredients": [
+        "Philadelphia - 250g",
+        "Bacon - 5",
+        "Cheddar - 1/2 cup",
+        "Frühlingszwiebeln - 2"
+      ],
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Tartinade",
+      "id": 50,
+      "lien": "https://www.ricardocuisine.com/recettes/355-tartinade-bacon-et-cheddar",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-26T13:42:22.140087",
+      "tags": [],
+      "notes": "Tout hacher finement.\nMélanger tous les ingrédients. Réfrigérer."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T13:25:41.373548",
+    "derniere_modification": "2026-08-26T13:42:22.143619",
     "version": "1.0.0"
   }
 }
