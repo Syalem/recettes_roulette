@@ -81,6 +81,14 @@ const useFilters = (recettes = []) => {
       );
     }
 
+    // Afficher les recettes les plus récentes en premier
+    resultats.sort((a, b) => {
+      if (a.date_ajout && b.date_ajout) {
+        return new Date(b.date_ajout) - new Date(a.date_ajout);
+      }
+      return (b.id || 0) - (a.id || 0);
+    });
+
     return resultats;
   }, [filtres, recettes]);
 

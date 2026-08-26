@@ -86,7 +86,9 @@ const AddRecetteModal = ({
 
   const capitalizeFirstLetter = (str) => {
     if (!str) return str;
-    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+    // La première lettre est toujours en majuscule, le reste reste tel quel
+    // (les majuscules tapées avec Shift sont ainsi conservées).
+    return str.charAt(0).toUpperCase() + str.slice(1);
   };
 
   const modifierIngredient = (index, field, value) => {
