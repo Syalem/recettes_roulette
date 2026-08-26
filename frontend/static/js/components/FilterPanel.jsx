@@ -133,6 +133,19 @@ const FilterPanel = ({
             className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
             placeholder="Ex: 15"
           />
+
+          <label className="block text-sm font-medium text-gray-700 mt-4 mb-3">
+            Statut
+          </label>
+          <select
+            value={filtres.fait || ''}
+            onChange={(e) => onModifierFiltre('fait', e.target.value)}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500"
+          >
+            <option value="">Tous</option>
+            <option value="oui">Déjà cuisinée</option>
+            <option value="non">Non cuisinée</option>
+          </select>
         </div>
 
       </div>

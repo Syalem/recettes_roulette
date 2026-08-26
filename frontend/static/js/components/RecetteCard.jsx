@@ -41,6 +41,15 @@ const RecetteCard = ({ recette, onClick }) => {
             {recette.sous_categorie}
           </span>
         )}
+        {recette.fait ? (
+          <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
+            ✓ Déjà cuisinée
+          </span>
+        ) : (
+          <span className="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full">
+            Non cuisinée
+          </span>
+        )}
       </div>
 
       <div className="border-t border-gray-200 pt-3 flex-1">

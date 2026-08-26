@@ -270,6 +270,15 @@
               ${recette.sous_categorie}
             </span>
           ` : ''}
+          ${recette.fait ? `
+            <span class="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
+              ✓ Déjà cuisinée
+            </span>
+          ` : `
+            <span class="inline-block bg-slate-100 text-slate-500 text-xs px-3 py-1 rounded-full">
+              Non cuisinée
+            </span>
+          `}
         </div>
 
         ${recette.lien ? `

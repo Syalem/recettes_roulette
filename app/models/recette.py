@@ -18,6 +18,7 @@ class Recette:
     date_ajout: Optional[str] = None
     tags: Optional[List[str]] = None
     notes: Optional[str] = None
+    fait: bool = False  # True si la recette a déjà été cuisinée
     
     def __post_init__(self):
         """Validation et normalisation après initialisation."""

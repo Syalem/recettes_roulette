@@ -13,6 +13,7 @@ class FiltresRecette:
     livre: Optional[str] = None
     tags: Optional[List[str]] = None
     recherche_texte: Optional[str] = None
+    fait: Optional[bool] = None
 
 
 class RecetteFilter:
@@ -94,6 +95,13 @@ class RecetteFilter:
                 if r.get("tags") and any(tag in r["tags"] for tag in filtres.tags)
             ]
         
+        # Filtre par statut "déjà cuisiné"
+        if filtres.fait is not None:
+            resultats = [
+                r for r in resultats
+                if bool(r.get("fait", False)) == filtres.fait
+            ]
+
         # Recherche textuelle (titre ou notes)
         if filtres.recherche_texte:
             terme = filtres.recherche_texte.lower()

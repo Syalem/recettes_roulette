@@ -9,7 +9,8 @@ const DEFAULT_RECIPE = {
   livre: '',
   page: '',
   tags: [],
-  notes: ''
+  notes: '',
+  fait: false
 };
 
 const AddRecetteModal = ({ 
@@ -280,6 +281,17 @@ const AddRecetteModal = ({
               />
             </div>
           </div>
+
+          {/* Déjà cuisiné */}
+          <label className="flex items-center gap-2 cursor-pointer">
+            <input
+              type="checkbox"
+              checked={Boolean(recette.fait)}
+              onChange={(e) => setRecette({ ...recette, fait: e.target.checked })}
+              className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500"
+            />
+            <span className="text-sm text-gray-700">Déjà cuisinée</span>
+          </label>
 
           {/* Catégorie et Sous-catégorie */}
           <div className="grid grid-cols-2 gap-4">

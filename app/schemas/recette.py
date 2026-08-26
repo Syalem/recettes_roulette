@@ -14,6 +14,7 @@ class RecetteBase(BaseModel):
     page: Optional[str] = None
     tags: Optional[List[str]] = []
     notes: Optional[str] = None
+    fait: Optional[bool] = False
 
 class RecetteCreate(RecetteBase):
     """Schéma pour créer une recette."""
@@ -32,6 +33,7 @@ class RecetteUpdate(BaseModel):
     page: Optional[str] = None
     tags: Optional[List[str]] = None
     notes: Optional[str] = None
+    fait: Optional[bool] = None
 
 class RecetteResponse(RecetteBase):
     """Schéma pour la réponse contenant une recette."""

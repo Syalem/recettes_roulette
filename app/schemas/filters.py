@@ -12,6 +12,7 @@ class FiltresRecetteSchema(BaseModel):
     tags: Optional[List[str]] = None
     recherche_texte: Optional[str] = None
     ingredients: Optional[List[str]] = None  # ← Ajoute cette ligne
+    fait: Optional[bool] = None
 
 
 class TriSchema(BaseModel):

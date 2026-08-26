@@ -32,7 +32,8 @@ def filtrer_recettes(filtres: FiltresRecetteSchema):
         ingredients_exclus=filtres.ingredients_exclus,
         livre=filtres.livre,
         tags=filtres.tags,
-        recherche_texte=filtres.recherche_texte
+        recherche_texte=filtres.recherche_texte,
+        fait=filtres.fait
     )
     
     resultats = RecetteFilter.filtrer(recettes, filtres_obj)
@@ -110,7 +111,8 @@ def trier_recettes(
             ingredients_exclus=filtres.ingredients_exclus,
             livre=filtres.livre,
             tags=filtres.tags,
-            recherche_texte=filtres.recherche_texte
+            recherche_texte=filtres.recherche_texte,
+            fait=filtres.fait
         )
         recettes = RecetteFilter.filtrer(recettes, filtres_obj)
     

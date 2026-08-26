@@ -8,7 +8,8 @@ const DEFAULT_FILTERS = {
   ingredient_mode: 'any',
   recherche_texte: '',
   tags: [],
-  livre: ''
+  livre: '',
+  fait: ''
 };
 
 
@@ -71,6 +72,11 @@ const useFilters = (recettes = []) => {
       resultats = resultats.filter(r =>
         r.tags && filtres.tags.some(tag => r.tags.includes(tag))
       );
+    }
+
+    if (filtres.fait) {
+      const veutFait = filtres.fait === 'oui';
+      resultats = resultats.filter(r => Boolean(r.fait) === veutFait);
     }
 
     if (filtres.recherche_texte) {

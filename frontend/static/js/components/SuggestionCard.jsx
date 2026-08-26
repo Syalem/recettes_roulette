@@ -37,6 +37,9 @@ const SuggestionCard = ({ recette, onClose, onClick }) => {
         <span className="flex items-center gap-2">
           {recette.categorie}
         </span>
+        <span className="inline-block text-xs px-3 py-1 rounded-full bg-white/25">
+          {recette.fait ? '✓ Déjà cuisinée' : 'Non cuisinée'}
+        </span>
       </div>
     </div>
   );
