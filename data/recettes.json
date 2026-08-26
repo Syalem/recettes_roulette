@@ -1064,10 +1064,32 @@
       "date_ajout": "2026-08-26T10:08:34.514053",
       "tags": [],
       "notes": "Dans une casserole, hors du feu, mélanger au fouet tous les ingrédients. Porter à ébullition à feu moyen en remuant continuellement et en raclant le fond et les parois de la casserole jusqu’à ce que le mélange épaississe légèrement. Laisser mijoter 20 minutes. Retirer du feu et laisser tiédir 1h30 ou jusqu’à ce que le thermomètre indique 40 °C (104 °F).\nEntre-temps, placer un tamis tapissé de 4 épaisseurs de coton étamine au-dessus d’un bol. Y verser le mélange. Couvrir d’une pellicule plastique et laisser tiédir 30 minutes. Réfrigérer 8 heures ou toute une nuit en le laissant égoutter.\nJeter le liquide. Transférer le fromage égoutté dans un contenant hermétique. Le fromage à la crème se conserve 2 semaines au réfrigérateur.\n\nVous pouvez diminuer ou augmenter la quantité de sel de cette recette. Tout comme la parfumer, au goût, de ciboulette, de pesto ou de moutarde. Si vous utilisez du yogourt maison, ajouter 15 ml (1 c. à soupe) de jus de citron."
+    },
+    {
+      "titre": "Dorés au four à préparer la veille",
+      "duree_prep": 20,
+      "duree_cuisson": 45,
+      "ingredients": [
+        "Oeufs - 4",
+        "Lait - 430mL (1 3/4 cups)",
+        "Sirop d'érable - 125mL (1/2 cup)",
+        "Beurre - 3 tbsp",
+        "Cannelle - 1/2 tsp",
+        "Tranches de pain - 8"
+      ],
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Autre",
+      "id": 48,
+      "lien": "https://www.ricardocuisine.com/recettes/5987-pain-dore-au-four-a-preparer-la-veille",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-26T13:00:40.075717",
+      "tags": [],
+      "notes": "Beurrer un moule carré de 20 cm (8 po) d’une contenance d’environ 2 litres (8 tasses). Réserver.\nDans un bol, mélanger les oeufs, le lait, le sirop d’érable et la cannelle au fouet. Réserver.\nSur un plan de travail, beurrer un côté de chaque tranche de pain. Réserver.\nRépartir la moitié du pain dans le moule, côté beurré vers le haut. Couper le pain si nécessaire afin de couvrir toute la surface du moule. Verser la moitié du mélange d’oeufs. Couvrir du reste du pain, côté beurré vers le haut. Arroser du reste du mélange d’oeufs. Couvrir de papier d’aluminium et réfrigérer toute une nuit.\nPlacer la grille au centre du four. Préchauffer le four à 180 °C (350 °F).\nCuire au four 20 minutes avec le papier d’aluminium. Retirer le papier et poursuivre la cuisson 30 minutes. Terminer la cuisson sous le gril (broil) jusqu’à ce que le pain soit bien doré. Laisser tiédir 5 minutes."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T10:08:34.517670",
+    "derniere_modification": "2026-08-26T13:00:40.079342",
     "version": "1.0.0"
   }
 }
