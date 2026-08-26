@@ -1086,10 +1086,39 @@
       "date_ajout": "2026-08-26T13:00:40.075717",
       "tags": [],
       "notes": "Beurrer un moule carré de 20 cm (8 po) d’une contenance d’environ 2 litres (8 tasses). Réserver.\nDans un bol, mélanger les oeufs, le lait, le sirop d’érable et la cannelle au fouet. Réserver.\nSur un plan de travail, beurrer un côté de chaque tranche de pain. Réserver.\nRépartir la moitié du pain dans le moule, côté beurré vers le haut. Couper le pain si nécessaire afin de couvrir toute la surface du moule. Verser la moitié du mélange d’oeufs. Couvrir du reste du pain, côté beurré vers le haut. Arroser du reste du mélange d’oeufs. Couvrir de papier d’aluminium et réfrigérer toute une nuit.\nPlacer la grille au centre du four. Préchauffer le four à 180 °C (350 °F).\nCuire au four 20 minutes avec le papier d’aluminium. Retirer le papier et poursuivre la cuisson 30 minutes. Terminer la cuisson sous le gril (broil) jusqu’à ce que le pain soit bien doré. Laisser tiédir 5 minutes."
+    },
+    {
+      "titre": "Oeufs pochés en sauce tomate",
+      "duree_prep": 15,
+      "duree_cuisson": 30,
+      "ingredients": [
+        "Oignons - 1",
+        "Huile d'olive - 3 cas",
+        "Gousse d'ail - 3",
+        "Paprika doux - 1 cac",
+        "Curcuma - 1 cac",
+        "Cumin en poudre - 1/2 cac",
+        "Flocons de piment - 1/4 cac",
+        "Bouillon - 180mL",
+        "Tomates (stückig) - 800mL (8oz)",
+        "Oeufs - 4",
+        "Fêta - 60g",
+        "Persil - 2 cas",
+        "Tranches de pain - 4"
+      ],
+      "categorie": "Plat principal",
+      "sous_categorie": "Autre",
+      "id": 49,
+      "lien": "https://www.ricardocuisine.com/recettes/5721-oeufs-poches-en-sauce-tomate",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-26T13:25:41.369987",
+      "tags": [],
+      "notes": "Dans une grande poêle à feu moyen-élevé, attendrir l’oignon (haché finement) dans l’huile. Ajouter l’ail (haché finement) et les épices. Cuire 1 minute en remuant. Déglacer avec le bouillon. Ajouter les tomates. Porter à ébullition. Laisser mijoter 20 minutes ou jusqu’à ce que la sauce épaississe. Saler et poivrer.\nÀ l’aide d’une cuillère, creuser quatre ou six puits dans la sauce tomate. Y casser les oeufs et parsemer du fromage. Couvrir et laisser mijoter doucement de 5 à 6 minutes ou jusqu’à ce que le blanc des oeufs soit cuit. Parsemer du persil. Répartir dans des assiettes creuses. Accompagner des tranches de pain grillées aillées. "
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T13:00:40.079342",
+    "derniere_modification": "2026-08-26T13:25:41.373548",
     "version": "1.0.0"
   }
 }
