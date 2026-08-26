@@ -1021,10 +1021,33 @@
       "date_ajout": "2026-08-26T09:30:12.127257",
       "tags": [],
       "notes": "Préparation\nGraisse légèrement la cuve du rice cooker.\nDans un grand saladier, mélange :\nla farine,\nle sucre,\nla levure chimique,\nle sel.\nDans un autre récipient, mélange les :\nœufs,\nlait,\nbeurre fondu refroidi,\nvanille.\nVerse les ingrédients liquides dans les ingrédients secs.\nMélange juste assez pour incorporer la farine. Il peut rester quelques petits grumeaux : il ne faut pas trop travailler la pâte.\nVerse toute la pâte dans la cuve.\nFerme le couvercle et lance le programme standard « White Rice » / riz blanc.\nLa recette indique une cuisson de 35 à 50 minutes, mais précise que cela dépend beaucoup du modèle de rice cooker.\nLe pancake est prêt lorsque :\nle dessous est doré,\nle dessus est ferme mais encore légèrement rebondissant,\nune pique plantée au centre ressort propre.\nDémoule-le en retournant la cuve sur une grande assiette, coupe en parts et sers avec du beurre et du sirop d'érable. On ne le retourne pas pendant la cuisson"
+    },
+    {
+      "titre": "Crêpes de sarrasin à l'eau pétillante",
+      "duree_prep": 15,
+      "duree_cuisson": 25,
+      "ingredients": [
+        "Farine de sarrasin - 150g (1 cup)",
+        "Farine - 75g (1/2 cup)",
+        "Sel - 1/4 tsp",
+        "Oeufs - 2",
+        "Eau pétillante - 500mL (2 cups)",
+        "Beurre - 30mL (2 tbsp)",
+        "Sirop d'érable - 30mL (2 tbsp)"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Crêpes, gauffres",
+      "id": 46,
+      "lien": "https://www.ricardocuisine.com/recettes/9114-crepes-de-sarrasin-a-l-eau-petillante",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-26T09:38:07.578700",
+      "tags": [],
+      "notes": "Pour 12 crêpes\nDans un bol, mélanger les farines avec le sel. Ajouter les oeufs, 250 ml (1 tasse) de l’eau pétillante et le beurre fondu. Bien mélanger au fouet jusqu’à ce que la pâte soit homogène. Incorporer le reste de l’eau pétillante et le sirop d’érable.\nChauffer une poêle antiadhésive d’environ 18 cm (7 po) de diamètre à feu moyen-élevé. Lorsque la poêle est chaude, la badigeonner de beurre avec un pinceau.\nPour chaque crêpe, verser environ 60 ml ( tasse) de pâte au centre de la poêle. En faisant pivoter la poêle, répandre la pâte également pour recouvrir tout le fond. Lorsque le rebord se décolle facilement et commence à dorer, soit après environ 1 minute, retourner la crêpe à l’aide d’une spatule. Poursuivre la cuisson 30 secondes et retirer la crêpe de la poêle. Réserver sur une assiette."
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T09:30:12.131347",
+    "derniere_modification": "2026-08-26T09:38:07.585308",
     "version": "1.0.0"
   }
 }
