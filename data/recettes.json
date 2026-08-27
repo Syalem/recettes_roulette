@@ -1183,10 +1183,33 @@
       "tags": [],
       "notes": "Pour 10 cookies\nPréchauffer le four à 190°C, mode chaleur tournante si possible. \n \nCouper au couteau les pépites de chocolat, afin d'obtenir de belles pépites gourmandes. \n \nDans un grand saladier, mélanger les ingrédients humides : battre énergiquement l'huile de coco ramollie avec le sirop d'agave et d'érable au fouet manuel ou à la cuillère magique. Ajouter l'oeuf, la vanille et enfin la coco râpée et fouetter bien.\nDans un autre saladier, mélanger les ingrédients secs à la cuillère : poudre d'amandes et bicarbonate puis les 120g de pépites de chocolat et le sel.\n\nVerser les ingrédients secs sur les ingrédients humides et mélanger rapidement avec une cuillère à soupe ou une maryse, sans trop insister.\n Sur une plaque recouverte de papier sulfurisé, disposer des petites boules de pâte en les espaçant bien. J'en ai fait 10 avec ces quantités.\n\nSaupoudrer des 30g de pépites de chocolat restantes et aplatir légèrement les boules à ce moment.\nEnfourner pour 7 à 8 minutes à 190°C, pas plus! (selon la taille des cookies et le four). Pour moi, 7 minutes dans le four préchauffé et pour 10 cookies. Ils doivent être légèrement dorés sur les bords, comme sur les photos.\n \nAttendre au moins 10 minutes avant de les décoller.\nSinon, conserver après refroidissement complet dans une boîte métallique pendant 48h environ. Ils seront plus mous dans ce cas, perdront leur texture croustillante en surface. Du coup, je les repasse alors 3 minutes au four à 190°C puis les laisse refroidir quelques instants. Ils redeviennent comme neufs !!! \n",
       "fait": true
+    },
+    {
+      "titre": "Madeleines à la pâte de spéculoos",
+      "duree_prep": 20,
+      "duree_cuisson": 10,
+      "ingredients": [
+        "Farine - 150g",
+        "Sucre - 130g",
+        "Beurre - 120g",
+        "Oeufs - 2",
+        "Sel - 1 pincée",
+        "Pâte de spéculoos (crunchy) - 3 cas"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Gâteau individuel",
+      "id": 52,
+      "lien": "https://cuisine.journaldesfemmes.fr/recette/352233-madeleines-a-la-pate-de-speculoos",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-27T08:29:29.450178",
+      "tags": [],
+      "notes": "Faire fondre le beurre. Dans un saladier, mélanger les oeufs et le sucre ainsi que le sel. Bien mélanger jusqu'à ce que le mélange blanchisse, ce qui permettra à la pâte de bien lever sans mettre de levure chimique donc bien mélanger jusqu'à ce que l'appareil s'éclaircisse.\nAjouter peu à peu la farine, le beurre fondu et la pâte à tartiner. Bien mélanger le tout.\nBeurrer les moules et préchauffer le four thermostat 6-7. Verser la préparation dans les moules, au 2/3 et mettre à cuire environ 10-15 mn.\nPour finir\nSurveiller la cuisson à partir du moment où les madeleines commencent à bomber sur le dessus en plantant un couteau dedans. A déguster tiède ou froid, sans modération !",
+      "fait": true
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-27T06:03:33.039015",
+    "derniere_modification": "2026-08-27T08:33:18.186795",
     "version": "1.0.0"
   }
 }
