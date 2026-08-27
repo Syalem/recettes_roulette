@@ -1156,10 +1156,37 @@
       "date_ajout": "2026-08-26T13:42:22.140087",
       "tags": [],
       "notes": "Tout hacher finement.\nMélanger tous les ingrédients. Réfrigérer."
+    },
+    {
+      "titre": "Cookies légers",
+      "duree_prep": 10,
+      "duree_cuisson": 7,
+      "ingredients": [
+        "Poudre d'amandes - 190g",
+        "Bicarbonate de soude - 1 cac",
+        "Sel - 1 pincée",
+        "Chocolat - 150g",
+        "Huile de coco solide - 2 cas",
+        "Vanille - un peu",
+        "Oeufs - 1",
+        "Sirop d'érable - 2 cas",
+        "Sirop d'agave - 1-2 cas",
+        "Noisettes concassées - 1 cas"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Biscuits",
+      "id": 51,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-08-27T05:58:43.927550",
+      "tags": [],
+      "notes": "Pour 10 cookies\nPréchaufer le four à 190°C, chaleur tournante.\n",
+      "fait": true
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-26T16:02:38.854106",
+    "derniere_modification": "2026-08-27T05:58:43.932219",
     "version": "1.0.0"
   }
 }
