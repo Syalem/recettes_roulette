@@ -58,7 +58,7 @@
         "Crème fraîche - 60g",
         "Pâte feuilletée - 2"
       ],
-      "categorie": "Dessert",
+      "categorie": "Sucré",
       "sous_categorie": "Gâteau",
       "id": 6,
       "lien": "",
@@ -243,8 +243,8 @@
         "Fromage râpé - 30g",
         "Ail en poudre"
       ],
-      "categorie": "Miscellanées",
-      "sous_categorie": "Autre",
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Gauffres salées",
       "id": 13,
       "lien": "https://www.instagram.com/reel/DPeRQvNDPWr/?igsh=MXUyanp6eHN4N3NpZA==",
       "livre": "Instagram ",
@@ -267,8 +267,8 @@
         "Sel",
         "Poivre"
       ],
-      "categorie": "Miscellanées",
-      "sous_categorie": "Autre",
+      "categorie": "Apéro - Brunch",
+      "sous_categorie": "Gauffres salées",
       "id": 14,
       "lien": "https://www.instagram.com/reel/DPeRQvNDPWr/?igsh=MXUyanp6eHN4N3NpZA==",
       "livre": "Instagram ",
@@ -290,7 +290,7 @@
         "Sel",
         "Poivre"
       ],
-      "categorie": "Miscellanées",
+      "categorie": "Accompagnements",
       "sous_categorie": "Sauce, condiment",
       "id": 15,
       "lien": "https://pin.it/4QbjyBZDp",
@@ -314,7 +314,7 @@
         "Œuf - 2",
         "Levure chimique - 2 cac"
       ],
-      "categorie": "Dessert",
+      "categorie": "Sucré",
       "sous_categorie": "Gâteau",
       "id": 16,
       "lien": "https://cuisineminutes.com/2021/10/06/gateau-au-cacao-5-minutes/?utm_source=Pinterest&utm_medium=organic",
@@ -366,7 +366,7 @@
         "Beurre - Moule",
         "Cassonade - Moule"
       ],
-      "categorie": "Dessert",
+      "categorie": "Sucré",
       "sous_categorie": "Gâteau",
       "id": 18,
       "lien": "",
@@ -1209,7 +1209,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-27T08:33:18.186795",
+    "derniere_modification": "2026-08-31T09:42:39.807210",
     "version": "1.0.0"
   }
 }
