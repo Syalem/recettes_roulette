@@ -159,7 +159,7 @@
         "Poivre",
         "Eau - 2 à 3 cas"
       ],
-      "categorie": "Miscellanées",
+      "categorie": "Accompagnements",
       "sous_categorie": "Sauce, condiment",
       "id": 10,
       "lien": "https://www.instagram.com/reel/DT8Za3VDPiY/?igsh=YjgyNmRoc3N6MHdv",
@@ -167,7 +167,8 @@
       "page": "",
       "date_ajout": "2026-01-26T18:46:52.543962",
       "tags": [],
-      "notes": "3 a 4 jours au frais"
+      "notes": "3 a 4 jours au frais",
+      "fait": false
     },
     {
       "titre": "Soupe au poulet",
@@ -1209,7 +1210,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-08-31T09:42:39.807210",
+    "derniere_modification": "2026-08-31T09:44:09.248695",
     "version": "1.0.0"
   }
 }
