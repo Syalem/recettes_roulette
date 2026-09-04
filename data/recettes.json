@@ -1230,12 +1230,35 @@
       "page": "",
       "date_ajout": "2026-09-04T06:55:06.470545",
       "tags": [],
-      "notes": "Mélanger dans l'ordre, puis séparer la pâte pour ajouter du cacao ou des pépites de chocolat.\nAjouter de la confiture au remplissage pour créer un coeur dans les muffins. \nMélanger les pâtes pour faire un marbré.\n\nConvient pour environ 24 muffins et un petit cake.",
+      "notes": "Mélanger dans l'ordre, puis séparer la pâte pour ajouter du cacao (et un peu de lait) ou des pépites de chocolat.\nAjouter de la confiture au remplissage pour créer un coeur dans les muffins. \nMélanger les pâtes pour faire un marbré.\n\nConvient pour environ 24 muffins et un petit cake.",
       "fait": true
+    },
+    {
+      "titre": "Pâte à goûter sans sucre",
+      "duree_prep": 10,
+      "duree_cuisson": 20,
+      "ingredients": [
+        "Oeufs - 2",
+        "Compote - 150g",
+        "Yaourt - 100g",
+        "Farine - 120g",
+        "Levure chimique - 1/2 sachet",
+        "Vanille - 1 cac"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Gâteau individuel",
+      "id": 54,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-09-04T07:17:08.033829",
+      "tags": [],
+      "notes": "Ajouter des fruits pour les muffins, cacao et un peu de lait pour un marbré, des flocons d'avoine pour des cookies, du citron pour des madeleines au citron, glaceage au chocolat, ...",
+      "fait": false
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-09-04T06:55:06.474674",
+    "derniere_modification": "2026-09-04T07:17:24.343340",
     "version": "1.0.0"
   }
 }
