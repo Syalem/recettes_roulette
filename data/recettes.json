@@ -1255,10 +1255,34 @@
       "tags": [],
       "notes": "Ajouter des fruits pour les muffins, cacao et un peu de lait pour un marbré, des flocons d'avoine pour des cookies, du citron pour des madeleines au citron, glaceage au chocolat, ...",
       "fait": false
+    },
+    {
+      "titre": "Muffins sans sucre",
+      "duree_prep": 10,
+      "duree_cuisson": 25,
+      "ingredients": [
+        "Oeufs - 2",
+        "Compote - 200g",
+        "Vanille - 1 cac",
+        "Yaourt - 120g",
+        "Farine - 240g",
+        "Levure chimique - 1 sachet",
+        "Chocolat - 100g"
+      ],
+      "categorie": "Sucré",
+      "sous_categorie": "Gâteau individuel",
+      "id": 55,
+      "lien": "",
+      "livre": "",
+      "page": "",
+      "date_ajout": "2026-09-04T07:49:06.236152",
+      "tags": [],
+      "notes": "Pour 12 muffins\nMélanger dans l'ordre, cuire à 180 pendant 20-25 min",
+      "fait": false
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-09-04T07:17:51.033134",
+    "derniere_modification": "2026-09-04T07:49:06.243581",
     "version": "1.0.0"
   }
 }
