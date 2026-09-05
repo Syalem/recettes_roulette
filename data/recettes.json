@@ -1254,7 +1254,7 @@
       "date_ajout": "2026-09-04T07:17:08.033829",
       "tags": [],
       "notes": "Ajouter des fruits pour les muffins, cacao et un peu de lait pour un marbré, des flocons d'avoine pour des cookies, du citron pour des madeleines au citron, glaceage au chocolat, ...",
-      "fait": false
+      "fait": true
     },
     {
       "titre": "Muffins sans sucre",
@@ -1282,7 +1282,7 @@
     }
   ],
   "metadata": {
-    "derniere_modification": "2026-09-04T07:49:37.786081",
+    "derniere_modification": "2026-09-05T12:38:57.607269",
     "version": "1.0.0"
   }
 }
